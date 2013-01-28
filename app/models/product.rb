@@ -6,4 +6,6 @@ class Product < ActiveRecord::Base
   has_many :prod_mat_relations
   has_many :pcard_prod_relations
   has_many :svcard_prod_relations
+
+  IS_SERVICE = {:YES => 1, :NO => 0} #是否服务  1 是  0 否
 end
