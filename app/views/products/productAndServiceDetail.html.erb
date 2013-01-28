@@ -1,0 +1,27 @@
+<div class="rightTitle">
+  <% if @serviceOrProduct.is_service %>
+  <h1><a href="#">服务</a> &gt;<%= @serviceOrProduct.name %></h1>
+  <% else %>
+  <h1><a href="#">产品</a> &gt;<%= @serviceOrProduct.name %></h1>
+  <% end %>
+  
+  <div class="pro_show">
+    <div class="bigImg jqzoom"><img src="images/lt_big.jpg" jqimg = "images/lt_show.jpg" /></div>
+    <div class="pic_show">
+      <ul>
+        <li><img src=<%= @serviceOrProduct.img_url %> /></li> 
+      </ul>
+    </div>
+  </div>
+  <div class="pro_price">
+    <h2><%= @serviceOrProduct.name  %></h2>
+    <p>价格：<span><%= @serviceOrProduct.base_price %></span>元</p>
+    <p>促销：VIP价格<span><%= @serviceOrProduct.sale_price %></span>元</p>
+  </div>
+  <div class="clear"></div>
+  <div class="pro_text">
+    <p><%= @serviceOrProduct.description %></p>
+    <img src=<%= @serviceOrProduct.img_url %>/>
+    <p><%= @serviceOrProduct.introduction %></p>
+  </div>
+</div>
