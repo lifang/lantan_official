@@ -2,10 +2,12 @@
 class ReservationsController < ApplicationController
   layout 'frontdoor'
   def new
+    @store = Store.find(params[:store_id].to_i)
     @services = Product.find_all_by_is_service_and_store_id(Product::IS_SERVICE[:YES],params[:store_id])
     @products = Product.find_all_by_is_service_and_store_id(Product::IS_SERVICE[:NO],params[:store_id])
     @store_id = params[:store_id]
   end
+  
   def create
     @car_num = CarNum.create(:num => params[:car_number])  
     #将车牌号插入车牌-型号表中
