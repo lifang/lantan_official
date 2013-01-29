@@ -20,6 +20,6 @@ class ReservationsController < ApplicationController
     #往客户表中插入数据
     @customer_num_relation = CustomerNumRelation.create(:customer_id => @customer.id, :car_num_id => @car_num.id) 
     #往客户-车牌表中插入数据
-
+    
   end
 end
