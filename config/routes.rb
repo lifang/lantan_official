@@ -12,10 +12,11 @@ LantanOfficial::Application.routes.draw do
   resources :stores
   resources :teams
 
-  controller :products do
-    get "products_and_service" => :index
-    get "product_and_service_detail" => :show
+  resources :stores do
+    resources :products
+    resources :reservations
   end
+
   controller :reservations do
     get "reservate" => :new
     post "reservate" => :create

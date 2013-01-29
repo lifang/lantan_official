@@ -22,7 +22,7 @@
   <h1>产品</h1>
   <ul class="product">
     <% @products.each do |p|%>
-      <li><img src= <%= p.img_url %>/><a href="productAndServiceDetail?id=<%= p.id %>"><%= p.name %></a></li>
+      <li><img src= <%= p.img_url %>/><a href="/products/<%= p.id %>"><%= p.name %></a></li>
     <% end %>
   </ul>
 </div>
