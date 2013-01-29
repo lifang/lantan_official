@@ -103,7 +103,7 @@ img { border: none;}
 }
 .rightTitle h1 a { color: #930205;}
 
-.serve { width: 350px; float: left; margin: 0 10px; _margin: 0 8px;}
+.serve { width: 350px; float: left; margin: 10px 10px; _margin: 10px 8px;}
 .serve dt { 
     font-size: 16px; 
 	font-weight:bolder; 
