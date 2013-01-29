@@ -13,12 +13,15 @@ LantanOfficial::Application.routes.draw do
   resources :teams
 
   controller :products do
-    get "productsAndService" => :productAndService
-    get "productAndServiceDetail" => :productAndServiceDetail
+    get "products_and_service" => :index
+    get "product_and_service_detail" => :show
   end
-  
+  controller :reservations do
+    get "reservate" => :new
+    post "reservate" => :create
+  end
   controller :teams do
-   get "teamIntroduce" => :teamIntroduce
+   get "team_introduce" => :index
   end
   # Sample of named route:
   #   match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase

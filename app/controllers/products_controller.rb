@@ -1,12 +1,12 @@
 #encoding: utf-8
 class ProductsController < ApplicationController
   layout 'frontdoor'
-  def productAndService
-    @service = Product.find_all_by_is_service(1)
-    @products = Product.find_all_by_is_service(0)
+  def index
+    @service = Product.find_all_by_is_service_and_store_id(Product::IS_SERVICE[:YES],params[:store_id])
+    @products = Product.find_all_by_is_service_and_store_id(Product::IS_SERVICE[:NO],params[:store_id])
   end
 
-  def productAndServiceDetail
+  def show
     @serviceOrProduct = Product.find(params[:id])
   end
 end
