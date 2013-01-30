@@ -21,7 +21,7 @@ img { border: none;}
 	font-family: "微软雅黑";
 }
 
-.head { height: 107px; overflow: hidden; background: url(../images/h_bg.png) repeat-x;}
+.head { height: 107px; overflow: hidden; background: url(/assets/h_bg.png) repeat-x;}
 .logo { width: 320px; height: 100px; float: left;}
 .nav { width:  680px; height: 32px; float: right; padding-top: 39px; _padding-top: 38px;}
 .nav ul { overflow: hidden; padding-left: 173px;}
@@ -36,7 +36,7 @@ img { border: none;}
 .banner { padding-bottom: 15px; height: 345px;}
 
 .main { padding: 10px 0 30px 0; overflow: hidden; background: #FFF;}
-.m_bg { background: url(../images/m_bg.jpg) repeat-x;}
+.m_bg { background: url(/assets/m_bg.jpg) repeat-x;}
 .left { width: 250px; float: left; margin-right: 10px; color: #FFF; text-shadow: 1px 1px rgba(0,0,0,0.5);}
 
 .left h1 { font-size: 18px; line-height: 36px;}
@@ -70,7 +70,7 @@ img { border: none;}
 	font-size: 12px; 
 	text-align: center;
 	text-shadow: 1px 1px rgba(0,0,0,0.5);
-	background: url(../images/f_bg.jpg) repeat;
+	background: url(/assets/f_bg.jpg) repeat;
 }
 
 /*产品服务*/
@@ -125,7 +125,7 @@ img { border: none;}
     width: 245px; 
 	height: 140px; 
 	display: block; 
-	background: url(../images/black.png) repeat; 
+	background: url(/assets/black.png) repeat; 
 	position: absolute;
 	top: 0; 
 	left: 0;
@@ -178,7 +178,7 @@ img { border: none;}
 .arrange table { background: #CCC; margin: 20px 0;}
 .arrange td { background: #FFF; padding: 10px;}
 .arrange td.table_head { 
-    background: url(../images/table_bg.jpg) repeat-x;
+    background: url(/assets/table_bg.jpg) repeat-x;
 	height: 40px; 
 	line-height: 40px; 
 	padding: 0 0 0 20px;
