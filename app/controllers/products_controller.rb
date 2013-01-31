@@ -2,21 +2,27 @@
 class ProductsController < ApplicationController
   layout 'frontdoor'
   def index
-    @store = Store.find(params[:store_id].to_i)
+    @store = Store.find(params[:store_id])
     services = Product.find_all_by_is_service_and_store_id(Product::IS_SERVICE[:YES],params[:store_id])
     @service_hash = {}
-    services.each do |s|
-      if @service_hash[s.types]
 
-      else
-        
+    Product::SERVICE_TYPES.each_key do |key|  #将Product类里面的服务类别迭代并将Products表中的数据按类别划分
+      services.each do |service|
+        if(service.types == key)
+          if @service_hash[key].nil?
+             @service_hash[key] = []     
+             @service_hash[key] << service
+          else
+            @service_hash[key] << service
+          end
+        end
       end
     end
     @products = Product.find_all_by_is_service_and_store_id(Product::IS_SERVICE[:NO],params[:store_id])
   end
 
   def show
-    @product = Product.find(params[:id])
-    @store = Store.find(@product.store_id)
+    @service_or_product = Product.find(params[:id])
+    @store = Store.find(@service_or_product.store_id)
   end
 end

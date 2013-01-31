@@ -14,16 +14,12 @@ LantanOfficial::Application.routes.draw do
 
   resources :stores do
     resources :products
-    resources :reservations
+    resources :reservations 
+    resources :teams
   end
 
-  controller :reservations do
-    get "reservate" => :new
-    post "reservate" => :create
-  end
-  controller :teams do
-   get "team_introduce" => :index
-  end
+ 
+  
   # Sample of named route:
   #   match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase
   # This route can be invoked with purchase_url(:id => product.id)
