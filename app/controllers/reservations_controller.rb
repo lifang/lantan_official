@@ -1,5 +1,5 @@
 #encoding: utf-8
-class ReservationsController < ApplicationController
+class ReservationsController < ApplicationController  #预约
   layout 'frontdoor'
   def new
     @reservation = Reservation.new

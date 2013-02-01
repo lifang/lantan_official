@@ -1,7 +1,7 @@
 #encoding: utf-8
-class ProductsController < ApplicationController
+class ProductsController < ApplicationController    #产品与服务
   layout 'frontdoor'
-  def index
+  def index     #产品&服务
     @store = Store.find(params[:store_id])
     services = Product.find_all_by_is_service_and_store_id(Product::IS_SERVICE[:YES],params[:store_id])
     @service_hash = {}
@@ -21,7 +21,7 @@ class ProductsController < ApplicationController
     @products = Product.find_all_by_is_service_and_store_id(Product::IS_SERVICE[:NO],params[:store_id])
   end
 
-  def show
+  def show    #单个产品显示
     @service_or_product = Product.find(params[:id])
     @store = Store.find(@service_or_product.store_id)
   end

@@ -1,4 +1,5 @@
 LantanOfficial::Application.routes.draw do
+  get "homepage/index"
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -11,6 +12,30 @@ LantanOfficial::Application.routes.draw do
   resources :sales
   resources :stores
   resources :teams
+  resources :homepage do
+    collection do
+    get :index
+    get :login
+    get :logoff
+    post :create_customer_session
+    get :about_lantan
+    get :company_introduce
+    get :company_culture
+    get :characteristic_service
+    get :managment_idea
+    get :store_introduce
+    get :team_introduce
+    get :sales_promotion
+    get :product_information
+    get :sv_cards
+    get :news_centre
+    get :customer_investigate
+    get :contact_us
+    end
+    member do
+      
+    end
+  end
 
   resources :stores do
     resources :products
