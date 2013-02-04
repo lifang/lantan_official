@@ -1,0 +1,19 @@
+<div class="main">
+  <div class="box">
+   
+    <div class="right">
+      <div class="r_menu">
+        <ul>
+          <li><a href="#" class="hover">活动促销</a></li>
+        </ul>
+      </div>
+      <div class="clear"></div>
+      <div class="text_box">
+        <%= render("/homepage/sales_list") %>
+      </div>
+      <div class="pageTurn">
+        <%= will_paginate  @sales, :previous_label => "< Prev", :next_label=> "Next >", :page_links =>"false" %>
+      </div>
+    </div>
+  </div>
+</div>

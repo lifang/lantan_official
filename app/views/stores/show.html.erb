@@ -1,0 +1,45 @@
+<div class="main m_bg">
+  <div class="box">
+    <div class="banner">
+      <%=render("add_pic_change") %>
+    </div>
+    <div class="left">
+      <%=render "store_info" %>
+    </div>
+    <div class="right">
+      <div class="sales">
+        <% (@laster_sales || []).each do |sale| %>
+          <a href="#"><%= image_tag ("#{sale.img_url}") %></a>
+        <%end%>
+      </div>
+      <div class="text">
+        <h1>服务</h1>
+        <dl>
+          <% Product::SERVICE_TYPES.each do |product_type|   %>
+            <dt><%= product_type[1] %></dt>
+            <% (@product_service || []).each do |product| %>
+              <% if product.types.equal?(product_type[0])  %>
+            <dd><%=link_to "#{product.name}"  ,"/stores/#{@store.id}/products/#{product.id}" %>&nbsp;/&nbsp;</dd>
+              <%end%>
+            <%end%>
+          <%end%>
+        </dl>
+      </div>
+      <div class="text">
+        <h1>产品</h1>
+        <dl>
+          <% Product::PRODUCT_TYPES.each do |product_type|%>
+            <dt><%= product_type[1] %></dt>
+            <% (@product_product || []).each do |product| %>
+              <%if product.types.equal?(product_type[0]) %>
+                <dd><%=link_to "#{product.name}"  ,"/stores/#{@store.id}/products/#{product.id}" %>&nbsp;/&nbsp;</dd>
+              <%end%>
+            <%end%>
+          <%end%>
+        </dl>
+      </div>
+    </div>
+  </div>
+</div>
+
+

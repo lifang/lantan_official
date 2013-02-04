@@ -1,10 +1,11 @@
+#encoding: utf-8
 class HomepageController < ApplicationController  #总部控制器
   layout 'headquarter', :except => [:index, :login]
   def index #总部首页
     @current_url = request.path     #用户当前所浏览的页面地址，用于当用户登录后跳转到登录前所浏览的页面
   end
   def login       #登录页面
-     @current_url = params[:current_url]
+    @current_url = params[:current_url]
   end
   def create_customer_session #登录验证
     customer = Customer.find_by_name_and_mobilephone(params[:name], params[:mobilephone])
@@ -23,27 +24,33 @@ class HomepageController < ApplicationController  #总部控制器
     @current_url = request.path
     redirect_to "/homepage/company_introduce"
   end
-    def company_introduce #公司介绍
-       @current_url = request.path
-    end
-    def characteristic_service  #特色服务
-        @current_url = request.path
-    end
-    def managment_idea #经营理念
-        @current_url = request.path
-    end
-    def company_culture #企业文化
-        @current_url = request.path
-    end
-    def team_introduce #团队介绍
-        @current_url = request.path
-    end
-    def store_introduce #门店介绍
-        @current_url = request.path
-    end
-  def sales_promotion #活动促销
+  def company_introduce #公司介绍
     @current_url = request.path
   end
+  def characteristic_service  #特色服务
+    @current_url = request.path
+  end
+  def managment_idea #经营理念
+    @current_url = request.path
+  end
+  def company_culture #企业文化
+    @current_url = request.path
+  end
+  def team_introduce #团队介绍
+    @current_url = request.path
+  end
+  def store_introduce #门店介绍
+    @current_url = request.path
+  end
+  def sales_promotion #活动促销
+    @sales=show_sales
+    @current_url = request.path
+  end
+  def show_sale #活动促销详情
+    sale_id=params[:sale_id]
+    @sale = Sale.find(sale_id)
+  end
+  
   def product_information  #产品信息
     @current_url = request.path
   end
@@ -51,13 +58,42 @@ class HomepageController < ApplicationController  #总部控制器
     @current_url = request.path
   end
   def news_centre #新闻中心
+    @news = New.find_by_sql("select * from news where status = 0 ").paginate(
+      :page => params[:page],:per_page => 3,:order => "created_at desc")
+
+
     @current_url = request.path
+  end
+  def show_new#新闻详情
+    @new = New.find(params[:id])
   end
   def customer_investigate  #用户调查
     @current_url = request.path
   end
   def contact_us #联系我们
+    @store = Store.find(1)
     @current_url = request.path
   end
 
+  def provincechange
+    options = "<option value='0'>--请选择--</option>"
+    city = City.where("parent_id = ?",params[:id]).all
+    city.each do |c|
+      options << "<option value=#{c.id}>#{c.name}</option>"
+    end
+    render :text => options
+  end
+
+  def citychange
+    items = ""
+    stores = Store.where("city_id = ?",params[:id]).all
+    stores.each do |s|
+      items << "<a href = '/stores/#{s.id}'><li value=#{s.id}>#{s.name}</li></a>"
+    end
+    render :text => items
+  end
+  private
+  def show_sales
+    Sale.where("store_id = 1 and status = 0 ").paginate(:page => params[:page],:per_page => 3,:order => "created_at desc")
+  end
 end

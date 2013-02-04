@@ -247,3 +247,5 @@ img { border: none;}
 
 .pageTurn a.current { padding: 5px 12px; font-weight: bold; color: #fff; background: #930205;}
 .pageTurn a.disabled {display: none;}
+/*联系我们----*/
+#contact_us_map{width:700px;height: 350px;margin-bottom: 20px;border: 1px solid #ddd;}

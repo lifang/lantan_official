@@ -1,0 +1,18 @@
+<div class="r_menu">
+  <ul>
+    <li><a href="#" class="hover">新闻中心</a></li>
+  </ul>
+</div>
+<div class="clear"></div>
+<div class="text_box">
+  <ul class="news_list">
+    <% (@news || []).each do |new| %>
+      <li><span><%= show_time(new.created_at) %></span>
+        <a href="/homepage/show_new?id=<%= new.id %>"><%=new.title%></a></li>
+    <%end%>
+  </ul>
+</div>
+<div class="pageTurn">
+  <%= will_paginate  @news, :previous_label => "< Prev",
+    :next_label=> "Next >", :page_links =>"false" %>
+</div>

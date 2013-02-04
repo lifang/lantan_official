@@ -1,0 +1,51 @@
+
+<div class="leftNews">
+  <h1><a href="#">更多&gt;&gt;</a>活动咨询</h1>
+  <ul>
+    <li><span>2012-01-10</span><a href="#">上海大众2014年推新A级车</a></li>
+    <li><span>2012-01-10</span><a href="#">上海大众2014年推新A级车</a></li>
+    <li><span>2012-01-10</span><a href="#">上海大众2014年推新A级车</a></li>
+    <li><span>2012-01-10</span><a href="#">上海大众2014年推新A级车</a></li>
+    <li><span>2012-01-10</span><a href="#">上海大众2014年推新A级车</a></li>
+    <li><span>2012-01-10</span><a href="#">上海大众2014年推新A级车</a></li>
+  </ul>
+</div>
+<div class="leftInquire">
+  <h1>门店查询</h1>
+  <div class="inquire_side"><span>选择省市：</span><label><select id="city_province_id"><option value="0">--请选择--</option>
+        <% (province || []).each do |p|%>
+          <option value=<%= p.id %>><%= p.name %></option>
+        <%end%>
+      </select>
+    </label>
+    <select id="city_city_id"></select></div>
+  <div class="clear"></div>
+  <div class="inquire_side">
+    <ul id="stores_list">
+    </ul>
+  </div>
+</div>
+<script type="text/javascript">
+  $("#city_province_id").change(function(){
+    $.ajax({
+      type :"POST",
+      url:"provincechange?id="+$("#city_province_id").attr("value"),
+      data :'text',
+      success: function(data)
+      {
+        $("#city_city_id").html(data);
+      }
+    })
+  })
+  $("#city_city_id").change(function(){
+    $.ajax({
+      type :"POST",
+      url:"citychange?id="+$("#city_city_id").attr("value"),
+      data :'text',
+      success: function(data)
+      {
+        $("#stores_list").html(data);
+      }
+    })
+  })
+</script>
