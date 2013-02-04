@@ -17,9 +17,9 @@
         <dl>
           <% Product::SERVICE_TYPES.each do |product_type|   %>
             <dt><%= product_type[1] %></dt>
-            <% (@product_service || []).each do |product| %>
-              <% if product.types.equal?(product_type[0])  %>
-            <dd><%=link_to "#{product.name}"  ,"/stores/#{@store.id}/products/#{product.id}" %>&nbsp;/&nbsp;</dd>
+            <% (@product_service || []).each do |service| %>
+              <% if service.types == product_type[0]  %>
+            <span><%=link_to "#{service.name}","/stores/#{@store.id}/products/#{service.id}" %>&nbsp;/&nbsp;</span>
               <%end%>
             <%end%>
           <%end%>
@@ -31,8 +31,8 @@
           <% Product::PRODUCT_TYPES.each do |product_type|%>
             <dt><%= product_type[1] %></dt>
             <% (@product_product || []).each do |product| %>
-              <%if product.types.equal?(product_type[0]) %>
-                <dd><%=link_to "#{product.name}"  ,"/stores/#{@store.id}/products/#{product.id}" %>&nbsp;/&nbsp;</dd>
+              <%if product.types == product_type[0] %>
+                <span><%=link_to "#{product.name}","/stores/#{@store.id}/products/#{product.id}" %>&nbsp;/&nbsp;</span>
               <%end%>
             <%end%>
           <%end%>

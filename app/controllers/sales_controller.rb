@@ -6,7 +6,7 @@ class SalesController < ApplicationController
     @store_id = params[:store_id]
     @store = Store.find(@store_id)
     @sales = show_sale(@store_id)
-    @laster_sales =  @store.sales.find_by_sql("select * from sales where status = 1  order by started_at desc  limit 2")
+    @laster_sales =  @store.sales.find_by_sql ["select * from sales where status = ?  order by started_at desc  limit ?",STATUS_TRUE,LASTRT_SALES]
   end
   
   def show
@@ -20,13 +20,13 @@ class SalesController < ApplicationController
     elsif @sale.disc_types == 0#金额
       @discount_price = @product.base_price - @sale.discount
     end
-    @laster_sales = Sale.find_by_sql("select * from sales where status = 1 and  store_id= #{store_id} order by started_at desc  limit 2")
+    @laster_sales =  @store.sales.find_by_sql ["select * from sales where status = ?  order by started_at desc  limit ?",STATUS_TRUE,LASTRT_SALES]
   end
 
   private
   def show_sale(store_id)#门店所有活动
-    Sale.where("status = 0 and (store_id = ? or store_id = 1)",store_id).paginate(
-      :page => params[:page],:per_page => 3,:order => "created_at desc")
+    Sale.where("status = ?  and (store_id = ? or store_id = 1)",STATUS_TRUE,store_id).paginate(
+      :page => params[:page],:per_page => SALES_PER_PAGE_NUM,:order => "created_at desc")
   end
 
   def discount_price(sale_price,discount)

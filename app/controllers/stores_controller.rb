@@ -10,11 +10,15 @@ class StoresController < ApplicationController
     @store = Store.find(store_id)
     
     #最新活动
-    @laster_sales =  Sale.find_by_sql("select * from sales where store_id = #{store_id} and status = 1 order by started_at desc  limit 2")
+    @laster_sales =  Sale.find_by_sql ["select * from sales where
+store_id = ? and status = ? order by started_at desc  limit ?",store_id,
+      STATUS_TRUE,LASTRT_SALES]
     #门店服务
-    @product_service = Product.where("is_service=? and status = 1",1).all
+    @product_service = Product.find_by_sql ["select * from products where 
+is_service= ? and status = ?",PRODUCT_SERVICE,STATUS_TRUE]
     #门店产品
-    @product_product = Product.where("is_service=? and status = 1",0).all
+    @product_product = Product.find_by_sql ["select * from products where
+is_service= ? and status = ?",PRODUCT_PRODUCT,STATUS_TRUE]
   end
 
   private
