@@ -23,7 +23,7 @@
               <div class="logo">杭州澜泰科技有限公司</div>
               <div class="login">
                    <% if session[:customer].nil? %>
-                   <a href="#">注册</a> |
+                   <a href="/homepage/regist?current_url=<%= @current_url %>">注册</a> |
                    <a href="/homepage/login?current_url=<%= @current_url %>">登录</a>
                  <% else %>
                    欢迎用户<%= session[:customer].name %>|

@@ -17,7 +17,9 @@ LantanOfficial::Application.routes.draw do
     get :index
     get :login
     get :logoff
-    post :create_customer_session
+    get :regist
+    post :regist_create
+    post :login_create
     get :about_lantan
     get :company_introduce
     get :company_culture
@@ -34,6 +36,11 @@ LantanOfficial::Application.routes.draw do
     end
     member do
       
+    end
+  end
+  resources :news do
+    member do
+      get :show
     end
   end
 
