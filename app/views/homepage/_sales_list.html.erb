@@ -6,9 +6,8 @@
     <% if sale.introduction.size>50 %>
       <p><%= sale.introduction[0,50] %><%=link_to "详情/","/homepage/show_sale?sale_id=#{sale.id}",:action =>"show_sale" %></p>
     <%else%>
-      <p><%= sale.introduction %><%=link_to "详情","/homepage/show_sale?sale_id=#{sale.id}",:action =>"show_sale" %> %></p>
+      <p><%= sale.introduction %><%=link_to "详情","/homepage/show_sale?sale_id=#{sale.id}",:action =>"show_sale" %></p>
     <%end%>
   </div>
 <% end %>
 
- 

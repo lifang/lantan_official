@@ -17,13 +17,14 @@
   </ul>
 </div>
 <script type="text/javascript">
-  var position="1,1";
+ var position="<%= @store.position  %>";
   var position_j_w= position.toString().split(',');
   var center_j=position_j_w[0];
   var center_w=position_j_w[1];
   //标注点数组
   var markerArr = [{
-      title:"杭州澜泰科技有限公司",
+      title:"<%= @store.name %>",
+      content:"<%= @store.address %>",
       point: center_j+"|"+center_w  ,//"116.419217|39.941715"
       isOpen:1,
       icon:{
@@ -36,7 +37,6 @@
       }
     }
   ];
-  //创建和初始化地图函数：
 function initMap(){
     createMap();//创建地图
     setMapEvent();//设置地图事件
