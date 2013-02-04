@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<title>澜泰总部-login</title>
+<%= stylesheet_link_tag "application" %>
+<%= stylesheet_link_tag "login" %>
+
+<%= javascript_include_tag "application" %>
+<%= javascript_include_tag "headquarter-main" %>
+<!--[if IE 6]>
+<script src="js/DD_belatedPNG_0.0.8a-min.js"></script>
+<script>
+  DD_belatedPNG.fix('*');
+</script>
+<![endif]-->
+
+</head>
+
+<body>
+     <div class="box">
+     	 <div class="logo">杭州澜泰科技有限公司</div>
+         <div class="login_bg">
+              <div class="login_box">
+                <%= form_tag "/homepage/create_customer_session" do %>
+                   <h1>用户登录</h1>
+                   <input type="hidden" name="current_url" value="<%= @current_url %>"/>
+                   <div class="login_list">
+                        <label>用户名：</label>
+                        <%= text_field_tag 'name' %>
+                   </div>
+                   <div class="login_list">
+                        <label>手机号：</label>
+                        <%= password_field_tag 'mobilephone' %>
+                   </div>
+                   <div class="login_btn">
+                     <button>登录</button>
+                   </div>
+                     <% end %>
+                   <div class="login_a"><a href="#">忘记密码?</a> | <a href="#">注册</a></div>
+                 
+              </div>
+         </div>
+     </div>
+      <div class="foot">
+        <div><img src="/assets/foot_logo.png"/></div>
+          <p>Copyright © 2013 杭州澜泰 版权所有</p>
+</div>
+</body>
+</html>

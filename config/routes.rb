@@ -11,19 +11,41 @@ LantanOfficial::Application.routes.draw do
   resources :sales
   resources :stores
   resources :teams
+  resources :homepage do
+    collection do
+    get :login
+    get :logoff
+    post :create_customer_session
+    get :about_lantan
+    get :company_introduce
+    get :company_culture
+    get :characteristic_service
+    get :managment_idea
+    get :store_introduce
+    get :team_introduce
+    get :sales_promotion
+    get :product_information
+    get :sv_cards
+    get :news_centre
+    get :customer_investigate
+    get :contact_us
+    get :show_sale
+    get :show_new
+    get :contact_us
+    post :provincechange
+    post :citychange
+    end
+  end
 
   resources :stores do
     resources :products
-    resources :reservations
+    resources :reservations 
+    resources :teams
+    resources :sales
   end
 
-  controller :reservations do
-    get "reservate" => :new
-    post "reservate" => :create
-  end
-  controller :teams do
-   get "team_introduce" => :index
-  end
+ 
+  
   # Sample of named route:
   #   match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase
   # This route can be invoked with purchase_url(:id => product.id)
@@ -66,7 +88,7 @@ LantanOfficial::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  # root :to => 'welcome#index'
+     root :to => 'homepage#index'
 
   # See how all your routes lay out with "rake routes"
 

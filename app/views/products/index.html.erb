@@ -1,28 +1,25 @@
-<div class="rightTitle">
-  <h1>服务</h1>
-  <dl class="serve">
-    <dt>汽车清洗类</dt>
-    <% @service.each do |s|%>
-      <% if s.types == 1 %>
-        <dd><a href="product_and_service_detail?id=<%= s.id %>"><%= s.name %></a></dd>
+ <div class="main">
+      <div class="box">        <div class="leftAera">
+  <%=render "stores/store_info" %>
+  <div class="leftSales"><a href="#"><img src="images/sales01.jpg"></a><a href="#"><img src="images/sales01.jpg"></a></div>
+</div><div class="rightAera">
+  <div class="rightTitle">
+    <h1>服务</h1>
+    <% Product::SERVICE_TYPES.each do |key,value|   %>
+      <dl class="serve">
+        <dt><%= value %></dt>
+        <% @service_hash[key].to_a.each do |service| %>
+          <dd><a href="/products/<%= service.id %>"><%= service.name %>\</a></dd>
+        <% end %>
+      </dl>
+    <% end %>
+  </div>
+  <div class="rightTitle">
+    <h1>产品</h1>
+    <ul class="product">
+      <% @products.each do |p|%>
+        <li><img src= <%= p.img_url %>/><a href="/products/<%= p.id %>"><%= p.name %></a></li>
       <% end %>
-    <% end %>
-  </dl>
-  <dl class="serve">
-    <dt>汽车养护类</dt>
-    <% @service.each do |s| %>
-      <% if s.types == 2 %>
-        <dd><a href="product_and_service_detail?id=<%= s.id %>"><%= s.name %></a></dd>
-      <% end %>
-    <% end %>
-  </dl>
-
-</div>
-<div class="rightTitle">
-  <h1>产品</h1>
-  <ul class="product">
-    <% @products.each do |p|%>
-      <li><img src= <%= p.img_url %>/><a href="/products/<%= p.id %>"><%= p.name %></a></li>
-    <% end %>
-  </ul>
-</div>
+    </ul>
+  </div>
+</div></div></div>

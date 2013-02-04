@@ -1,0 +1,76 @@
+<!doctype html>                       <!--总部布局模板-->
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <title>澜泰总部--产品信息</title>
+    <%= stylesheet_link_tag "application","headquarter-style" %>
+    <%= javascript_include_tag "application","headquarter-main","address" %>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?key=&v=1.4&services=true"></script>
+    <script type="text/javascript" src="http://api.map.baidu.com/getscript?v=1.4&key=&services=&t=20130128031352"></script>
+    <!--[if IE 6]>
+    <script src="js/DD_belatedPNG_0.0.8a-min.js"></script>
+    <script>
+      DD_belatedPNG.fix('*');
+    </script>
+    <![endif]-->
+  </head>
+
+  <body>
+    <div class="head">
+      <div class="box">
+        <div class="logo">杭州澜泰科技有限公司</div>
+        <div class="login">
+          <% if session[:customer].nil? %>
+            <a href="#">注册</a> |
+            <a href="/homepage/login?current_url=<%= @current_url %>">登录</a>
+          <% else %>
+            欢迎用户<%= session[:customer].name %>|
+            <a href="/homepage/logoff?current_url=<%= @current_url %>" onclick="return sure_logoff()">注销</a>
+          <% end %>
+        </div>
+        <div id="navigation" class="nav">
+          <ul>
+            <li class="hover"><a href="/">首页</a></li>
+            <li class="menu"><a href="/homepage/about_lantan">关于澜泰</a>
+              <div class="second_menu">
+                <p><a href="/homepage/company_introduce">公司介绍</a></p>
+                <p><a href="/homepage/characteristic_service">特色服务</a></p>
+                <p><a href="/homepage/managment_idea">经营理念</a></p>
+                <p><a href="/homepage/company_culture">企业文化</a></p>
+                <p><a href="/homepage/team_introduce">团队介绍</a></p>
+                <p><a href="/homepage/store_introduce">门店介绍</a></p>
+              </div>
+            </li>
+            <li><a href="/homepage/sales_promotion">活动促销</a></li>
+            <li><a href="/homepage/product_information">产品信息</a></li>
+            <li><a href="/homepage/sv_cards">储值卡</a></li>
+            <li><a href="/homepage/news_centre">新闻中心</a></li>
+            <li><a href="/homepage/customer_investigate">用户调查</a></li>
+            <li><a href="/homepage/contact_us">联系我们</a></li>
+          </ul>
+          <div class="nav_bg"></div>
+        </div>
+      </div>
+    </div>
+    <div class="main">
+      <div class="box">
+        <div class="left">
+          <%= render("left") %>
+        </div>
+        <div class="right">
+          <%= yield %>
+        </div>
+      </div>
+    </div>
+    <div class="foot">
+      <div><img src="/assets/foot_logo.png"/></div>
+      <p>Copyright © 2013 杭州澜泰 版权所有</p>
+    </div>
+  </body>
+  <script>
+    function sure_logoff(){
+      return confirm("确定退出?");
+    }
+
+  </script>
+</html>
