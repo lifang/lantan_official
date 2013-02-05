@@ -50,15 +50,4 @@
     </div>
   </div>
 </div>
-<script type="text/javascript">
-  $(".card_two").css("display", "none");
-  $(".card_three").css("display", "none");
-  $(".btn_one").click(function(){
-    $(".card_one").slideUp();
-    $(".card_two").css("display", "inline");
-  });
-  $(".btn_two").click(function(){
-    $(".card_two").slideUp();
-    $(".card_three").css("display", "inline");
-  });
-</script>
+<%= javascript_include_tag "headquarter-main" %>

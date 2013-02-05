@@ -1,5 +1,16 @@
 // JavaScript Document
 //nav
+//储值卡
+  $(".card_two").css("display", "none");
+  $(".card_three").css("display", "none");
+  $(".btn_one").click(function(){
+    $(".card_one").slideUp();
+    $(".card_two").css("display", "inline");
+  });
+  $(".btn_two").click(function(){
+    $(".card_two").slideUp();
+    $(".card_three").css("display", "inline");
+  });
 $(function(){
 	var xxx,re;
 	var hover= $(".hover").position().left;
@@ -48,3 +59,5 @@ $(function(){
 	$(".scroll_play").hover(function(){clearInterval(t)},
 					function(){t = setInterval(showAuto, 5000);});
 });
+
+
