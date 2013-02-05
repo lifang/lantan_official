@@ -23,7 +23,7 @@
                    <a href="/homepage/regist?current_url=<%= @current_url %>">注册</a> |
                    <a href="/homepage/login?current_url=<%= @current_url %>">登录</a>
                  <% else %>
-                   欢迎用户<%= session[:customer].name %>|
+                   欢迎用户<%= session[:customer].name %> |<a href="#">个人信息</a>|
                    <a href="/homepage/logoff?current_url=<%= @current_url %>" onclick="return sure_logoff()">注销</a>
                  <% end %>
 

@@ -3,14 +3,16 @@ class OfficialSaleController < ApplicationController  #总店活动促销页面
   layout "headquarter"
    
   def index
-    @sales_laster = Sale.find(:all, :conditions => ["status = ?",Sale::STATUS[:NOMAL]],
+    @sales_laster = Sale.find(:all, :conditions => ["status = ? and store_id = ?",
+        Sale::STATUS[:NOMAL],Store::DEFAULT_ID],
       :order => "created_at desc", :limit => Sale::NEW_NUM)
     @sales=show_sales
     @current_url = request.path
   end
 
   def show
-    @sales_laster = Sale.find(:all, :conditions => ["status = ?",Sale::STATUS[:NOMAL]],
+    @sales_laster = Sale.find(:all, :conditions => ["status = ? and store_id = ?",
+        Sale::STATUS[:NOMAL],Store::DEFAULT_ID],
       :order => "created_at desc", :limit => Sale::NEW_NUM)
     sale_id=params[:id]
     @sale = Sale.find(sale_id)
@@ -56,7 +58,7 @@ class OfficialSaleController < ApplicationController  #总店活动促销页面
   private
 
   def show_sales
-    Sale.find(:all, :conditions =>["store_id = 1 and status = ? ",
+    Sale.find(:all, :conditions =>["store_id = ? and status = ? ",Store::DEFAULT_ID,
         Sale::STATUS[:NOMAL]]).paginate(
       :page => params[:page],:per_page => Sale::SALES_PER_PAGE_NUM,
       :order => "created_at desc")
