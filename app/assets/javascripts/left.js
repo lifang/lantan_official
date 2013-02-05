@@ -1,7 +1,7 @@
 $("#city_province_id").change(function(){
     $.ajax({
         type :"POST",
-        url:"/homepage/provincechange?id="+$("#city_province_id").attr("value"),
+        url:"/official_sale/province_change?id="+$("#city_province_id").attr("value"),
         data :'text',
         success: function(data)
         {
@@ -12,7 +12,7 @@ $("#city_province_id").change(function(){
 $("#city_city_id").change(function(){
     $.ajax({
         type :"POST",
-        url:"/homepage/citychange?id="+$("#city_city_id").attr("value"),
+        url:"/official_sale/city_change?id="+$("#city_city_id").attr("value"),
         data :'text',
         success: function(data)
         {

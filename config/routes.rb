@@ -37,6 +37,13 @@ LantanOfficial::Application.routes.draw do
     end
   end
 
+  resources :official_sale do
+    collection do
+      post :province_change
+      post :city_change
+    end
+  end
+
   resources :stores do
     resources :products
     resources :reservations 

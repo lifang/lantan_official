@@ -1,7 +1,7 @@
 $("#city_p_id").change(function(){
     $.ajax({
         type :"POST",
-        url:"/homepage/provincechange?id="+$("#city_p_id").attr("value"),
+        url:"/official_sale/province_change?id="+$("#city_p_id").attr("value"),
         data :'text',
         success: function(data)
         {
@@ -12,7 +12,7 @@ $("#city_p_id").change(function(){
 $("#city_c_id").change(function(){
     $.ajax({
         type :"POST",
-        url:"/homepage/citychange?id="+$("#city_c_id").attr("value"),
+        url:"/official_sale/city_change?id="+$("#city_c_id").attr("value"),
         data :'text',
         success: function(data)
         {
@@ -20,3 +20,7 @@ $("#city_c_id").change(function(){
         }
     })
 })
+
+ function sure_logoff(){
+      return confirm("确定退出?");
+    }

@@ -1,9 +1,8 @@
-
 <div class="leftNews">
   <h1><a href="/homepage/news_centre">更多&gt;&gt;</a>活动咨询</h1>
   <ul>
     <% (@sales_all || []).each do |sale| %>
-      <li><span><a href="#"><%=sale.name[0,10] %></a></span><%=show_time(sale.created_at) %></li>
+      <li><span><a href="/official_sale/<%= sale.id %>"><%=sale.name[0,10] %></a></span><%=show_time(sale.created_at) %></li>
     <%end%>
   </ul>
 </div>

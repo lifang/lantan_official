@@ -43,7 +43,7 @@
                 <p><a href="/homepage/store_introduce">门店介绍</a></p>
               </div>
             </li>
-            <li><a href="/homepage/sales_promotion">活动促销</a></li>
+            <li><a href="/official_sale">活动促销</a></li>
             <li><a href="/homepage/product_information">产品信息</a></li>
             <li><a href="/homepage/sv_cards">储值卡</a></li>
             <li><a href="/homepage/news_centre">新闻中心</a></li>
@@ -79,7 +79,9 @@
         </div>
         <div class="inquire">
           <h1>门店查询</h1>
-          <div class="inquire_div"><span>选择省市：</span><label><select id="city_p_id"><option value="0">--请选择--</option>
+          <div class="inquire_div"><span>选择省市：</span><label>
+              <select id="city_p_id">
+                <option value="0">--请选择--</option>
                 <% (province || []).each do |p|%>
                   <option value=<%= p.id %>><%= p.name %></option>
                 <%end%>
@@ -113,35 +115,6 @@
       <div><img src="/assets/foot_logo.png"/></div>
       <p>Copyright © 2013 杭州澜泰 版权所有</p>
     </div>
-
+    <%= javascript_include_tag "select_store" %>
   </body>
-  <script type="text/javascript">
-    $("#city_p_id").change(function(){
-      $.ajax({
-        type :"POST",
-        url:"/homepage/provincechange?id="+$("#city_p_id").attr("value"),
-        data :'text',
-        success: function(data)
-        {
-          $("#city_c_id").html(data);
-        }
-      })
-    })
-    $("#city_c_id").change(function(){
-      $.ajax({
-        type :"POST",
-        url:"/homepage/citychange?id="+$("#city_c_id").attr("value"),
-        data :'text',
-        success: function(data)
-        {
-          $("#stores_list_table").html(data);
-        }
-      })
-    })
-  </script>
-  <script>
-    function sure_logoff(){
-      return confirm("确定退出?");
-    }
-  </script>
 </html>

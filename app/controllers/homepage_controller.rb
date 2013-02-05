@@ -61,17 +61,11 @@ class HomepageController < ApplicationController  #总部控制器
   end
   
   def sales_promotion #活动促销
-    @sales_all = Sale.find(:all, :conditions => ["status = ?",Sale::STATUS[:NOMAL]],
-      :order => "created_at desc", :limit => Sale::NEW_NUM)
-    @sales=show_sales
-    @current_url = request.path
+   
   end
   
   def show_sale #活动促销详情
-    @sales_all = Sale.find(:all, :conditions => ["status = ?",Sale::STATUS[:NOMAL]],
-      :order => "created_at desc", :limit => Sale::NEW_NUM)
-    sale_id=params[:sale_id]
-    @sale = Sale.find(sale_id)
+   
   end
   
   def product_information  #产品信息
@@ -88,7 +82,7 @@ class HomepageController < ApplicationController  #总部控制器
     @sales_all = Sale.find(:all, :conditions => ["status = ?",Sale::STATUS[:NOMAL]],
       :order => "created_at desc", :limit => Sale::NEW_NUM)
     @news = New.find(:all ,:conditions => ["status = ?",Sale::STATUS[:NOMAL]]).paginate(
-      :page => params[:page],:per_page => NEWS_PER_PAGE_NUM,:order => "created_at desc")
+      :page => params[:page],:per_page => New::NEWS_PER_PAGE_NUM,:order => "created_at desc")
     @current_url = request.path
   end
   
@@ -109,28 +103,9 @@ class HomepageController < ApplicationController  #总部控制器
     @current_url = request.path
   end
 
-  def provincechange
-    options = "<option value='0'>--请选择--</option>"
-    city = City.where("parent_id = ?",params[:id]).all
-    city.each do |c|
-      options << "<option value=#{c.id}>#{c.name}</option>"
-    end
-    render :text => options
-  end
-
-  def citychange
-    items = ""
-    stores = Store.where("city_id = ?",params[:id]).all
-    stores.each do |s|
-      items << "<a href = '/stores/#{s.id}'><li value=#{s.id}>#{s.name}</li></a>"
-    end
-    render :text => items
-  end
+  
 
   private
   
-  def show_sales
-    Sale.find(:all, :conditions =>["store_id = 1 and status = ? ",Sale::STATUS[:NOMAL]]).paginate(
-      :page => params[:page],:per_page => Sale::SALES_PER_PAGE_NUM,:order => "created_at desc")
-  end
+ 
 end
