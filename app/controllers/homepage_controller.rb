@@ -105,7 +105,6 @@ class HomepageController < ApplicationController  #总部控制器
   def news_centre #新闻中心
    
   end
-  
 
   def show_new#新闻详情
     

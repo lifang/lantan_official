@@ -1,5 +1,5 @@
 <div class="leftNews">
-  <h1><a href="/news">更多&gt;&gt;</a>活动咨询</h1>
+  <h1><a href="/official_sale">更多&gt;&gt;</a>活动咨询</h1>
   <ul>
     <% (@sales_laster || []).each do |sale| %>
       <li><span><a href="/official_sale/<%= sale.id %>"><%=sale.name[0,10] %></a></span><%=show_time(sale.created_at) %></li>
