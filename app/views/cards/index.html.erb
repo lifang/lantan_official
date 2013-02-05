@@ -1,0 +1,64 @@
+<div class="main">
+  <div class="box">
+    <div class="right">
+      <div class="r_menu">
+        <ul>
+          <li><a href="#" class="hover">&nbsp;储&nbsp;值&nbsp;卡</a></li>
+        </ul>
+      </div>
+      <div class="clear"></div>
+      <div class="text_box">
+        <div class="card_one">
+          <div class="c_one">储值卡介绍</div>
+          <div class="c_text">澜泰是一家从事引进和开发汽车服务领域高科技产品、技术，以及专业
+            将目前国外最顶尖的汽车美容养护产品和配套技术引入中国，并迅速在第一，不断创新，精益求精”的经营理念，为国内中高档轿车拥有者提
+            致力于服务中国市场客户，通过多年的努力和坚持，我们的产品和服务澜泰是一家从事引进和开发汽车服务领域高科技产品、技术，以及专业
+            将目前国外最顶尖的汽车美容养护产品和配套技术引入中国，并迅速在第一，不断创新，精益求精”的经营理念，为国内中高档轿车拥有者提
+            致力于服务中国市场客户，通过多年的努力和坚持，我们的产品和服务</div>
+          <div class="clear"></div>
+          <div class="c_btn"><a href="#" class="btn_one">下一步</a></div>
+        </div>
+
+        <div class="card_two">
+          <div class="c_two">协议申明</div>
+          <div class="c_text">澜泰是一家从事引进和开发汽车服务领域高科技产品、技术，以及专业
+            将目前国外最顶尖的汽车美容养护产品和配套技术引入中国，并迅速在第一，不断创新，精益求精”的经营理念，为国内中高档轿车拥有者提
+            致力于服务中国市场客户，通过多年的努力和坚持，我们的产品和服务澜泰是一家从事引进和开发汽车服务领域高科技产品、技术，以及专业
+            将目前国外最顶尖的汽车美容养护产品和配套技术引入中国，并迅速在第一，不断创新，精益求精”的经营理念，为国内中高档轿车拥有者提
+            致力于服务中国市场客户，通过多年的努力和坚持，我们的产品和服务</div>
+          <div class="clear"></div>
+          <div class="c_btn"><a href="#" class="btn_two">下一步</a></div>
+        </div>
+
+        <div class="card_three">
+          <div class="c_three">储值卡面额</div>
+          <div class="c_text">
+            <ul>
+              <li><%= radio_button_tag 'money','100',true %>100元</li>
+              <li><%= radio_button_tag 'money','200' %>200元</li>
+              <li><%= radio_button_tag 'money','500' %>500元</li>
+              <li><%= radio_button_tag 'money','1000' %>1000元</li>
+              <li><%= radio_button_tag 'money','2000' %>2000元</li>
+              <li><%= radio_button_tag 'money','5000' %>5000元</li>
+            </ul>
+          </div>
+          <div class="clear"></div>
+          <div class="c_btn"><a href="#" class="btn_three">完成</a></div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+  $(".card_two").css("display", "none");
+  $(".card_three").css("display", "none");
+  $(".btn_one").click(function(){
+    $(".card_one").slideUp();
+    $(".card_two").css("display", "inline");
+  });
+  $(".btn_two").click(function(){
+    $(".card_two").slideUp();
+    $(".card_three").css("display", "inline");
+  });
+</script>

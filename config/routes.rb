@@ -1,4 +1,6 @@
 LantanOfficial::Application.routes.draw do
+  get "cards/index"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -41,7 +43,7 @@ LantanOfficial::Application.routes.draw do
     end
   end
   resources :news
-
+  resources :cards
   resources :official_sale do
     collection do
       post :province_change
