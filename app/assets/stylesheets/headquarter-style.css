@@ -121,15 +121,11 @@ img { border: none;}
 .serviceItems_div h2 { color:#d51518; font-size: 16px;}
 .serviceItems_div a { color: #333; margin: 5px;}
 .serviceItems_div a:hover { text-decoration: underline;}
-.service_one, .service_two { 
-    width: 355px; 
-	padding-left: 130px; 
-	background: url(../assets/icon.png) no-repeat 50px 10px;
+.service_list { 
+    width: 465px;
+	padding: 10px; 
 	float: left;
 }
-.service_one { background: url(../assets/icon.png) no-repeat 50px 10px;}
-.service_two { background: url(../assets/icon.png) no-repeat 50px -135px;}
-
 /*foot*/
 .foot { border-top: 1px #cccccc solid; padding: 15px 0; font-size: 12px;}
 .foot div { width: 150px; height: 70px; margin: 0 auto;}
