@@ -10,13 +10,16 @@ class StoresController < ApplicationController
     @store = Store.find(store_id)
     #最新活动
     @laster_sales = Sale.find(:all,
-      :conditions => ["store_id = ? and status = ? ",store_id,Sale::STATUS[:NOMAL]],
+      :conditions => ["store_id = ? and status = ? ",store_id,
+        Sale::STATUS[:NOMAL]],
       :order=>"started_at desc", :limit => Sale::LASTER_SALES)
     #门店服务
     @product_service = Product.find(:all,
-      :conditions => ["is_service = ? and status = ? ",Product::IS_SERVICE[:NO],Sale::STATUS[:NOMAL]])
+      :conditions => ["is_service = ? and status = ? ",Product::IS_SERVICE[:NO],
+        Sale::STATUS[:NOMAL]])
     #门店产品
     @product_product = Product.find(:all,
-      :conditions => ["is_service = ? and status = ? ",Product::IS_SERVICE[:YES],Sale::STATUS[:NOMAL]])
+      :conditions => ["is_service = ? and status = ? ",Product::IS_SERVICE[:YES],
+        Sale::STATUS[:NOMAL]])
   end
 end
