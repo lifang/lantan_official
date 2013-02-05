@@ -2,6 +2,7 @@
 #门店控制器
 class StoresController < ApplicationController
   layout "frontdoor" #门店模板
+  
   #首页,展示门店
   def show
     @title = "门店首页"
