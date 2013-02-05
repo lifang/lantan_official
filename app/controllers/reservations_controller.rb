@@ -6,9 +6,13 @@ class ReservationsController < ApplicationController  #预约
     @store = Store.find(params[:store_id])
     @services = Product.find_all_by_is_service_and_store_id(Product::IS_SERVICE[:YES],params[:store_id])
     @products = Product.find_all_by_is_service_and_store_id(Product::IS_SERVICE[:NO],params[:store_id])
+    @laster_sales = Sale.find(:all,
+      :conditions => ["store_id = ? and status =?",@store.id,Sale::STATUS[:NOMAL]],
+      :order=>"started_at desc", :limit => Sale::LASTER_SALES)
   end
   
   def create
+    
     @store = Store.find(params[:store_id])
     @reservation = Reservation.new(:car_num_id => params[:car_number], :res_time => params[:res_time],
       :store_id => params[:store_id], :status => Reservation::DEFAULT_STATUS)
@@ -26,5 +30,8 @@ class ReservationsController < ApplicationController  #预约
         end
       end
     end
+    @laster_sales = Sale.find(:all,
+      :conditions => ["store_id = ? and status =?",@store.id,Sale::STATUS[:NOMAL]],
+      :order=>"started_at desc", :limit => Sale::LASTER_SALES)
   end
 end

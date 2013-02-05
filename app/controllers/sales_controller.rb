@@ -29,8 +29,9 @@ class SalesController < ApplicationController
 
   private
   def show_sale(store_id)#门店所有活动
-    Sale.find(:all, :conditions =>["status = ?  and (store_id = ? or store_id = 1)",Sale::STATUS[:NOMAL],store_id]).paginate(
-      :page => params[:page],:per_page => Sale::SALES_PER_PAGE_NUM,:order => "created_at desc")
+    Sale.find(:all, :conditions =>["status = ?  and (store_id = ? or store_id = 1)",
+        Sale::STATUS[:NOMAL],store_id]).paginate(:page => params[:page],
+      :per_page => Sale::SALES_PER_PAGE_NUM,:order => "created_at desc")
   end
 
   def discount_price(sale_price,discount)
