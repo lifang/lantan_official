@@ -7,7 +7,7 @@ img { border: none;}
 .box { width: 1000px; margin: 0 auto;}
 .clear { clear: both;}
 .red { color: #F00;}
-.btn {
+.btn_one,.btn_two,.btn_three,.btn {
 	width: 80px;
 	height: 30px;
 	display: block;
@@ -121,15 +121,11 @@ img { border: none;}
 .serviceItems_div h2 { color:#d51518; font-size: 16px;}
 .serviceItems_div a { color: #333; margin: 5px;}
 .serviceItems_div a:hover { text-decoration: underline;}
-.service_one, .service_two { 
-    width: 355px; 
-	padding-left: 130px; 
-	background: url(../assets/icon.png) no-repeat 50px 10px;
+.service_list { 
+    width: 465px;
+	padding: 10px; 
 	float: left;
 }
-.service_one { background: url(../assets/icon.png) no-repeat 50px 10px;}
-.service_two { background: url(../assets/icon.png) no-repeat 50px -135px;}
-
 /*foot*/
 .foot { border-top: 1px #cccccc solid; padding: 15px 0; font-size: 12px;}
 .foot div { width: 150px; height: 70px; margin: 0 auto;}
@@ -218,7 +214,7 @@ img { border: none;}
 
 
 /*储值卡*/
-.card { padding-bottom: 15px; margin-bottom: 15px;}
+.card,.card_one,.card_two { padding-bottom: 15px; margin-bottom: 15px;}
 .c_one, .c_two, .c_three { width: 98px; height: 98px; text-indent: -999px; overflow: hidden; float: left; margin-right: 15px;}
 .c_one {background: url(../assets/card_bg.png) no-repeat;}
 .c_two {background: url(../assets/card_bg.png) no-repeat 0 -99px;}

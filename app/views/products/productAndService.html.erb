@@ -1,7 +1,9 @@
  <div class="main">
       <div class="box">        <div class="leftAera">
   <%=render "stores/store_info" %>
- <div class="leftSales"><a href="#"><img src="images/sales01.jpg"></a><a href="#"><img src="images/sales01.jpg"></a></div>
+ <div class="leftSales">
+    <%=render("/sales/laster_sales")%>
+ </div>
 </div><div class="rightAera">
   <div class="rightTitle">
     <h1>服务</h1>

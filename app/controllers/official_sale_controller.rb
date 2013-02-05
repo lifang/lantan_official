@@ -1,6 +1,6 @@
 #encoding: utf-8
 class OfficialSaleController < ApplicationController  #总店活动促销页面
-  layout "headquarter", :except => [:login]
+  layout "headquarter"
    
   def index
     @sales_laster = Sale.find(:all, :conditions => ["status = ?",Sale::STATUS[:NOMAL]],

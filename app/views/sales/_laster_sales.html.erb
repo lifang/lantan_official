@@ -1,0 +1,3 @@
+<% ( @laster_sales || []).each do |sale| %>
+<a href="/official_sale/<%=sale.id%>"><%= image_tag("#{sale.img_url}")  %></a>
+<% end %>

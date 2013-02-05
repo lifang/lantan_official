@@ -8,9 +8,7 @@
     </div>
     <div class="right">
       <div class="sales">
-        <% (@laster_sales || []).each do |sale| %>
-          <a href="#"><%= image_tag ("#{sale.img_url}") %></a>
-        <%end%>
+        <%=render("/sales/laster_sales")%>
       </div>
       <div class="text">
         <h1>服务</h1>
