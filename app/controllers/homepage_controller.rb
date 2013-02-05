@@ -27,6 +27,7 @@ class HomepageController < ApplicationController  #总部控制器
     if customer.save #往用户表中插入数据
       CarNum.create(:num => params[:car_num])
       session[:customer] = customer
+       
       @current_url = params[:current_url]
     end
   end
@@ -40,6 +41,7 @@ class HomepageController < ApplicationController  #总部控制器
       redirect_to "/homepage/login"
     else
       session[:customer] = customer
+      session[:customer_id] = customer.id
       redirect_to params[:current_url]
     end
   end

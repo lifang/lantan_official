@@ -43,7 +43,12 @@ LantanOfficial::Application.routes.draw do
     end
   end
   resources :news
-  resources :cards
+  resources :cards do
+    collection do
+     get :alipay_exercise
+     get :alipay_compete
+    end
+  end
   resources :official_sale do
     collection do
       post :province_change

@@ -11,6 +11,8 @@
     $(".card_two").slideUp();
     $(".card_three").css("display", "inline");
   });
+  
+  
 $(function(){
 	var xxx,re;
 	var hover= $(".hover").position().left;
@@ -29,8 +31,8 @@ $(function(){
 //second_menu
 $(function(){
 	$(".menu").hover(
-		function(){$(this).find(".second_menu").slideDown("slow"); },
-		function(){$(this).find(".second_menu").slideUp("slow"); }
+		function(){$(this).find(".second_menu").slideDown("slow");},
+		function(){$(this).find(".second_menu").slideUp("slow");}
 	)
 });
 
