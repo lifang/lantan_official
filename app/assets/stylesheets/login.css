@@ -47,7 +47,7 @@ button { font-family:"微软雅黑"; cursor: pointer; border: none;}
 .foot p { text-align: center; line-height: 32px; color:#c3c3c3;}
 
 /*register注册*/
-.register_bg { width: 1000px; padding: 10px 0;}
+.register_bg { width: 1000px; padding: 10px 0; height: 370px;}
 .register_bg ul { height: 37px; width: 1000px; display: block; margin-bottom: 30px;}
 .re_one { background: url(../assets/re_title.png) no-repeat 0 0;}
 .re_two { background: url(../assets/re_title.png) no-repeat 0 bottom;}
@@ -55,7 +55,7 @@ button { font-family:"微软雅黑"; cursor: pointer; border: none;}
 
 .re_list { width: 350px; height: 40px; line-height: 40px; margin: 20px auto;}
 .re_list label { width: 60px; display: inline-block; text-align: right; float: left;}
-.re_list input { height: 30px; line-height: 30px; width: 288px; _width: 280px;}
+.re_list input { height: 30px; line-height: 30px; width: 280px; _width: 280px;}
 
 .re_btn { margin-top: 30px;}
 .re_btn button { 

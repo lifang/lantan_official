@@ -9,5 +9,5 @@ class Sale < ActiveRecord::Base
   #左侧活动列表显示条数
    NEW_NUM = 6
   #内容部分显示活动条数
-  SALES_PER_PAGE_NUM = 3
+  SALES_PER_PAGE_NUM = 10
 end

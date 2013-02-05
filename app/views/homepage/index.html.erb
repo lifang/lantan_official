@@ -16,14 +16,13 @@
     <![endif]-->
 
   </head>
-
   <body>
     <div class="head">
       <div class="box">
         <div class="logo">杭州澜泰科技有限公司</div>
         <div class="login">
           <% if session[:customer].nil? %>
-            <a href="#">注册</a> |
+            <a href="/homepage/regist?current_url=<%= @current_url %>">注册</a> |
             <a href="/homepage/login?current_url=<%= @current_url %>">登录</a>
           <% else %>
             欢迎用户<%= session[:customer].name %>|
@@ -32,7 +31,7 @@
         </div>
         <div class="nav">
           <ul>
-            <li class="hover"><a href="/homepage/index">首页</a></li>
+            <li class="hover"><a href="/homepage">首页</a></li>
             <li class="menu"><a href="/homepage/about_lantan">关于澜泰</a>
               <div class="second_menu">
                 <p><a href="/homepage/company_introduce">公司介绍</a></p>
@@ -69,43 +68,47 @@
         <div class="news">
           <h1>新闻</h1>
           <ul>
-            <li><span>2012-12-01</span><a href="#">上海大众2014年推新A级车上海大众2014年推新A级车上海大众2014年推新A级车</a></li>
-            <li><span>2012-12-01</span><a href="#">上海大众2014年推新A级车</a></li>
-            <li><span>2012-12-01</span><a href="#">上海大众2014年推新A级车</a></li>
-            <li><span>2012-12-01</span><a href="#">上海大众2014年推新A级车</a></li>
-            <li><span>2012-12-01</span><a href="#">上海大众2014年推新A级车</a></li>
-            <li><span>2012-12-01</span><a href="#">上海大众2014年推新A级车</a></li>
+            <% @news.each do |n| %>
+              <li><span><%= n.created_at.strftime("%Y-%m-%d") %></span><a href="/news/<%= n.id %>"><%= n.title %></a></li>
+            <% end %>
           </ul>
         </div>
         <div class="inquire">
           <h1>门店查询</h1>
-          <div class="inquire_div"><span>选择省市：</span><label>
-              <select id="city_p_id">
-                <option value="0">--请选择--</option>
-                <% (province || []).each do |p|%>
-                  <option value=<%= p.id %>><%= p.name %></option>
-                <%end%>
-              </select>
-            </label>
-            <select id="city_c_id"></select></div>
+          <div class="inquire_div"><label>选择省市：</label>
+      <select id="city_province_id"><option value="0">--请选择--</option>
+        <% (province || []).each do |p|%>
+          <option value=<%= p.id %>><%= p.name %></option>
+        <%end%>
+      </select>
+    <select id="city_city_id"></select></div>
           <div class="clear"></div>
           <div class="inquire_div">
-            <ul id="stores_list_table">
-            </ul>
+         <ul id="stores_list">
+    </ul>
           </div>
         </div>
         <div class="clear"></div>
         <div class="serviceItems">
           <h1>服务项目</h1>
           <div class="serviceItems_div">
-            <div class="service_one">
-              <h2>汽车养护类</h2>
-              <a href="#">免工时换油保养</a> / <a href="#">引擎燃烧室清洗</a> / <a href="#">引擎喷油嘴清洗</a> / <a href="#">引擎节气门清洗</a> / <a href="#">空调风道清洗</a>
-            </div>
-            <div class="service_two">
-              <h2>汽车养护类</h2>
-              <a href="#">免工时换油保养</a> / <a href="#">引擎燃烧室清洗</a> / <a href="#">引擎喷油嘴清洗</a> / <a href="#">引擎节气门清洗</a> / <a href="#">空调风道清洗</a>
-            </div>
+            <% Product::SERVICE_TYPES.each_with_index do |hash, index| %>
+              <% if index % 2 == 0 %>
+                <div class="service_one">
+                  <h2><%= hash[1] %></h2>
+                  <% @service_hash[hash[0]].to_a.each do |service| %>
+                    <a href="/products/<%= service.id %>"><%= service.name %></a>/
+                  <% end %>
+                </div>
+              <% else %>
+                <div class="service_two">
+                  <h2><%= hash[1] %></h2>
+                  <% @service_hash[hash[0]].to_a.each do |service| %>
+                    <a href="/products/<%= service.id %>"><%= service.name %></a>/
+                  <% end %>
+                </div>
+              <% end %>
+            <% end %>
             <div class="clear"></div>
           </div>
         </div>
@@ -115,6 +118,6 @@
       <div><img src="/assets/foot_logo.png"/></div>
       <p>Copyright © 2013 杭州澜泰 版权所有</p>
     </div>
-    <%= javascript_include_tag "select_store" %>
+<%= javascript_include_tag "left" %>
   </body>
 </html>

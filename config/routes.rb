@@ -13,9 +13,13 @@ LantanOfficial::Application.routes.draw do
   resources :teams
   resources :homepage do
     collection do
+
+    get :index
     get :login
     get :logoff
-    post :create_customer_session
+    get :regist
+    post :regist_create
+    post :login_create
     get :about_lantan
     get :company_introduce
     get :company_culture
@@ -36,11 +40,14 @@ LantanOfficial::Application.routes.draw do
     post :citychange
     end
   end
+  resources :news
 
   resources :official_sale do
     collection do
       post :province_change
       post :city_change
+      post :province_change_reservations
+      post :city_change_reservations
     end
   end
 
