@@ -1,5 +1,4 @@
 LantanOfficial::Application.routes.draw do
-  get "homepage/index"
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -14,6 +13,7 @@ LantanOfficial::Application.routes.draw do
   resources :teams
   resources :homepage do
     collection do
+
     get :index
     get :login
     get :logoff
@@ -33,9 +33,11 @@ LantanOfficial::Application.routes.draw do
     get :news_centre
     get :customer_investigate
     get :contact_us
-    end
-    member do
-      
+    get :show_sale
+    get :show_new
+    get :contact_us
+    post :provincechange
+    post :citychange
     end
   end
   resources :news do
@@ -48,6 +50,7 @@ LantanOfficial::Application.routes.draw do
     resources :products
     resources :reservations 
     resources :teams
+    resources :sales
   end
 
  
@@ -94,7 +97,7 @@ LantanOfficial::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  # root :to => 'welcome#index'
+     root :to => 'homepage#index'
 
   # See how all your routes lay out with "rake routes"
 

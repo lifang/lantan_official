@@ -1,0 +1,16 @@
+<div class="inquire_div"><label>选择省市：</label>
+  <select id="city_p_id">
+    <option value="0">--请选择--</option>
+    <% (province || []).each do |p|%>
+      <option value=<%= p.id %>><%= p.name %></option>
+    <%end%>
+  </select>
+  table
+  <select id="city_c_id"></select>
+</div>
+<div class="clear"></div>
+<div class="inquire_div">
+  <ul id="stores_list_table">
+  </ul>
+</div>
+<%= javascript_include_tag "select_store" %>

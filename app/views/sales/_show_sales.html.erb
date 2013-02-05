@@ -1,0 +1,12 @@
+<h1><%= @sale.name %> </h1>
+<em><%= show_time(@sale.created_at) %></em>
+图片
+<h2>活动介绍</h2>
+<p><%= @sale.introduction  %></p>
+<h2>活动时间：<%= show_time(@sale.started_at)  %>&nbsp;至&nbsp;<%= show_time(@sale.ended_at)  %></h2>
+<h2>活动规则</h2>
+<%if @sale.disc_types==1%><!--金额-->
+  <p>这是金额优惠</p>
+<%elsif @sale.disc_types==0%><!--打折-->
+  <p>这是打折优惠</p>
+<%end%>

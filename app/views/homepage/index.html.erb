@@ -1,124 +1,151 @@
 <!doctype html>
 <html>
-<head>
-<meta charset="utf-8"/>
-<title>澜泰总部</title>
-<%= stylesheet_link_tag "application" %>
-<%= stylesheet_link_tag "headquarter-style" %>
+  <head>
+    <meta charset="utf-8"/>
+    <title>澜泰总部</title>
+    <%= stylesheet_link_tag "application" %>
+    <%= stylesheet_link_tag "headquarter-style" %>
 
-<%= javascript_include_tag "application" %>
-<%= javascript_include_tag "headquarter-main" %>
-<!--[if IE 6]>
-<script src="js/DD_belatedPNG_0.0.8a-min.js"></script>
-<script>
-  DD_belatedPNG.fix('*');
-</script>
-<![endif]-->
+    <%= javascript_include_tag "application" %>
+    <%= javascript_include_tag "headquarter-main" %>
+    <!--[if IE 6]>
+    <script src="js/DD_belatedPNG_0.0.8a-min.js"></script>
+    <script>
+      DD_belatedPNG.fix('*');
+    </script>
+    <![endif]-->
 
-</head>
-
-<body>
-     <div class="head">
-          <div class="box">
-              <div class="logo">杭州澜泰科技有限公司</div>
-              <div class="login">
-                <% if session[:customer].nil? %>
-                   <a href="/homepage/regist?current_url=<%= @current_url %>">注册</a> |
-                   <a href="/homepage/login?current_url=<%= @current_url %>">登录</a>
-                 <% else %>
-                   欢迎用户<%= session[:customer].name %>|
-                   <a href="/homepage/logoff?current_url=<%= @current_url %>" onclick="return sure_logoff()">注销</a>
-                 <% end %>
+  </head>
+  <body>
+    <div class="head">
+      <div class="box">
+        <div class="logo">杭州澜泰科技有限公司</div>
+        <div class="login">
+          <% if session[:customer].nil? %>
+            <a href="/homepage/regist?current_url=<%= @current_url %>">注册</a> |
+            <a href="/homepage/login?current_url=<%= @current_url %>">登录</a>
+          <% else %>
+            欢迎用户<%= session[:customer].name %>|
+            <a href="/homepage/logoff?current_url=<%= @current_url %>" onclick="return sure_logoff()">注销</a>
+          <% end %>
+        </div>
+        <div class="nav">
+          <ul>
+            <li class="hover"><a href="/homepage">首页</a></li>
+            <li class="menu"><a href="/homepage/about_lantan">关于澜泰</a>
+              <div class="second_menu">
+                <p><a href="/homepage/company_introduce">公司介绍</a></p>
+                <p><a href="/homepage/characteristic_service">特色服务</a></p>
+                <p><a href="/homepage/managment_idea">经营理念</a></p>
+                <p><a href="/homepage/company_culture">企业文化</a></p>
+                <p><a href="/homepage/team_introduce">团队介绍</a></p>
+                <p><a href="/homepage/store_introduce">门店介绍</a></p>
               </div>
-              <div class="nav">
-                   <ul>
-                      <li class="hover"><a href="/homepage/index">首页</a></li>
-                      <li class="menu"><a href="/homepage/about_lantan">关于澜泰</a>
-                          <div class="second_menu">
-                               <p><a href="/homepage/company_introduce">公司介绍</a></p>
-                               <p><a href="/homepage/characteristic_service">特色服务</a></p>
-                               <p><a href="/homepage/managment_idea">经营理念</a></p>
-                               <p><a href="/homepage/company_culture">企业文化</a></p>
-                               <p><a href="/homepage/team_introduce">团队介绍</a></p>
-                               <p><a href="/homepage/store_introduce">门店介绍</a></p>
-                          </div>
-                      </li>
-                      <li><a href="/homepage/sales_promotion">活动促销</a></li>
-                      <li><a href="/homepage/product_information">产品信息</a></li>
-                      <li><a href="/homepage/sv_cards">储值卡</a></li>
-                      <li><a href="/homepage/news_centre">新闻中心</a></li>
-                      <li><a href="/homepage/customer_investigate">用户调查</a></li>
-                      <li><a href="/homepage/contact_us">联系我们</a></li>
-                   </ul>
-                   <div class="nav_bg"></div>
-              </div>
+            </li>
+            <li><a href="/homepage/sales_promotion">活动促销</a></li>
+            <li><a href="/homepage/product_information">产品信息</a></li>
+            <li><a href="/homepage/sv_cards">储值卡</a></li>
+            <li><a href="/homepage/news_centre">新闻中心</a></li>
+            <li><a href="/homepage/customer_investigate">用户调查</a></li>
+            <li><a href="/homepage/contact_us">联系我们</a></li>
+          </ul>
+          <div class="nav_bg"></div>
+        </div>
+      </div>
+    </div>
+    <div class="main">
+      <div class="banner">
+        <div class="scroll_play">
+          <div class="scroll_show">
+            <a href="#" target="_blank"><img src="/assets/banner1.png" /></a>
+            <a href="#" target="_blank"><img src="/assets/banner2.png" /></a>
+            <a href="#" target="_blank"><img src="/assets/banner3.png"  /></a>
           </div>
-     </div>
-     <div class="main">
-          <div class="banner">
-               <div class="scroll_play">
-                    <div class="scroll_show">
-                         <a href="#" target="_blank"><img src="/assets/banner1.png" /></a>
-                         <a href="#" target="_blank"><img src="/assets/banner2.png" /></a>
-                         <a href="#" target="_blank"><img src="/assets/banner3.png"  /></a>
-                    </div>
-                    <div class="scroll_num"><a>1</a><a>2</a><a>3</a></div>
-               </div>
+          <div class="scroll_num"><a>1</a><a>2</a><a>3</a></div>
+        </div>
+      </div>
+        <div class="box">
+          <div class="news">
+            <h1>新闻</h1>
+            <ul>
+              <% @news.each do |n| %>
+                <li><span><%= n.created_at.strftime("%Y-%m-%d") %></span><a href="/news/<%= n.id %>"><%= n.title %></a></li>
+              <% end %>
+            </ul>
           </div>
-          <div class="box">
-              <div class="news">
-                   <h1>新闻</h1>
-                   <ul>
-                     <% @news.each do |n| %>
-                      <li><span><%= n.created_at.strftime("%Y-%m-%d") %></span><a href="/news/<%= n.id %>"><%= n.title %></a></li>
-                     <% end %>
-                   </ul>
-              </div>
-              <div class="inquire">
-                   <h1>门店查询</h1>
-                   <div class="inquire_div"><label>选择省市：</label><select name=""></select><select name=""></select></div>
-                   <div class="clear"></div>
-                   <div class="inquire_div">
-                        <ul>
-                           <li><a href="#">杭州门店001</a></li>
-                           <li><a href="#">杭州门店001</a></li>
-                        </ul>
-                   </div>
-              </div>
+          <div class="inquire">
+            <h1>门店查询</h1>
+            <div class="inquire_div"><span>选择省市：</span><label>
+                <select id="city_p_id">
+                  <option value="0">--请选择--</option>
+                  <% (province || []).each do |p|%>
+                    <option value=<%= p.id %>><%= p.name %>
+                    </option>
+                  <%end%>
+                </select>
+              </label>
+              <select id="city_c_id"></select></div>
+            <div class="clear"></div>
+          </div>
+          <div class="clear"></div>
+          <div class="serviceItems">
+            <h1>服务项目</h1>
+            <div class="serviceItems_div">
+              <% Product::SERVICE_TYPES.each_with_index do |hash, index| %>
+                <% if index % 2 == 0 %>
+                  <div class="service_one">
+                    <h2><%= hash[1] %></h2>
+                    <% @service_hash[hash[0]].to_a.each do |service| %>
+                      <a href="/products/<%= service.id %>"><%= service.name %></a>/
+                    <% end %>
+                  </div>
+                <% else %>
+                  <div class="service_two">
+                    <h2><%= hash[1] %></h2>
+                    <% @service_hash[hash[0]].to_a.each do |service| %>
+                      <a href="/products/<%= service.id %>"><%= service.name %></a>/
+                    <% end %>
+                  </div>
+                <% end %>
+              <% end %>
               <div class="clear"></div>
-              <div class="serviceItems">
-                   <h1>服务项目</h1>
-                   <div class="serviceItems_div">
-                     <% Product::SERVICE_TYPES.each_with_index do |hash, index| %>
-                     <% if index % 2 == 0 %>
-                        <div class="service_one">
-                             <h2><%= hash[1] %></h2>
-                             <% @service_hash[hash[0]].to_a.each do |service| %>
-                             <a href="/products/<%= service.id %>"><%= service.name %></a>/
-                             <% end %>
-                        </div>
-                     <% else %>
-                        <div class="service_two">
-                             <h2><%= hash[1] %></h2>
-                            <% @service_hash[hash[0]].to_a.each do |service| %>
-                             <a href="/products/<%= service.id %>"><%= service.name %></a>/
-                             <% end %>
-                        </div>
-                     <% end %>
-                     <% end %>
-                        <div class="clear"></div>
-                   </div>
-              </div>
+            </div>
           </div>
-     </div>
-     <div class="foot">
-          <div><img src="/assets/foot_logo.png"/></div>
-          <p>Copyright © 2013 杭州澜泰 版权所有</p>
-     </div>
-</body>
-<script>
-  function sure_logoff(){
-    return confirm("确定退出?");
-  }
-</script>
+        </div>
+      </div>
+    <div class="foot">
+      <div><img src="/assets/foot_logo.png"/></div>
+      <p>Copyright © 2013 杭州澜泰 版权所有</p>
+    </div>
+
+  </body>
+  <script type="text/javascript">
+    $("#city_p_id").change(function(){
+      $.ajax({
+        type :"POST",
+        url:"/homepage/provincechange?id="+$("#city_p_id").attr("value"),
+        data :'text',
+        success: function(data)
+        {
+          $("#city_c_id").html(data);
+        }
+      })
+    })
+    $("#city_c_id").change(function(){ alert("jj");
+      $.ajax({
+        type :"POST",
+        url:"/homepage/citychange?id="+$("#city_c_id").attr("value"),
+        data :'text',
+        success: function(data)
+        {
+          $("#stores_list_table").html(data);
+        }
+      })
+    })
+  </script>
+  <script>
+    function sure_logoff(){
+      return confirm("确定退出?");
+    }
+  </script>
 </html>

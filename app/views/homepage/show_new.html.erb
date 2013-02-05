@@ -1,0 +1,12 @@
+<div class="r_menu">
+  <ul>
+    <li><a href="#" class="hover">产品信息</a></li>
+  </ul>
+</div>
+<div class="clear"></div>
+<div class="text_box">
+  <h1><%= @new.title %></h1>
+  <em><%= show_time(@new.created_at) %></em>
+  <img src="images/pro02.jpg">
+  <%= raw(@new.content) %>
+</div>
