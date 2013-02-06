@@ -12,6 +12,6 @@ class NewsController < ApplicationController #新闻控制器
   def show
     @sales_laster = Sale.find(:all, :conditions => ["status = ? and store_id = ?",Sale::STATUS[:NOMAL],Store::DEFAULT_ID],
       :order => "created_at desc", :limit => Sale::NEW_NUM)
-    @new = New.find(params[:id])
+    @new = New.find(params[:id].to_i)
   end
 end

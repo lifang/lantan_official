@@ -6,7 +6,7 @@ class StoresController < ApplicationController
   #首页,展示门店
   def show
     #当前门店
-    store_id = params[:id]
+    store_id = params[:id].to_i
     @store = Store.find(store_id)
     #最新活动
     @laster_sales = Sale.find(:all,
@@ -16,10 +16,11 @@ class StoresController < ApplicationController
     #门店服务
     @services = Product.find(:all,
       :conditions => ["is_service = ? and store_id = ? ",Product::IS_SERVICE[:YES],
-        params[:id]])
+        params[:id].to_i])
     #门店产品
     @products = Product.find(:all,
       :conditions => ["is_service = ? and store_id = ? ",Product::IS_SERVICE[:NO],
-        params[:id]])
+        params[:id].to_i])
+    
   end
 end

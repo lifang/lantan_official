@@ -4,8 +4,8 @@ class ReservationsController < ApplicationController  #预约
   def new
     @reservation = Reservation.new
     @store = Store.find(params[:store_id])
-    @services = Product.find_all_by_is_service_and_store_id(Product::IS_SERVICE[:YES],params[:store_id])
-    @products = Product.find_all_by_is_service_and_store_id(Product::IS_SERVICE[:NO],params[:store_id])
+    @services = Product.find_all_by_is_service_and_store_id(Product::IS_SERVICE[:YES],params[:store_id].to_i)
+    @products = Product.find_all_by_is_service_and_store_id(Product::IS_SERVICE[:NO],params[:store_id].to_i)
     @laster_sales = Sale.find(:all,
       :conditions => ["store_id = ? and status =?",@store.id,Sale::STATUS[:NOMAL]],
       :order=>"started_at desc", :limit => Sale::LASTER_SALES)

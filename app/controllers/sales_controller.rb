@@ -5,7 +5,7 @@ class SalesController < ApplicationController
   #门店活动促销首页
   def index
     @title = "活动"
-    @store_id = params[:store_id]
+    @store_id = params[:store_id].to_i
     @store = Store.find(@store_id)
     @sales = show_sale(@store_id)
     @laster_sales = Sale.find(:all,
@@ -16,7 +16,7 @@ class SalesController < ApplicationController
   #门店活动详情
   def show
     @title = "活动详情"
-    store_id =params[:store_id]
+    store_id =params[:store_id].to_i
     @sale = Sale.find(params[:id])
     @store = Store.find(store_id)
     @product= @sale.sale_prod_relations.first.product
