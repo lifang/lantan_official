@@ -1,6 +1,5 @@
 module ApplicationHelper
   include Constant
-
   
   def show_time(time)
     time.strftime('%Y-%m-%d')

@@ -28,7 +28,7 @@ test:
   database: lantan_db_test
   pool: 5
   username: root
-  password: ok  
+  password: condo2012
   host: 127.0.0.1
 
 production:
