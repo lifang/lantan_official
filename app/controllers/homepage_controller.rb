@@ -1,11 +1,6 @@
 #encoding: utf-8
 class HomepageController < ApplicationController  #总部控制器
-<<<<<<< HEAD
-  layout 'headquarter', :except => [:index, :login, :regist]
-  
-=======
   layout 'headquarter', :except => [:index, :login, :regist, :regist_create]
->>>>>>> a81e9754bca9a10703d8709a4d399d40a4c4cc22
   def index #总部首页
     @news = New.find(:all, :conditions => "status = '#{New::DEFAULT_STATUS}'", :order => "created_at desc", :limit => 6) #首页显示的6条新闻
     services = Product.find_all_by_is_service_and_store_id(Product::IS_SERVICE[:YES],Store::DEFAULT_ID) #首页显示的服务项目
