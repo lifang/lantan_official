@@ -1,12 +1,12 @@
 $(document).ready(function(){
     $("#next_step").click(function(){
-        if( $("#customer_name").val() == ""){
+        if( $.trim($("#customer_name").val()) == ""){
             alert("用户名不能为空!");
-        }else if( $("#car_number").val() == ""){
+        }else if($.trim($("#car_number").val()) == ""){
             alert("车牌不能为空!");
-        }else if($("#telephone").val() == ""){
+        }else if($.trim($("#telephone").val()) == ""){
             alert("电话号码不能为空!");
-        }else if( $("#datepicker").val() == ""){
+        }else if($.trim($("#datepicker").val()) == ""){
             alert("预约时间不能为空!");
         }else{
             $("#loginmessage").hide();

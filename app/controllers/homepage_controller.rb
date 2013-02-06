@@ -62,42 +62,7 @@ class HomepageController < ApplicationController  #总部控制器
   def about_lantan  #关于澜泰
     redirect_to "/homepage/company_introduce"
   end
-  
-  def company_introduce #公司介绍
-   
-  end
-  
-  def characteristic_service  #特色服务
-   
-  end
-  
-  def managment_idea #经营理念
-   
-  end
-  
-  def company_culture #企业文化
-  
-  end
-  
-  def team_introduce #团队介绍
  
-  end
-  
-  def store_introduce #门店介绍
-  end
-  
-  def show_sale #活动促销详情
-   
-  end
-  
-  def sv_cards  #储值卡
-  
-
-  end
-  
-  def customer_investigate  #用户调查
-
-  end
 
   def contact_us #联系我们
     @sales_laster = Sale.find(:all, :conditions => ["status = ?",Sale::STATUS[:NOMAL]],
