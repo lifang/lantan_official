@@ -1,5 +1,5 @@
 function regist_validate(){
-    if ($.trim($("#name").value) == ""){
+    if ($.trim($("#name").val()) == ""){
         alert("用户名不能为空！")
         return false;
     }

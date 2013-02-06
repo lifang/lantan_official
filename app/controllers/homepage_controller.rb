@@ -25,12 +25,17 @@ class HomepageController < ApplicationController  #总部控制器
   end
 
   def regist_create #注册验证
-    customer = Customer.new(:name => params[:name],:mobilephone =>  params[:mobilephone], :address => params[:address])
-    if customer.save #往用户表中插入数据
-      CarNum.create(:num => params[:car_num].strip)
-      session[:customer] = customer
-       
-      @current_url = params[:current_url]
+    if Customer.find_by_name_and_mobilephone(params[:name].strip, params[:mobilephone].strip).nil?
+      customer = Customer.new(:name => params[:name].strip,:mobilephone =>  params[:mobilephone].strip, :address => params[:address].strip)
+      if customer.save #往用户表中插入数据
+        car_num = CarNum.create(:num => params[:car_num].strip) #往车牌号表中插入数据
+        CustomerNumRelation.create(:customer_id => customer.id, :car_num_id => car_num.id)#往用户-车牌-关系表中插入数据
+        session[:customer] = customer
+        session[:customer_id] = customer.id
+        @current_url = params[:current_url]
+      end
+    else
+      redirect_to "/homepage/regist"
     end
   end
   
@@ -39,7 +44,7 @@ class HomepageController < ApplicationController  #总部控制器
   end
   
   def login_create #登录验证
-    customer = Customer.find_by_name_and_mobilephone(params[:name], params[:mobilephone])
+    customer = Customer.find_by_name_and_mobilephone(params[:name].strip, params[:mobilephone].strip)
     if customer.nil?
       redirect_to "/homepage/login"
     else
