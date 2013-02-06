@@ -7,7 +7,7 @@ img { border: none;}
 .box { width: 1000px; margin: 0 auto;}
 .clear { clear: both;}
 .red { color: #F00;}
-.btn {
+.btn,.btn_one,.btn_three,.btn_two {
 	width: 80px;
 	height: 30px;
 	display: block;

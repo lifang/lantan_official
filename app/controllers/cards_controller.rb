@@ -59,7 +59,6 @@ class CardsController < ApplicationController #储值卡
           @@m.synchronize {
             begin
               CSvcRelation.transaction do
-               
                 if c_sv_relations.nil?#如果没有记录
                   CSvcRelation.create(:customer_id=>trade_nu[0].to_i,:sv_card_id=>trade_nu[2].to_i,
                     :created_at=>Time.now,:total_price => 0,:over_price => 0)
