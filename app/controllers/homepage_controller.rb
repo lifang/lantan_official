@@ -27,7 +27,7 @@ class HomepageController < ApplicationController  #总部控制器
   def regist_create #注册验证
     customer = Customer.new(:name => params[:name],:mobilephone =>  params[:mobilephone], :address => params[:address])
     if customer.save #往用户表中插入数据
-      CarNum.create(:num => params[:car_num])
+      CarNum.create(:num => params[:car_num].strip)
       session[:customer] = customer
        
       @current_url = params[:current_url]
