@@ -18,7 +18,6 @@
           <div class="clear"></div>
           <div class="c_btn"><a href="#" class="btn_one">下一步</a></div>
         </div>
-
         <div class="card_two">
           <div class="c_two">协议申明</div>
           <div class="c_text">澜泰是一家从事引进和开发汽车服务领域高科技产品、技术，以及专业
@@ -29,25 +28,25 @@
           <div class="clear"></div>
           <div class="c_btn"><a href="#" class="btn_two">下一步</a></div>
         </div>
-
         <div class="card_three">
           <div class="c_three">储值卡面额</div>
           <div class="c_text">
             <ul>
-              <li><%= radio_button_tag 'money','100',true %>100元</li>
-              <li><%= radio_button_tag 'money','200' %>200元</li>
-              <li><%= radio_button_tag 'money','500' %>500元</li>
-              <li><%= radio_button_tag 'money','1000' %>1000元</li>
-              <li><%= radio_button_tag 'money','2000' %>2000元</li>
-              <li><%= radio_button_tag 'money','5000' %>5000元</li>
+              <% (@sv_cards ||[]).each do |sv_card| %>
+                <li>
+                  <input id="<%= sv_card.id %>" type="radio" name="sv_card" value="<%= sv_card.price %>"/><%= sv_card.price %>
+                </li>
+              <% end %>
             </ul>
           </div>
           <div class="clear"></div>
           <div class="c_btn"><a href="#" class="btn_three">完成</a></div>
         </div>
-
       </div>
     </div>
   </div>
 </div>
 <%= javascript_include_tag "headquarter-main" %>
+<script type="text/javascript">
+
+</script>
