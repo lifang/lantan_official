@@ -6,7 +6,5 @@ class TeamsController < ApplicationController
     @laster_sales = Sale.find(:all,
       :conditions => ["store_id = ? and status =?",@store.id,Sale::STATUS[:NOMAL]],
       :order=>"started_at desc", :limit => Sale::LASTER_SALES)
-    puts @store
-    puts @laster_sales,"------------------"
   end
 end

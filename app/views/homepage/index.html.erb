@@ -6,7 +6,8 @@
     <%= stylesheet_link_tag "application" %>
     <%= stylesheet_link_tag "headquarter-style" %>
     <%= javascript_include_tag "application" %>
-    <%= javascript_include_tag "headquarter-main" %>
+    <%= javascript_include_tag "headquarter-main","logoff" %>
+    
     <!--[if IE 6]>
     <script src="/assets/DD_belatedPNG_0.0.8a-min.js"></script>
     <script>
@@ -20,11 +21,11 @@
         <div class="logo">杭州澜泰科技有限公司</div>
         <div class="login">
           <% if session[:customer].nil? %>
-            <a href="/homepage/regist?current_url=<%= @current_url %>">注册</a> |
-            <a href="/homepage/login?current_url=<%= @current_url %>">登录</a>
+            <a href="/homepage/regist?current_url=<%= request.path %>">注册</a> |
+            <a href="/homepage/login?current_url=<%= request.path %>">登录</a>
           <% else %>
-            欢迎用户<%= session[:customer].name %> |<a href="#">个人信息</a>|
-            <a href="/homepage/logoff?current_url=<%= @current_url %>" onclick="return sure_logoff()">注销</a>
+            欢迎用户<%= session[:customer].name %> |
+            <a href="/homepage/logoff?current_url=<%= request.path %>" onclick="return sure_logoff()">注销</a>
           <% end %>
         </div>
         <div class="nav">
@@ -43,7 +44,7 @@
             <li><a href="/official_sale">活动促销</a></li>
             <li><a href="/homepage/product_information">产品信息</a></li>
             <li><a href="/cards">储值卡</a></li>
-            <li><a href="/homepage/news_centre">新闻中心</a></li>
+            <li><a href="/news">新闻中心</a></li>
             <li><a href="/homepage/customer_investigate">用户调查</a></li>
             <li><a href="/homepage/contact_us">联系我们</a></li>
           </ul>
@@ -87,7 +88,7 @@
           </div>
         </div>
         <div class="clear"></div>
-        <div class="serviceItems">
+         <div class="serviceItems">
           <h1>服务项目</h1>
           <div class="serviceItems_div">
             <% Product::SERVICE_TYPES.each_with_index do |hash, index| %>

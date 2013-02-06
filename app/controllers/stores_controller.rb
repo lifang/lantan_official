@@ -5,7 +5,6 @@ class StoresController < ApplicationController
   
   #首页,展示门店
   def show
-    @title = "门店首页"
     #当前门店
     store_id = params[:id]
     @store = Store.find(store_id)
@@ -15,12 +14,12 @@ class StoresController < ApplicationController
         Sale::STATUS[:NOMAL]],
       :order=>"started_at desc", :limit => Sale::LASTER_SALES)
     #门店服务
-    @product_service = Product.find(:all,
-      :conditions => ["is_service = ? and status = ? ",Product::IS_SERVICE[:NO],
-        Sale::STATUS[:NOMAL]])
+    @services = Product.find(:all,
+      :conditions => ["is_service = ? and store_id = ? ",Product::IS_SERVICE[:YES],
+        params[:id]])
     #门店产品
-    @product_product = Product.find(:all,
-      :conditions => ["is_service = ? and status = ? ",Product::IS_SERVICE[:YES],
-        Sale::STATUS[:NOMAL]])
+    @products = Product.find(:all,
+      :conditions => ["is_service = ? and store_id = ? ",Product::IS_SERVICE[:NO],
+        params[:id]])
   end
 end

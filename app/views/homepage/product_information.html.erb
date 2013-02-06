@@ -1,0 +1,17 @@
+<div class="r_menu">
+  <ul>
+    <li><a href="#" class="hover">产品信息</a></li>
+  </ul>
+</div>
+<div class="clear"></div>
+<div class="text_box">
+  <ul class="news_list">
+    <% (@products || []).each do |product| %>
+       <li><a href="/homepage/product_detail?id=<%= product.id %>"><%= product.name %></a></li>
+    <%end%>
+  </ul>
+</div>
+<div class="pageTurn">
+  <%= will_paginate  @products, :previous_label => "< Prev",
+    :next_label=> "Next >", :page_links =>"false" %>
+</div>
