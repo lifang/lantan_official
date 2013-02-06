@@ -1,6 +1,7 @@
 #encoding: utf-8
 class HomepageController < ApplicationController  #总部控制器
   layout 'headquarter', :except => [:index, :login, :regist]
+  
   def index #总部首页
     @current_url = request.path     #用户当前所浏览的页面地址，用于当用户登录后跳转到登录前所浏览的页面
     @news = New.find(:all, :conditions => "status = '#{New::DEFAULT_STATUS}'", :order => "created_at desc", :limit => 6) #首页显示的6条新闻
