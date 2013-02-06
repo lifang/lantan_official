@@ -1,33 +1,34 @@
- <div class="main">
-      <div class="box">        <div class="leftAera">
-  <%=render "stores/store_info" %>
-  <div class="leftSales">
-    <%=render("/sales/laster_sales")%>
-  </div>
-</div><div class="rightAera">
-  <div class="rightTitle">
-    <h1><a href="#">产品</a> &gt; 玻璃镀晶</h1>
-    <div class="pro_show">
-      <div class="bigImg jqzoom"><img src="/assets/lt_big.jpg" jqimg = "/assets/lt_show.jpg" /></div>
-      <div class="pic_show">
-        <ul>
-          <%= image_tag("lt.jpg") %>
-          <%= image_tag("lt01.jpg") %>
-          <%= image_tag("lt01.jpg") %>
-          <%= image_tag("lt01.jpg") %>
-          <%= image_tag("lt01.jpg") %>
-        </ul>
+<div class="main">
+  <div class="box">        <div class="leftAera">
+      <%=render "stores/store_info" %>
+      <div class="leftSales">
+        <%=render("/sales/laster_sales")%>
       </div>
     </div>
-    <div class="pro_price">
-      <%=render("show_sales")%>
-    </div>
-    <div class="clear"></div>
-    <div class="pro_text">
-      <p><%= @product.description  %></p>
-      <p>  <%= @product.introduction  %></p>
+    <div class="rightAera">
+      <div class="rightTitle">
+        <h1><a href="#">产品</a> &gt; 玻璃镀晶</h1>
+        <div class="pro_show">
+          <div class="bigImg jqzoom"><img src="/assets/lt_big.jpg" jqimg = "/assets/lt_show.jpg" /></div>
+          <div class="pic_show">
+            <ul>
+              <%= image_tag("lt.jpg") %>
+              <%= image_tag("lt01.jpg") %>
+              <%= image_tag("lt01.jpg") %>
+              <%= image_tag("lt01.jpg") %>
+              <%= image_tag("lt01.jpg") %>
+            </ul>
+          </div>
+        </div>
+        <div class="pro_price">
+          <%=render("show_sales")%>
+        </div>
+        <div class="clear"></div>
+        <div class="pro_text">
+          <p><%= @product.description  %></p>
+          <p>  <%= @product.introduction  %></p>
+        </div>
+      </div>
     </div>
   </div>
 </div>
-      </div>
- </div>

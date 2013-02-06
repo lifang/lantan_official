@@ -1,6 +1,6 @@
 <%  (@sales || []).each do |sale| %>
   <div class="salesList">
-    <%= image_tag ("#{sale.img_url}") %>
+    <a href="/official_sale/<%= sale.id %>"><%= image_tag ("#{sale.img_url}") %></a>
     <h2><%= sale.name %></h2>
     <p><%=show_time( sale.started_at )%>&nbsp;-&nbsp;<%= show_time( sale.ended_at )%></p>
     <% if sale.introduction.size>50 %>

@@ -13,12 +13,13 @@
       <div class="text">
         <h1>服务</h1>
         <dl>
-          <% Product::SERVICE_TYPES.each do |product_type|   %>
+          <% Product::SERVICE_TYPES.each do |product_type|%>
+
             <dt><%= product_type[1] %></dt>
             <% (@services || []).each do |service| %>
-              <% if service.types == product_type[0]  %>
-            <span><%=link_to "#{service.name}","/products/#{service.id}" %>&nbsp;/&nbsp;</span>
-              <%end%>
+             <% if service.types == product_type[0]  %>
+                <span><%=link_to "#{service.name}","/products/#{service.id}" %>&nbsp;/&nbsp;</span>
+                <% end %>
             <%end%>
           <%end%>
         </dl>
@@ -26,14 +27,16 @@
       <div class="text">
         <h1>产品</h1>
         <dl>
-          <% Product::PRODUCT_TYPES.each do |product_type|%>
+           <% Product::PRODUCT_TYPES.each do |product_type|   %>
             <dt><%= product_type[1] %></dt>
-            <% (@products || []).each do |product| %>
-             <% if product.types == product_type[0]  %>
-                <span><%=link_to "#{product.name}","/products/#{product.id}" %>&nbsp;/&nbsp;</span>
-                <% end %>
+
+            <% ( @products || []).each do |product| %>
+              <% if product.types == product_type[0]  %>
+            <span><%=link_to "#{product.name}","/products/#{product.id}" %>&nbsp;/&nbsp;</span>
+              <%end%>
             <%end%>
           <%end%>
+         
         </dl>
       </div>
     </div>

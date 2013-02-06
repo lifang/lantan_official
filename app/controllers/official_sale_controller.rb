@@ -41,7 +41,7 @@ class OfficialSaleController < ApplicationController  #总店活动促销页面
   #在线预约 -选择框省份发生变化时
   def province_change_reservations
     options = "<option value='0'>--请选择--</option>"
-    city = City.where("parent_id = ?",params[:id]).all
+    city = City.where("parent_id = ?",params[:id].to_i).all
     city.each do |c|
       options << "<option value=#{c.id}>#{c.name}</option>"
     end
@@ -51,7 +51,7 @@ class OfficialSaleController < ApplicationController  #总店活动促销页面
   #在线预约 -选择框城市发生变化时
   def city_change_reservations
     items = ""
-    stores = Store.where("city_id = ?",params[:id]).all
+    stores = Store.where("city_id = ?",params[:id].to_i).all
     stores.each do |s|
       items << "<a href = '/stores/#{s.id}/reservations/new'><li value=#{s.id}>#{s.name}</li></a>"
     end
