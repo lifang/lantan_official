@@ -23,17 +23,23 @@ class OfficialSaleController < ApplicationController  #总店活动促销页面
   def province_change
     options = "<option value='0'>--请选择--</option>"
     city = City.where("parent_id = ?",params[:id]).all
+    
     city.each do |c|
       options << "<option value=#{c.id}>#{c.name}</option>"
     end
     render :text => options
   end
+  
   #选择框城市发生变化时
   def city_change
     items = ""
     stores = Store.where("city_id = ?",params[:id]).all
+    if stores.blank?
+      items << "<li>对不起，该城市暂未有门店...</li>"
+    else
     stores.each do |s|
       items << "<a href = '/stores/#{s.id}'><li value=#{s.id}>#{s.name}</li></a>"
+    end
     end
     render :text => items
   end
@@ -52,8 +58,12 @@ class OfficialSaleController < ApplicationController  #总店活动促销页面
   def city_change_reservations
     items = ""
     stores = Store.where("city_id = ?",params[:id].to_i).all
+    if stores.blank?
+      items << "<li>对不起，该城市暂未有门店...</li>"
+    else
     stores.each do |s|
       items << "<a href = '/stores/#{s.id}/reservations/new'><li value=#{s.id}>#{s.name}</li></a>"
+    end
     end
     render :text => items
   end

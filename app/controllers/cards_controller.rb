@@ -11,7 +11,7 @@ class CardsController < ApplicationController #储值卡
 
 #发送充值请求
 def alipay_exercise
-  if params[:customer].nil?
+  if session[:customer].nil?
     redirect_to "/homepage/login"
   else
     sv_card = SvCard.find(params[:sv_card].to_i)  #购买的储值卡
