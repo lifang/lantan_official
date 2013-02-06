@@ -56,33 +56,6 @@ class HomepageController < ApplicationController  #总部控制器
     redirect_to "/homepage/company_introduce"
   end
   
-  def company_introduce #公司介绍
-   
-  end
-  
-  def characteristic_service  #特色服务
-   
-  end
-  
-  def managment_idea #经营理念
-   
-  end
-  
-  def company_culture #企业文化
-  
-  end
-  
-  def team_introduce #团队介绍
- 
-  end
-  
-  def store_introduce #门店介绍
-  end
-  
-  def show_sale #活动促销详情
-   
-  end
-  
   def product_information  #产品信息
        @sales_laster = Sale.find(:all, :conditions => ["status = ? and store_id = ?",Sale::STATUS[:NOMAL],Store::DEFAULT_ID],
       :order => "created_at desc", :limit => Sale::NEW_NUM)
