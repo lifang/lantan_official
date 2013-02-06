@@ -1,12 +1,12 @@
 <div class="r_menu">
   <ul>
-    <li><a href="#" class="hover">产品信息</a></li>
+    <li><a href="#" class="hover">新闻详情</a></li>
   </ul>
 </div>
 <div class="clear"></div>
 <div class="text_box">
   <h1><%= @new.title %></h1>
-  <em>ss<%= show_time(@new.created_at) %></em>
-  <img src="images/pro02.jpg">
+  <em><%= show_time(@new.created_at) %></em>
+  <img src="/assets/pro02.jpg"/>
   <%= raw(@new.content) %>
 </div>

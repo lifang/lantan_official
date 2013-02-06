@@ -8,7 +8,6 @@ class OfficialSaleController < ApplicationController  #总店活动促销页面
         Sale::STATUS[:NOMAL],Store::DEFAULT_ID],
       :order => "created_at desc", :limit => Sale::NEW_NUM)
     @sales=show_sales
-    @current_url = request.path
   end
 
   #官网活动促销详情

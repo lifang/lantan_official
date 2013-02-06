@@ -16,7 +16,7 @@ LantanOfficial::Application.routes.draw do
   resources :homepage do
     collection do
 
-    get :index
+    get :product_detail
     get :login
     get :logoff
     get :regist
