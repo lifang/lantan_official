@@ -18,10 +18,12 @@ class HomepageController < ApplicationController  #总部控制器
       end
     end
   end
+
   def regist  #用户注册
     @customer = Customer.new
      @current_url = params[:current_url]
   end
+
   def regist_create #注册验证
     customer = Customer.new(:name => params[:name],:mobilephone =>  params[:mobilephone], :address => params[:address])
     if customer.save #往用户表中插入数据
@@ -34,6 +36,7 @@ class HomepageController < ApplicationController  #总部控制器
   def login       #登录页面
     @current_url = params[:current_url]
   end
+  
   def login_create #登录验证
     customer = Customer.find_by_name_and_mobilephone(params[:name], params[:mobilephone])
     if customer.nil?
