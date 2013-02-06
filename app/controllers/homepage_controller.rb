@@ -27,7 +27,7 @@ class HomepageController < ApplicationController  #总部控制器
   def regist_create #注册验证
     customer = Customer.new(:name => params[:name],:mobilephone =>  params[:mobilephone], :address => params[:address])
     if customer.save #往用户表中插入数据
-      CarNum.create(:num => params[:car_num])
+      CarNum.create(:num => params[:car_num].strip)
       session[:customer] = customer
        
       @current_url = params[:current_url]
@@ -57,54 +57,7 @@ class HomepageController < ApplicationController  #总部控制器
   def about_lantan  #关于澜泰
     redirect_to "/homepage/company_introduce"
   end
-  
-  def company_introduce #公司介绍
-   
-  end
-  
-  def characteristic_service  #特色服务
-   
-  end
-  
-  def managment_idea #经营理念
-   
-  end
-  
-  def company_culture #企业文化
-  
-  end
-  
-  def team_introduce #团队介绍
  
-  end
-  
-  def store_introduce #门店介绍
-  end
-  
-  def show_sale #活动促销详情
-   
-  end
-  
-  def product_information  #产品信息
-       @sales_laster = Sale.find(:all, :conditions => ["status = ? and store_id = ?",Sale::STATUS[:NOMAL],Store::DEFAULT_ID],
-      :order => "created_at desc", :limit => Sale::NEW_NUM)
-       @products = Product.find_all_by_is_service_and_store_id(Product::IS_SERVICE[:NO],Store::DEFAULT_ID).paginate(
-      :page => params[:page],:per_page => 8,:order => "created_at desc")
-    #总店的产品信息
-  end
-  def product_detail  #产品信息详情
-    @product = Product.find(params[:id])
-      @sales_laster = Sale.find(:all, :conditions => ["status = ? and store_id = ?",Sale::STATUS[:NOMAL],Store::DEFAULT_ID],
-      :order => "created_at desc", :limit => Sale::NEW_NUM)
-  end
-  def sv_cards  #储值卡
-  
-
-  end
-  
-  def customer_investigate  #用户调查
-
-  end
 
   def contact_us #联系我们
     @sales_laster = Sale.find(:all, :conditions => ["status = ?",Sale::STATUS[:NOMAL]],

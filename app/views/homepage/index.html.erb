@@ -42,7 +42,7 @@
               </div>
             </li>
             <li><a href="/official_sale">活动促销</a></li>
-            <li><a href="/homepage/product_information">产品信息</a></li>
+            <li><a href="/product_information">产品信息</a></li>
             <li><a href="/cards">储值卡</a></li>
             <li><a href="/news">新闻中心</a></li>
             <li><a href="/homepage/customer_investigate">用户调查</a></li>
@@ -91,22 +91,13 @@
          <div class="serviceItems">
           <h1>服务项目</h1>
           <div class="serviceItems_div">
-            <% Product::SERVICE_TYPES.each_with_index do |hash, index| %>
-              <% if index % 2 == 0 %>
-                <div class="service_one">
+            <% Product::SERVICE_TYPES.each_with_index do |hash, index| %>            
+                <div class="service_list">
                   <h2><%= hash[1] %></h2>
                   <% @service_hash[hash[0]].to_a.each do |service| %>
                     <a href="/products/<%= service.id %>"><%= service.name %></a>/
                   <% end %>
                 </div>
-              <% else %>
-                <div class="service_two">
-                  <h2><%= hash[1] %></h2>
-                  <% @service_hash[hash[0]].to_a.each do |service| %>
-                    <a href="/products/<%= service.id %>"><%= service.name %></a>/
-                  <% end %>
-                </div>
-              <% end %>
             <% end %>
             <div class="clear"></div>
           </div>

@@ -7,7 +7,7 @@
 <div class="text_box">
   <ul class="news_list">
     <% (@products || []).each do |product| %>
-       <li><a href="/homepage/product_detail?id=<%= product.id %>"><%= product.name %></a></li>
+       <li><a href="/product_information/<%= product.id %>"><%= product.name %></a></li>
     <%end%>
   </ul>
 </div>
