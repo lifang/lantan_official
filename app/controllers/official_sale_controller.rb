@@ -16,7 +16,11 @@ class OfficialSaleController < ApplicationController  #总店活动促销页面
         Sale::STATUS[:NOMAL],Store::DEFAULT_ID],
       :order => "created_at desc", :limit => Sale::NEW_NUM)
     sale_id=params[:id]
+    begin
     @sale = Sale.find(sale_id)
+    rescue
+     redirect_to "/500"
+    end
   end
 
   #选择框省份发生变化时
