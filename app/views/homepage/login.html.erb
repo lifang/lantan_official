@@ -7,7 +7,7 @@
     <%= stylesheet_link_tag "login" %>
 
     <%= javascript_include_tag "application" %>
-    <%= javascript_include_tag "headquarter-main" %>
+    <%= javascript_include_tag "headquarter-main","login_validate" %>
     <!--[if IE 6]>
     <script src="js/DD_belatedPNG_0.0.8a-min.js"></script>
     <script>
@@ -17,10 +17,10 @@
   </head>
   <body>
     <div class="box">
-      <div class="logo">杭州澜泰科技有限公司</div>
+      <a href="/"><div class="logo">杭州澜泰科技有限公司</div></a>
       <div class="login_bg">
         <div class="login_box">
-          <%= form_tag "/homepage/login_create" do %>
+          <%= form_tag "/homepage/login_create",:onsubmit => "return login_validate()" do %>
             <h1>用户登录</h1>
             <%= hidden_field_tag "current_url", @current_url %>
             <div class="login_list">

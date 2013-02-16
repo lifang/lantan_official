@@ -9,8 +9,8 @@ class HomepageController < ApplicationController  #总部控制器
       services.each do |service|
         if(service.types == key)
           if @service_hash[key].nil?
-             @service_hash[key] = []
-             @service_hash[key] << service
+            @service_hash[key] = []
+            @service_hash[key] << service
           else
             @service_hash[key] << service
           end
@@ -21,16 +21,21 @@ class HomepageController < ApplicationController  #总部控制器
 
   def regist  #用户注册
     @customer = Customer.new
-     @current_url = params[:current_url]
+    @current_url = params[:current_url]
   end
 
   def regist_create #注册验证
-    customer = Customer.new(:name => params[:name],:mobilephone =>  params[:mobilephone], :address => params[:address])
-    if customer.save #往用户表中插入数据
-      CarNum.create(:num => params[:car_num].strip)
-      session[:customer] = customer
-       
-      @current_url = params[:current_url]
+    if Customer.find_by_name_and_mobilephone(params[:name].strip, params[:mobilephone].strip).nil?
+      customer = Customer.new(:name => params[:name].strip,:mobilephone =>  params[:mobilephone].strip, :address => params[:address].strip)
+      if customer.save #往用户表中插入数据
+        car_num = CarNum.create(:num => params[:car_num].strip) #往车牌号表中插入数据
+        CustomerNumRelation.create(:customer_id => customer.id, :car_num_id => car_num.id)#往用户-车牌-关系表中插入数据
+        session[:customer] = customer
+        session[:customer_id] = customer.id
+        @current_url = params[:current_url]
+      end
+    else
+      redirect_to "/homepage/regist"
     end
   end
   
@@ -39,7 +44,7 @@ class HomepageController < ApplicationController  #总部控制器
   end
   
   def login_create #登录验证
-    customer = Customer.find_by_name_and_mobilephone(params[:name], params[:mobilephone])
+    customer = Customer.find_by_name_and_mobilephone(params[:name].strip, params[:mobilephone].strip)
     if customer.nil?
       redirect_to "/homepage/login"
     else
@@ -55,7 +60,7 @@ class HomepageController < ApplicationController  #总部控制器
   end
   
   def about_lantan  #关于澜泰
-    redirect_to "/homepage/company_introduce"
+    render "/homepage/company_introduce"
   end
  
 
@@ -65,7 +70,6 @@ class HomepageController < ApplicationController  #总部控制器
     @store = Store.find(1)
 
   end
-
   def provincechange
     options = "<option value='0'>--请选择--</option>"
     city = City.where("parent_id = ?",params[:id]).all
@@ -79,11 +83,16 @@ class HomepageController < ApplicationController  #总部控制器
   def citychange
     items = ""
     stores = Store.where("city_id = ?",params[:id]).all
+   
+    if stores.blank?
+      items = "<li>对不起，该城市暂未有门店...</li>"
+    else
     stores.each do |s|
       items << "<a href = '/stores/#{s.id}'><li value=#{s.id}>#{s.name}</li></a>"
     end
-    render :text => items
   end
+  render :text => items
+end
   
  
 end
