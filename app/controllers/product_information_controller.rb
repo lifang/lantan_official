@@ -12,5 +12,4 @@ class ProductInformationController < ApplicationController
       @sales_laster = Sale.find(:all, :conditions => ["status = ? and store_id = ?",Sale::STATUS[:NOMAL],Store::DEFAULT_ID],
       :order => "created_at desc", :limit => Sale::NEW_NUM)
   end
-
 end

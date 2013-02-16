@@ -70,7 +70,6 @@ class HomepageController < ApplicationController  #总部控制器
     @store = Store.find(1)
 
   end
-
   def provincechange
     options = "<option value='0'>--请选择--</option>"
     city = City.where("parent_id = ?",params[:id]).all
