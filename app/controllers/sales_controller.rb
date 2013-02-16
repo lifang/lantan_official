@@ -4,21 +4,29 @@ class SalesController < ApplicationController
   
   #门店活动促销首页
   def index
-    @title = "活动"
     @store_id = params[:store_id].to_i
+    begin
     @store = Store.find(@store_id)
+    rescue
+     redirect_to "/500"
+    else
     @sales = show_sale(@store_id)
     @laster_sales = Sale.find(:all,
       :conditions => ["store_id = ? and status =?",@store_id,Sale::STATUS[:NOMAL]],
       :order=>"started_at desc", :limit => Sale::LASTER_SALES)
+    end
   end
 
   #门店活动详情
   def show
     @title = "活动详情"
     store_id =params[:store_id].to_i
+    begin
     @sale = Sale.find(params[:id])
     @store = Store.find(store_id)
+    rescue
+    redirect_to "/500"
+    else
     @product= @sale.sale_prod_relations.first.product
     if @sale.disc_types == 1#打折
       @discount_price = discount_price(@product.base_price,@sale.discount)
@@ -29,7 +37,7 @@ class SalesController < ApplicationController
       :conditions => ["store_id = ? and status =?",store_id,Sale::STATUS[:NOMAL]],
       :order=>"started_at desc", :limit => Sale::LASTER_SALES)
   end
-
+  end
   private
   #门店所有活动
   def show_sale(store_id)
