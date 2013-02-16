@@ -5,6 +5,7 @@ class UserInfoController < ApplicationController
   def svcard_records
     
   end
+  
   #消费账单
   def con_records
     
