@@ -6,6 +6,12 @@ LantanOfficial::Application.routes.draw do
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
   # Keep in mind you can assign values other than :controller and :action
+  resources :user_info do 
+    collection do
+      get :svcard_records
+      get :con_records
+    end
+  end
   resources :product_information
   resources :products
   resources :reservations
