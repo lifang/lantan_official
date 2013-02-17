@@ -1,4 +1,4 @@
-class ProductInformationController < ApplicationController
+class ProductInformationController < ApplicationController  #产品信息
   layout 'headquarter'
   def index
      @sales_laster = Sale.find(:all, :conditions => ["status = ? and store_id = ?",Sale::STATUS[:NOMAL],Store::DEFAULT_ID],
