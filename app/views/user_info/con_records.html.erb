@@ -1,0 +1,150 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>消费账单</title>
+<link href="style/style.css" rel="stylesheet" type="text/css">
+<script src="js/jQuery-v1.9.0.js"></script>
+<script src="js/main.js"></script>
+</head>
+
+<body>
+    <div class="head">
+         <div class="box">
+              <div class="logo_user">个人信息中心</div>
+              <div class="login">你好：XXX | <a href="#">退出</a></div>
+         </div>
+    </div>
+    <div class="main">
+         <div class="box">
+              <div class="nav">
+                   <ul>
+                       <li><a href="#">储值卡收支记录</a></li>
+                       <li class="hover"><a href="#">消费账单</a></li>
+                       <li><a href="#">套餐卡</a></li>
+                   </ul>
+              </div>
+              <div class="main_body">
+                   <div class="search">
+                         <div><label>消费账单：</label><input name="" type="radio">&nbsp;当月账单&nbsp;&nbsp;&nbsp;&nbsp;<input name="" type="radio">&nbsp;近二月&nbsp;&nbsp;&nbsp;&nbsp;<input name="" type="radio">&nbsp;近三月&nbsp;&nbsp;&nbsp;&nbsp;<input name="" type="radio">全部</div>
+                         <div><label>未开发票查询：</label>
+                              <select name="">
+                                   <option>未开出</option>
+                                   <option>已开出</option>
+                                   <option>已寄出</option>
+                              </select>
+                         </div>
+                         <div><button class="search_btn">查询</button></div>
+                    </div>
+                  <table width="100%" border="0" cellspacing="0" cellpadding="0" class="data_table">
+                                 <thead>
+                                      <tr class="hbg">
+                                        <td>订单号</td>
+                                        <td>时间</td>
+                                        <td>消费项目</td>
+                                        <td>金额（元）</td>
+                                        <td>支付方式</td>
+                                        <td>消费门店</td>
+                                        <td>开据发票</td>
+                                      </tr>
+                                  </thead>
+                                  <tbody>
+                                      <tr>
+                                        <td>2135845614</td>
+                                        <td>2012.12.12</td>
+                                        <td>
+                                           <table width="100%" border="0" cellspacing="1" cellpadding="0" class="s_table">
+                                              <tr class="fws">
+                                                <td>名称</td>
+                                                <td>数量</td>
+                                                <td>单价（元）</td>
+                                              </tr>
+                                              <tr>
+                                                <td>蜡</td>
+                                                <td>100</td>
+                                                <td>1000</td>
+                                              </tr>
+                                              <tr>
+                                                <td>蜡</td>
+                                                <td>100</td>
+                                                <td>1000</td>
+                                              </tr>
+                                            </table>
+                                        </td>
+                                        <td>2000</td>
+                                        <td>现金</td>
+                                        <td>门店01</td>
+                                        <td>已寄出</td>
+                                      </tr>
+                                      <tr>
+                                        <td>2135845614</td>
+                                        <td>2012.12.12</td>
+                                        <td>
+                                           <table width="100%" border="0" cellspacing="1" cellpadding="0" class="s_table">
+                                              <tr class="fws">
+                                                <td>名称</td>
+                                                <td>数量</td>
+                                                <td>单价（元）</td>
+                                              </tr>
+                                              <tr>
+                                                <td>蜡</td>
+                                                <td>100</td>
+                                                <td>1000</td>
+                                              </tr>
+                                              <tr>
+                                                <td>蜡</td>
+                                                <td>100</td>
+                                                <td>1000</td>
+                                              </tr>
+                                            </table>
+                                        </td>
+                                        <td>2000</td>
+                                        <td>现金</td>
+                                        <td>门店01</td>
+                                        <td><a href="#">已寄出</a></td>
+                                      </tr>
+                                      <tr>
+                                        <td>2135845614</td>
+                                        <td>2012.12.12</td>
+                                        <td>
+                                           <table width="100%" border="0" cellspacing="1" cellpadding="0" class="s_table">
+                                              <tr class="fws">
+                                                <td>名称</td>
+                                                <td>数量</td>
+                                                <td>单价（元）</td>
+                                              </tr>
+                                              <tr>
+                                                <td>蜡</td>
+                                                <td>100</td>
+                                                <td>1000</td>
+                                              </tr>
+                                              <tr>
+                                                <td>蜡</td>
+                                                <td>100</td>
+                                                <td>1000</td>
+                                              </tr>
+                                            </table>
+                                        </td>
+                                        <td>2000</td>
+                                        <td>现金</td>
+                                        <td>门店01</td>
+                                        <td><a href="#">已开发票</a></td>
+                                      </tr>
+                                  </tbody>
+                            </table>
+                  <div class="pageTurn">
+                       <a href="#" class="disabled">上一页</a>
+                       <a href="#" class="current">1</a>
+                       <a href="#?page=2">2</a>
+                       <a href="#?page=3">3</a>
+                       <a href="#?page=4">4</a>
+                       <a href="#?page=5">5</a>...<a href="#?page=199">199</a>
+                       <a href="#?page=200">200</a>
+                       <a href="#?page=2">下一页</a>
+                   </div>
+              </div>
+         </div>
+    </div>
+    <div class="foot"><p>Copyright © 2013 杭州澜泰 版权所有</p></div>
+</body>
+</html>
