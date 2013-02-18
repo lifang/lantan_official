@@ -1,6 +1,5 @@
 #encoding: utf-8
-#门店控制器
-class StoresController < ApplicationController
+class StoresController < ApplicationController  #门店控制器
   layout "frontdoor" #门店模板
   
   #首页,展示门店
