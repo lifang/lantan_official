@@ -13,9 +13,8 @@
       <div class="text">
         <h1>服务</h1>
         <dl>
-          <% Product::SERVICE_TYPES.each do |product_type|%>
-
-            <dt><%= product_type[1] %></dt>
+          <% Product::SERVICE_TYPES.each do |product_type|%><!---->
+            <dt><%= product_type[1] %></dt><!---->
             <% (@services || []).each do |service| %>
              <% if service.types == product_type[0]  %>
                 <span><%=link_to "#{service.name}","/products/#{service.id}" %>&nbsp;/&nbsp;</span>

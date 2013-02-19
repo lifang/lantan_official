@@ -15,7 +15,7 @@ development:
   database: lantan_db
   pool: 5
   username: root
-  password: condo2012
+  password: ok
   host: 127.0.0.1
 
 # Warning: The database defined as "test" will be erased and
@@ -28,7 +28,7 @@ test:
   database: lantan_db_test
   pool: 5
   username: root
-  password: condo2012
+  password: ok
   host: 127.0.0.1
 
 production:
@@ -38,6 +38,6 @@ production:
   database: lantan_db_production
   pool: 5
   username: root
-  password: condo2012
-  host: localhost
+  password: ok
+  host: 127.0.0.1
 

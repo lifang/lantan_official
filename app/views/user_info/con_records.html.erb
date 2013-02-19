@@ -1,0 +1,62 @@
+<div class="search">
+  <div><label>消费账单：</label>
+    <input class="search_info" name="time" type="radio" value="0"/>&nbsp;当月账单&nbsp;&nbsp;&nbsp;&nbsp;
+    <input class="search_info" name="time" type="radio" value="1"/>&nbsp;近二月&nbsp;&nbsp;&nbsp;&nbsp;
+    <input class="search_info" name="time" type="radio" value="2"/>&nbsp;近三月&nbsp;&nbsp;&nbsp;&nbsp;
+    <input class="search_info" name="time" type="radio" value="3"/>全部</div>
+  <div>
+    <label>未开发票查询：</label>
+    <select id="is_billing" name="is_billing">
+      <option value="0">未开出</option>
+      <option value="1">已开出</option>
+      <option value="2">已寄出</option>
+    </select>
+  </div>
+  <div><button class="search_btn" id="search_btn">查询</button></div>
+</div>
+<table width="100%" border="0" cellspacing="0" cellpadding="0" class="data_table">
+  <thead>
+    <tr class="hbg">
+      <td>订单号</td>
+      <td>时间</td>
+      <td>消费项目</td>
+      <td>金额（元）</td>
+      <td>支付方式</td>
+      <td>消费门店</td>
+      <td>开据发票</td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <%(@orders || []).each do |order|%>
+        <td><%= order.code %> </td>
+        <td><%= order.created_at %></td>
+        <td>
+          <table width="100%" border="0" cellspacing="1" cellpadding="0" class="s_table">
+            <tr class="fws">
+              <td>名称</td>
+              <td>数量</td>
+              <td>单价（元）</td>
+            </tr>
+            <% (order.order_prod_relations || []).each do |relation|  %>
+              <tr>
+                <td><%= relation.product_id %></td>
+                <td><%= relation.pro_num %></td>
+                <td><%= relation.product_id %></td>
+              </tr>
+            <%end%>
+          </table>
+        </td>
+        <td><%=  order.price%></td>
+        <td>现金</td>
+        <td>门店01</td>
+        <td>已寄出</td>
+      </tr>
+    <%end%>
+  </tbody>
+</table>
+<div class="pageTurn">
+ <%= will_paginate  @orders, :class => "pagination", :previous_label => "&lt;上一页",
+          :next_label=> "下一页&gt;"%>
+</div>
+<%= javascript_include_tag "application","user_info_main" %>
