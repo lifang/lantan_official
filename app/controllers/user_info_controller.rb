@@ -20,6 +20,9 @@ class UserInfoController < ApplicationController
     time = params[:int]  #判断选择情况
     is_billing = params[:is_billing]
     @records = search_records(time,is_billing)
+     @records.each do |record|
+       puts record.id,"-------------"
+     end
     render "/user_info/con_records"
   end
   
