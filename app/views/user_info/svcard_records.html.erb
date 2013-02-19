@@ -1,79 +1,24 @@
-<!doctype html>
-<html>
-<head>
-<meta charset="utf-8">
-<title>储值卡收支记录</title>
-<link href="style/style.css" rel="stylesheet" type="text/css">
-<script src="js/jQuery-v1.9.0.js"></script>
-<script src="js/main.js"></script>
-</head>
-
-<body>
-    <div class="head">
-         <div class="box">
-              <div class="logo_user">个人信息中心</div>
-              <div class="login">你好：XXX | <a href="#">退出</a></div>
-         </div>
-    </div>
-    <div class="main">
-         <div class="box">
-              <div class="nav">
-                   <ul>
-                       <li class="hover"><a href="#">储值卡收支记录</a></li>
-                       <li><a href="#">消费账单</a></li>
-                       <li><a href="#">套餐卡</a></li>
-                   </ul>
-              </div>
-              <div class="main_body">
-                  <table width="100%" border="0" cellspacing="0" cellpadding="0" class="data_table">
-                                 <thead>
-                                      <tr class="hbg">
-                                        <td>时间</td>
-                                        <td>金额（元）</td>
-                                        <td>原因</td>
-                                        <td>余额（元）</td>
-                                      </tr>
-                                  </thead>
-                                  <tbody>
-                                      <tr>
-                                        <td>2012.12.12</td>
-                                        <td>1000</td>
-                                        <td>XXXXXXXXXXXXXXX</td>
-                                        <td>2000</td>
-                                      </tr>
-                                      <tr>
-                                        <td>2012.12.12</td>
-                                        <td>1000</td>
-                                        <td>XXXXXXXXXXXXXXX</td>
-                                        <td>2000</td>
-                                      </tr>
-                                      <tr>
-                                        <td>2012.12.12</td>
-                                        <td>1000</td>
-                                        <td>XXXXXXXXXXXXXXX</td>
-                                        <td>2000</td>
-                                      </tr>
-                                      <tr>
-                                        <td>2012.12.12</td>
-                                        <td>1000</td>
-                                        <td>XXXXXXXXXXXXXXX</td>
-                                        <td>2000</td>
-                                      </tr>
-                                  </tbody>
-                            </table>
-                  <div class="pageTurn">
-                       <a href="#" class="disabled">上一页</a>
-                       <a href="#" class="current">1</a>
-                       <a href="#?page=2">2</a>
-                       <a href="#?page=3">3</a>
-                       <a href="#?page=4">4</a>
-                       <a href="#?page=5">5</a>...<a href="#?page=199">199</a>
-                       <a href="#?page=200">200</a>
-                       <a href="#?page=2">下一页</a>
-                   </div>
-              </div>
-         </div>
-    </div>
-    <div class="foot"><p>Copyright © 2013 杭州澜泰 版权所有</p></div>
-</body>
-</html>
+<table width="100%" border="0" cellspacing="0" cellpadding="0" class="data_table">
+  <thead>
+    <tr class="hbg">
+      <td>时间</td>
+      <td>金额（元）</td>
+      <td>原因</td>
+      <td>余额（元）</td>
+    </tr>
+  </thead>
+  <tbody>
+    <%(@records || []).each do |record|%>
+      <tr>
+        <td><%=show_time(record.created_at) %></td>
+        <td><%= record.use_price %></td>
+        <td>  <%= sv_p_relations(record)[0].product.name %></td>
+        <td><%= record.left_price %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<div class="pageTurn">
+   <%= will_paginate  @records, :class => "pagination", :previous_label => "&lt;上一页",
+          :next_label=> "下一页&gt;"%>
+</div>
