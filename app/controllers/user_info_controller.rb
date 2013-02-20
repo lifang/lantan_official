@@ -23,6 +23,8 @@ class UserInfoController < ApplicationController
     time = params[:time]  #判断选择情况
     is_billing = params[:is_billing]
     @orders = search_records(time,is_billing)
+    @time = time
+    @is_billing = is_billing
     render "/user_info/con_records"
   end
   

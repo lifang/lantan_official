@@ -1,19 +1,4 @@
-<div class="search">
-  <div><label>消费账单：</label>
-    <input class="search_info" name="time" type="radio" value="0"/>&nbsp;当月账单&nbsp;&nbsp;&nbsp;&nbsp;
-    <input class="search_info" name="time" type="radio" value="1"/>&nbsp;近二月&nbsp;&nbsp;&nbsp;&nbsp;
-    <input class="search_info" name="time" type="radio" value="2"/>&nbsp;近三月&nbsp;&nbsp;&nbsp;&nbsp;
-    <input class="search_info" name="time" type="radio" value="3"/>全部</div>
-  <div>
-    <label>未开发票查询：</label>
-    <select id="is_billing" name="is_billing">
-      <option value="0">未开出</option>
-      <option value="1">已开出</option>
-      <option value="2">已寄出</option>
-    </select>
-  </div>
-  <div><button class="search_btn" id="search_btn">查询</button></div>
-</div>
+<%= render("/user_info/search")  %>
 <table width="100%" border="0" cellspacing="0" cellpadding="0" class="data_table">
   <thead>
     <tr class="hbg">
