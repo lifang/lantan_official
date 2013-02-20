@@ -8,17 +8,19 @@
     </tr>
   </thead>
   <tbody>
-    <%(@records || []).each do |record|%>
+    <% (@order || []).each do |order| %>
       <tr>
-        <td><%=show_time(record.created_at) %></td>
-        <td><%= record.use_price %></td>
-        <td>  <%= sv_p_relations(record)[0].product.name %></td>
-        <td><%= record.left_price %></td>
+        <td><%= show_time(order.created_at) %></td>
+        <td><%= order.price  %></td>
+        <td><%(order.order_prod_relations || []).each do |pro|%>
+            <%= Product.find(pro.product_id).name %>
+          <%end%> </td>
+        <td><%= CSvcRelation.find(current_user.id).left_price   %></td>
       </tr>
-    <% end %>
+    <%end%>
   </tbody>
 </table>
 <div class="pageTurn">
-   <%= will_paginate  @records, :class => "pagination", :previous_label => "&lt;上一页",
-          :next_label=> "下一页&gt;"%>
+  <%= will_paginate  @order, :class => "pagination", :previous_label => "&lt;上一页",
+    :next_label=> "下一页&gt;"%>
 </div>

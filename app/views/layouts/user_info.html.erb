@@ -4,13 +4,14 @@
     <title>消费账单</title>
     <%= stylesheet_link_tag "user_info_style" %>
     <%= javascript_include_tag "application","logoff" %>
+   
   </head>
 
   <body>
     <div class="head">
       <div class="box">
-        <div class="logo_user">个人信息中心</div>
-        <div class="login">你好：<%=  current_customer(session[:customer_id]).name %> |
+        <a href="/"><div class="logo_user">个人信息中心</div></a>
+        <div class="login">你好：<%=  session[:customer].name %> |
           <a href="/homepage/logoff?current_url=<%=Constant::SERVER_PATH%>"
              onclick="return sure_logoff()">退出</a>
         </div>
@@ -20,9 +21,8 @@
       <div class="box">
         <div class="nav">
           <ul>
-         
             <li><a href="/user_info/svcard_records">储值卡收支记录</a></li>
-            <li class="hover"><a href="/user_info/con_records">消费账单</a></li>
+            <li><a href="/user_info/con_records">消费账单</a></li>
             <li><a href="#">套餐卡</a></li>
           </ul>
         </div>
@@ -32,5 +32,19 @@
       </div>
     </div>
     <div class="foot"><p>Copyright © 2013 杭州澜泰 版权所有</p></div>
+
+     <script type="text/javascript">
+       
+       if (window.location.pathname =="/user_info/svcard_records")
+       {
+         $('a[href$="svcard_records"]').parent().attr("class","hover");
+       }
+    if (window.location.pathname == "/user_info/con_records"||window.location.pathname == "/user_info/search")
+       {
+         
+         $('a[href$="con_records"]').parent().attr("class","hover");
+       }
+      
+    </script>
   </body>
 </html>

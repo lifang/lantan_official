@@ -30,7 +30,7 @@
     <tr>
       <%(@orders || []).each do |order|%>
         <td><%= order.code %> </td>
-        <td><%= order.created_at %></td>
+        <td><%= show_time(order.created_at) %></td>
         <td>
           <table width="100%" border="0" cellspacing="1" cellpadding="0" class="s_table">
             <tr class="fws">
@@ -48,15 +48,21 @@
           </table>
         </td>
         <td><%=  order.price%></td>
-        <td>现金</td>
-        <td>门店01</td>
-        <td>已寄出</td>
+        <td>
+          <% if  OrderPayType.find(order.types).pay_type == 1%>
+            <%=  OrderPayType::TYPES[:one]%>
+          <%elsif OrderPayType.find(order.types).pay_type == 2%>
+            <%=  OrderPayType::TYPES[:two]%>
+          <%end%>
+        </td>
+        <td><%= Store.find(order.store_id).name%> </td>
+        <td><%= order.is_billing %></td>
       </tr>
     <%end%>
   </tbody>
 </table>
 <div class="pageTurn">
- <%= will_paginate  @orders, :class => "pagination", :previous_label => "&lt;上一页",
-          :next_label=> "下一页&gt;"%>
+  <%= will_paginate  @orders, :class => "pagination", :previous_label => "&lt;上一页",
+    :next_label=> "下一页&gt;"%>
 </div>
 <%= javascript_include_tag "application","user_info_main" %>
