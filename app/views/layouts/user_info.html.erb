@@ -33,18 +33,6 @@
     </div>
     <div class="foot"><p>Copyright © 2013 杭州澜泰 版权所有</p></div>
 
-     <script type="text/javascript">
-       
-       if (window.location.pathname =="/user_info/svcard_records")
-       {
-         $('a[href$="svcard_records"]').parent().attr("class","hover");
-       }
-    if (window.location.pathname == "/user_info/con_records"||window.location.pathname == "/user_info/search")
-       {
-         
-         $('a[href$="con_records"]').parent().attr("class","hover");
-       }
-      
-    </script>
+    <%= javascript_include_tag "logoff" %>
   </body>
 </html>
