@@ -29,6 +29,7 @@ class UserInfoController < ApplicationController
   end
   
   private
+  
   def search_records(time,is_billing) #查找相应记录
     if time == "0"  #当前月
       @orders = Order.find(:all,
