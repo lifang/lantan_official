@@ -3,6 +3,7 @@
 class UserInfoController < ApplicationController
   #储值卡/打折卡收支记录
   def svcard_records
+    session[:current_url] = params[:cid]
     current_user = Customer.find(session[:customer_id])
     @records = current_user.c_svc_relations[0].svcard_use_records.paginate(
       :page => params[:page],:per_page => 6)  #当前用户所有储值卡记录信息
@@ -22,7 +23,12 @@ class UserInfoController < ApplicationController
     @records = search_records(time,is_billing)
     render "/user_info/con_records"
   end
-  
+
+  #套餐卡消费记录
+  def pcard_records
+    #获取当前用户的所有客户-套餐数据
+    @c_pcard_relations = CPcardRelation.find(:all, :conditions =>["customer_id = ? and status = ?", session[:customer_id], CPcardRelation::STATUS[:NORMAL]]).paginate( :page => params[:page],:per_page => 1)
+  end
   private
   
   def search_records(time,is_billing) #查找相应记录
@@ -47,17 +53,5 @@ class UserInfoController < ApplicationController
       end
     end
     Order.find(:all, :conditions => ["month(created_at) = month(now()) and status = ",0])
-  end
-
-  #套餐卡消费记录
-  def pcard_records
-    c_pcard_relations = CPcardRelation.find(:all, :conditions =>["customer_id = ? and status = ?", session[:customer_id], CPcardRelation::STATUS[:NORMAL]])
-    if !c_pcard_relations.blank?
-      package_card_array = []
-      c_pcard_relations.each do |c_pcard_relation|
-        package_card_array << PackageCard.find(c_pcard_relation.package_card_id)
-        
-      end
-    end
   end
 end

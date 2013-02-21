@@ -1,27 +1,29 @@
- <div class="main">
-      <div class="box">        <div class="leftAera">
-  <%=render "stores/store_info" %>
-  <div class="leftSales">
-     <%=render("/sales/laster_sales")%>
-  </div>
-</div><div class="rightAera">
-  <div class="rightTitle">
-    <h1>服务</h1>
-    <% Product::SERVICE_TYPES.each do |key,value|   %>
-      <dl class="serve">
-        <dt><%= value %></dt>
-        <% @service_hash[key].to_a.each do |service| %>
-          <dd><a href="/products/<%= service.id %>"><%= service.name %>\</a></dd>
+<div class="main">
+  <div class="box">        <div class="leftAera">
+      <%=render "stores/store_info" %>
+      <div class="leftSales">
+        <%=render("/sales/laster_sales")%>
+      </div>
+    </div><div class="rightAera">
+      <div class="rightTitle">
+        <h1>服务</h1>
+        <% Product::SERVICE_TYPES.each do |key,value|   %>
+          <dl class="serve">
+            <dt><%= value %></dt>
+            <% @service_hash[key].to_a.each do |service| %>
+              <dd><a href="/products/<%= service.id %>"><%= service.name %>\</a></dd>
+            <% end %>
+          </dl>
         <% end %>
-      </dl>
-    <% end %>
+      </div>
+      <div class="rightTitle">
+        <h1>产品</h1>
+        <ul class="product">
+          <% @products.each do |p|%>
+            <li><img src= <%= p.img_url %>/><a href="/products/<%= p.id %>"><%= p.name %></a></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
   </div>
-  <div class="rightTitle">
-    <h1>产品</h1>
-    <ul class="product">
-      <% @products.each do |p|%>
-        <li><img src= <%= p.img_url %>/><a href="/products/<%= p.id %>"><%= p.name %></a></li>
-      <% end %>
-    </ul>
-  </div>
-</div></div></div>
+</div>

@@ -41,9 +41,9 @@ class OfficialSaleController < ApplicationController  #总店活动促销页面
     if stores.blank?
       items << "<li>对不起，该城市暂未有门店...</li>"
     else
-    stores.each do |s|
-      items << "<a href = '/stores/#{s.id}'><li value=#{s.id}>#{s.name}</li></a>"
-    end
+      stores.each do |s|
+        items << "<a href = '/stores/#{s.id}'><li>#{s.name}</li></a>"
+      end
     end
     render :text => items
   end

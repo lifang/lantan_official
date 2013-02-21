@@ -11,19 +11,17 @@
       <div class="box">
         <div class="logo_user">个人信息中心</div>
         <div class="login">你好：<%=  current_customer(session[:customer_id]).name %> |
-          <a href="/homepage/logoff?current_url=<%=Constant::SERVER_PATH%>"
-             onclick="return sure_logoff()">退出</a>
+          <a href="/homepage/logoff?cid=<%= session[:current_url] %>" onclick="return sure_logoff()">退出</a>
         </div>
       </div>
     </div>
     <div class="main">
       <div class="box">
         <div class="nav">
-          <ul>
-         
+          <ul>       
             <li><a href="/user_info/svcard_records">储值卡收支记录</a></li>
             <li class="hover"><a href="/user_info/con_records">消费账单</a></li>
-            <li><a href="#">套餐卡</a></li>
+            <li><a href="/user_info/pcard_records">套餐卡</a></li>
           </ul>
         </div>
         <div class="main_body">

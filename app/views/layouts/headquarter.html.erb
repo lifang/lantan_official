@@ -19,12 +19,12 @@
       <div class="box">
         <a href="/"><div class="logo">杭州澜泰科技有限公司</div></a>
         <div class="login">
-          <% if session[:customer].nil? %>
-            <a href="/homepage/regist?current_url=<%= request.path %>">注册</a> |
-            <a href="/homepage/login?current_url=<%= request.path %>">登录</a>
+          <% if session[:customer_id].nil? %>
+            <a href="/homepage/regist?cid=<%= request.path %>">注册</a> |
+            <a href="/homepage/login?cid=<%= request.path %>">登录</a>
           <% else %>
-            欢迎用户<%= session[:customer].name %>登录! |<a href="/user_info/svcard_records">个人信息</a>|
-            <a href="/homepage/logoff?current_url=<%= request.path %>" onclick="return sure_logoff()">注销</a>
+            欢迎用户<%= current_customer(session[:customer_id]).name %>登录! |<a href="/user_info/svcard_records?cid=<%= request.path %>">个人信息</a>|
+            <a href="/homepage/logoff?cid=<%= request.path %>" onclick="return sure_logoff()">注销</a>
           <% end %>
         </div>
         <div id="navigation" class="nav">

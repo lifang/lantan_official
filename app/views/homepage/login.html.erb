@@ -22,7 +22,6 @@
         <div class="login_box">
           <%= form_tag "/homepage/login_create",:onsubmit => "return login_validate()" do %>
             <h1>用户登录</h1>
-            <%= hidden_field_tag "current_url", @current_url %>
             <div class="login_list">
               <label>用户名：</label>
               <%= text_field_tag 'name' %>

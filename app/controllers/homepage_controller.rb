@@ -21,7 +21,7 @@ class HomepageController < ApplicationController  #总部控制器
 
   def regist  #用户注册
     @customer = Customer.new
-    @current_url = params[:current_url]
+    session[:current_url] = params[:cid]
   end
 
   def regist_create #注册验证
@@ -30,9 +30,7 @@ class HomepageController < ApplicationController  #总部控制器
       if customer.save #往用户表中插入数据
         car_num = CarNum.create(:num => params[:car_num].strip) #往车牌号表中插入数据
         CustomerNumRelation.create(:customer_id => customer.id, :car_num_id => car_num.id)#往用户-车牌-关系表中插入数据
-        session[:customer] = customer
         session[:customer_id] = customer.id
-        @current_url = params[:current_url]
       end
     else
       redirect_to "/homepage/regist"
@@ -40,7 +38,7 @@ class HomepageController < ApplicationController  #总部控制器
   end
   
   def login       #登录页面
-    @current_url = params[:current_url]
+     session[:current_url] = params[:cid]
   end
   
   def login_create #登录验证
@@ -48,15 +46,17 @@ class HomepageController < ApplicationController  #总部控制器
     if customer.nil?
       redirect_to "/homepage/login"
     else
-      session[:customer] = customer
       session[:customer_id] = customer.id
-      redirect_to params[:current_url]
+      redirect_to session[:current_url]
     end
   end
   
   def logoff    #注销
-    session[:customer] = nil
-    redirect_to params[:current_url]
+    if !session[:customer_id].nil?
+      session[:customer_id] = nil
+      session[:current_url] = params[:cid]
+      redirect_to session[:current_url]
+    end
   end
   
   def about_lantan  #关于澜泰
@@ -68,31 +68,6 @@ class HomepageController < ApplicationController  #总部控制器
     @sales_laster = Sale.find(:all, :conditions => ["status = ?",Sale::STATUS[:NOMAL]],
       :order => "created_at desc", :limit => Sale::NEW_NUM)
     @store = Store.find(1)
-
   end
-  def provincechange
-    options = "<option value='0'>--请选择--</option>"
-    city = City.where("parent_id = ?",params[:id]).all
-    puts city.size
-    city.each do |c|
-      options << "<option value=#{c.id}>#{c.name}</option>"
-    end
-    render :text => options
-  end
-
-  def citychange
-    items = ""
-    stores = Store.where("city_id = ?",params[:id]).all
-   
-    if stores.blank?
-      items = "<li>对不起，该城市暂未有门店...</li>"
-    else
-    stores.each do |s|
-      items << "<a href = '/stores/#{s.id}'><li value=#{s.id}>#{s.name}</li></a>"
-    end
-  end
-  render :text => items
-end
-  
  
 end
