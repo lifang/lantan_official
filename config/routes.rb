@@ -11,6 +11,7 @@ LantanOfficial::Application.routes.draw do
       get :svcard_records
       get :con_records
       get :pcard_records
+      get :search
     end
   end
   resources :product_information

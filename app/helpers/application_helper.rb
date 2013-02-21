@@ -12,5 +12,8 @@ module ApplicationHelper
     Sale.find(:all, :conditions => ["status = ?",Sale::STATUS[:NOMAL]],
       :order => "created_at desc", :limit => Sale::NEW_NUM)
   end
+  def current_user
+    Customer.find(session[:customer_id])
+  end
   
 end
