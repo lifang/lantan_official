@@ -1,0 +1,26 @@
+<table width="100%" border="0" cellspacing="0" cellpadding="0" class="data_table">
+  <thead>
+    <tr class="hbg">
+      <td>时间</td>
+      <td>金额（元）</td>
+      <td>原因</td>
+      <td>余额（元）</td>
+    </tr>
+  </thead>
+  <tbody>
+    <% (@order || []).each do |order| %>
+      <tr>
+        <td><%= show_time(order.created_at) %></td>
+        <td><%= order.price  %></td>
+        <td><%(order.order_prod_relations || []).each do |pro|%>
+            <%= Product.find(pro.product_id).name %>
+          <%end%> </td>
+        <td><%= CSvcRelation.find(current_user.id).left_price   %></td>
+      </tr>
+    <%end%>
+  </tbody>
+</table>
+<div class="pageTurn">
+  <%= will_paginate  @order, :class => "pagination", :previous_label => "&lt;上一页",
+    :next_label=> "下一页&gt;"%>
+</div>
