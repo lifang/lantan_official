@@ -53,7 +53,7 @@
             <td>&nbsp;</td>
             <% @services.first(3).each do |service|%>
               <td><div class="td_item"><img src=<%= service.img_url %>/><p><input type="checkbox" name="select_service[]"  value='<%= service.id %>' /><%= service.name %></p></div></td>
-            <% end %>
+            <% end unless @services.blank? %>
           </tr>
           <tr>
             <td>&nbsp;</td>
@@ -61,7 +61,7 @@
               <ul>
                 <% @services[3..@services.length-1].each do |service| %>
                   <li><input type="checkbox" name="select_service[]" value='<%= service.id %>' /><%= service.name %></li>
-                <% end %>
+                <% end unless @services.blank? %>
               </ul>
             </td>
           </tr>
