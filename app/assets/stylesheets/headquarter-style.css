@@ -245,3 +245,25 @@ img { border: none;}
 .pageTurn a.disabled {display: none;}
 /*联系我们----*/
 #contact_us_map{width:700px;height: 350px;margin-bottom: 20px;border: 1px solid #ddd;}
+
+/*tab_alert*/
+.tab_alert { 
+    width: 500px; 
+	padding: 10px; 
+	border-radius: 0.6em; 
+	background: url(../assets/black.png) repeat; 
+	box-shadow: 2px 2px 2px rgba(0,0,0,0.3);
+	position: absolute;
+}
+.tab_alert_box { background: #FFF; overflow: hidden; border-radius: 0.6em;}
+.tabox_h { line-height: 24px; margin: 20px auto; text-align: center; color:#930205;}
+.close { 
+    width: 10px; 
+	height: 10px; 
+	background: url(../assets/x.png) no-repeat; 
+	text-indent: -999px; 
+	position: absolute; 
+	top: 15px; 
+	right: 15px;
+	overflow: hidden;
+}
