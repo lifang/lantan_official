@@ -9,7 +9,7 @@
 <%= javascript_include_tag "main" %>
 <%= javascript_include_tag "regist_validate" %>
 <!--[if IE 6]>
-<script src="js/DD_belatedPNG_0.0.8a-min.js"></script>
+<script src="/assets/DD_belatedPNG_0.0.8a-min.js"></script>
 <script>
   DD_belatedPNG.fix('*');
 </script>
@@ -24,27 +24,28 @@
         <li>第一步填写账户信息</li>
         <li>第二步注册成功</li>
       </ul>
-       <%= form_for @customer, :url => "/homepage/regist_create",:html => {:onsubmit => "return regist_validate()"} do %>
+       <%= form_for "customer", :url => "/homepage/regist_create",
+         :html => {:onsubmit => "return regist_validate()"} do %>
         <div class="re_list">
-          <label>姓名：</label>
+          <label>姓名：<span class="red">*</span></label>
           <%= text_field_tag "name" %>
         </div>
         <div class="re_list">
-          <label>车牌号</label>
+          <label>车牌号：<span class="red">*</span></label>
          <%= text_field_tag "car_num" %>
         </div>
         <div class="re_list">
-          <label>手机号：</label>
+          <label>手机号：<span class="red">*</span></label>
           <%= text_field_tag "mobilephone" %>
         </div>
         <div class="re_list">
-          <label>地址：</label>
+          <label>地址：<span class="red">*</span></label>
           <%= text_field_tag "address" %>
         </div>
       <div class="re_btn">
         <button>同意协议并注册</button>
       </div>
-      <div class="re_a"><a href="#">&lt;&lt;澜泰服务协议&gt;&gt;</a></div>
+      <div class="re_a"><a href="javascript:void(0)">&lt;&lt;澜泰服务协议&gt;&gt;</a></div>
     <% end %>
     </div>
   </div>

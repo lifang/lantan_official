@@ -6,7 +6,7 @@
 <div class="clear"></div>
 <div class="text_box">
   <h1><%= @new.title %></h1>
-  <em><%= show_time(@new.created_at) %></em>
+  <em><%= @new.created_at.strftime('%Y-%m-%d') if @new.created_at %></em>
   <img src="/assets/pro02.jpg"/>
   <%= raw(@new.content) %>
 </div>

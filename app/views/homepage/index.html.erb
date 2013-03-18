@@ -7,7 +7,7 @@
     <%= stylesheet_link_tag "headquarter-style" %>
     <%= javascript_include_tag "application" %>
     <%= javascript_include_tag "headquarter-main","logoff" %>
-    
+
     <!--[if IE 6]>
     <script src="/assets/DD_belatedPNG_0.0.8a-min.js"></script>
     <script>
@@ -21,32 +21,33 @@
         <a href="/"><div class="logo">杭州澜泰科技有限公司</div></a>
         <div class="login">
           <% if session[:customer_id].nil? %>
-            <a href="/homepage/regist?cid=<%= request.path %>">注册</a> |
-            <a href="/homepage/login?cid=<%= request.path %>">登录</a>
+            <a href="/regist">注册</a> |
+            <a href="/login">登录</a>
           <% else %>
-            欢迎用户<%= current_customer(session[:customer_id]).name %> | <a href="/user_info/svcard_records?cid=<%= request.path %>">个人信息</a>|
-            <a href="/homepage/logoff?cid=<%= request.path %>" onclick="return sure_logoff()">注销</a>
+            欢迎用户<%= current_customer(session[:customer_id]).name %> |
+            <a href="/user_info/svcard_records?cid=<%= request.path %>">个人信息</a>|
+            <a href="/logout">注销</a>
           <% end %>
         </div>
         <div class="nav">
           <ul>
             <li class="hover"><a href="/homepage">首页</a></li>
-            <li class="menu"><a href="/homepage/about_lantan">关于澜泰</a>
+            <li class="menu"><a href="/introduce">关于澜泰</a>
               <div class="second_menu">
-                <p><a href="/homepage/company_introduce">公司介绍</a></p>
-                <p><a href="/homepage/characteristic_service">特色服务</a></p>
-                <p><a href="/homepage/managment_idea">经营理念</a></p>
-                <p><a href="/homepage/company_culture">企业文化</a></p>
-                <p><a href="/homepage/team_introduce">团队介绍</a></p>
-                <p><a href="/homepage/store_introduce">门店介绍</a></p>
+                <p><a href="/introduce">公司介绍</a></p>
+                <p><a href="/characteristic">特色服务</a></p>
+                <p><a href="/managment">经营理念</a></p>
+                <p><a href="/culture">企业文化</a></p>
+                <p><a href="/team">团队介绍</a></p>
+                <p><a href="/store">门店介绍</a></p>
               </div>
             </li>
             <li><a href="/official_sale">活动促销</a></li>
             <li><a href="/product_information">产品信息</a></li>
             <li><a href="/cards">储值卡</a></li>
             <li><a href="/news">新闻中心</a></li>
-            <li><a href="/homepage/customer_investigate">用户调查</a></li>
-            <li><a href="/homepage/contact_us">联系我们</a></li>
+            <li><a href="/surveys">用户调查</a></li>
+            <li><a href="/contact_us">联系我们</a></li>
           </ul>
           <div class="nav_bg"></div>
         </div>
@@ -56,9 +57,9 @@
       <div class="banner">
         <div class="scroll_play">
           <div class="scroll_show">
-            <a href="#" target="_blank"><img src="/assets/banner1.png" /></a>
-            <a href="#" target="_blank"><img src="/assets/banner2.png" /></a>
-            <a href="#" target="_blank"><img src="/assets/banner3.png"  /></a>
+            <a href="javascript:void(0)" target="_blank"><img src="/assets/banner1.png" /></a>
+            <a href="javascript:void(0)" target="_blank"><img src="/assets/banner2.png" /></a>
+            <a href="javascript:void(0)" target="_blank"><img src="/assets/banner3.png"  /></a>
           </div>
           <div class="scroll_num"><a>1</a><a>2</a><a>3</a></div>
         </div>
@@ -75,29 +76,29 @@
         <div class="inquire">
           <h1>门店查询</h1>
           <div class="inquire_div"><label>选择省市：</label>
-      <select id="city_province_id"><option value="0">--请选择--</option>
-        <% (province || []).each do |p|%>
-          <option value=<%= p.id %>><%= p.name %></option>
-        <%end%>
-      </select>
-    <select id="city_city_id"></select></div>
+            <select id="city_province_id"><option value="0">--请选择--</option>
+              <% (province || []).each do |p|%>
+                <option value=<%= p.id %>><%= p.name %></option>
+              <%end%>
+            </select>
+            <select id="city_city_id"></select></div>
           <div class="clear"></div>
           <div class="inquire_div">
-         <ul id="stores_list">
-    </ul>
+            <ul id="stores_list"></ul>
           </div>
         </div>
         <div class="clear"></div>
-         <div class="serviceItems">
+        <div class="serviceItems">
           <h1>服务项目</h1>
           <div class="serviceItems_div">
-            <% Product::SERVICE_TYPES.each_with_index do |hash, index| %>            
-                <div class="service_list">
-                  <h2><%= hash[1] %></h2>
-                  <% @service_hash[hash[0]].to_a.each do |service| %>
-                    <a href="/products/<%= service.id %>"><%= service.name %></a>/
-                  <% end %>
-                </div>
+            <% Product::SERVICE_TYPES.each do |key, value| %>
+              <div class="service_list">
+                <h2><%= value %></h2>
+                <% @service_hash[key].each_with_index do |service, index| %>
+                  <a href="/products/<%= service.id %>" target="_blank"><%= service.name %><% index %></a>
+                  <% if (index + 1) < @service_hash[key].length %>/<% end %>
+                <% end %>
+              </div>
             <% end %>
             <div class="clear"></div>
           </div>
@@ -108,6 +109,6 @@
       <div><img src="/assets/foot_logo.png"/></div>
       <p>Copyright © 2013 杭州澜泰 版权所有</p>
     </div>
-<%= javascript_include_tag "left" %>
+    <%= javascript_include_tag "left" %>
   </body>
 </html>

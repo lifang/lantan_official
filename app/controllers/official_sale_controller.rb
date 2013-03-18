@@ -4,23 +4,17 @@ class OfficialSaleController < ApplicationController  #总店活动促销页面
 
   #官网活动促销
   def index
-    @sales_laster = Sale.find(:all, :conditions => ["status = ? and store_id = ?",
-        Sale::STATUS[:NOMAL],Store::DEFAULT_ID],
-      :order => "created_at desc", :limit => Sale::NEW_NUM)
-    @sales=show_sales
+    @sales = Sale.paginate_by_sql(["select * from sales where status = ? order by created_at desc ", Sale::STATUS[:RELEASE]],
+      :page => params[:page],:per_page => Sale::SALES_PER_PAGE_NUM)
   end
 
   #官网活动促销详情
   def show
-    @sales_laster = Sale.find(:all, :conditions => ["status = ? and store_id = ?",
-        Sale::STATUS[:NOMAL],Store::DEFAULT_ID],
-      :order => "created_at desc", :limit => Sale::NEW_NUM)
-    sale_id=params[:id]
-    begin
-    @sale = Sale.find(sale_id)
-    rescue
-     redirect_to "/500"
-    end
+    @sale = Sale.find(params[:id])
+    puts "-------------------------"
+    puts @sale.to_json
+    @products = Product.find_by_sql(["select p.name, s.prod_num from products p left join sale_prod_relations s
+        on s.product_id = p.id where s.sale_id = ?", @sale.id])
   end
 
   #选择框省份发生变化时
@@ -42,7 +36,7 @@ class OfficialSaleController < ApplicationController  #总店活动促销页面
       items << "<li>对不起，该城市暂未有门店...</li>"
     else
       stores.each do |s|
-        items << "<a href = '/stores/#{s.id}'><li>#{s.name}</li></a>"
+        items << "<li><a href = '/stores/#{s.id}' target='_blank'>#{s.name}</a></li>"
       end
     end
     render :text => items
@@ -70,15 +64,6 @@ class OfficialSaleController < ApplicationController  #总店活动促销页面
     end
     end
     render :text => items
-  end
-  
-  private
-  #官网总店的销售活动
-  def show_sales
-    Sale.find(:all, :conditions =>["store_id = ? and status = ? ",Store::DEFAULT_ID,
-        Sale::STATUS[:NOMAL]]).paginate(
-      :page => params[:page],:per_page => Sale::SALES_PER_PAGE_NUM,
-      :order => "created_at desc")
   end
   
 end

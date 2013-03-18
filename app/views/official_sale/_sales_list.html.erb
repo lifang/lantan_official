@@ -1,0 +1,16 @@
+<%  (@sales || []).each do |sale| %>
+  <div class="salesPro">
+    <img src="<%= sale.img_url %>" alt="lantan" width="350" height="150" />
+    <h1><%= sale.name %></h1>
+    <span><% if sale.disc_time_types == Sale::DISC_TIME[:TIME] %>
+        <%= sale.started_at.strftime('%Y-%m-%d') if sale.started_at %>&nbsp;
+        至&nbsp;<%= sale.ended_at.strftime('%Y-%m-%d') if sale.ended_at %>
+      <% else %>
+        <%= Sale::DISC_TIME_NAME[sale.disc_time_types] %>
+      <% end %></span>
+    <p><%= sale.description %>...</p>
+    <a href="/official_sale/<%= sale.id %>">详情&gt;&gt;</a>
+  </div>
+
+<% end %>
+

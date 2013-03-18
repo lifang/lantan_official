@@ -1,11 +1,13 @@
 #encoding: utf-8
 class HomepageController < ApplicationController  #总部控制器
   layout 'headquarter', :except => [:index, :login, :regist, :regist_create]
-  def index #总部首页
-    @news = New.find(:all, :conditions => "status = '#{New::DEFAULT_STATUS}'", :order => "created_at desc", :limit => 6) #首页显示的6条新闻
-    services = Product.find_all_by_is_service_and_store_id(Product::IS_SERVICE[:YES],Store::DEFAULT_ID) #首页显示的服务项目
+  def index 
+    @news = New.find(:all, :conditions => "status = '#{New::DEFAULT_STATUS}'",
+      :order => "created_at desc", :limit => 6)
+    services = Product.find(:all, :select => "id, name, types", :conditions => ["is_service = ?",
+        Product::IS_SERVICE[:YES]])
     @service_hash = {}
-    Product::SERVICE_TYPES.each_key do |key|  #将Product类里面的服务类别迭代并将Products表中的数据按类别划分
+    Product::SERVICE_TYPES.each_key do |key|
       services.each do |service|
         if(service.types == key)
           if @service_hash[key].nil?
@@ -19,17 +21,13 @@ class HomepageController < ApplicationController  #总部控制器
     end
   end
 
-  def regist  #用户注册
-    @customer = Customer.new
-    session[:current_url] = params[:cid]
-  end
-
-  def regist_create #注册验证
+  def regist_create 
     if Customer.find_by_name_and_mobilephone(params[:name].strip, params[:mobilephone].strip).nil?
-      customer = Customer.new(:name => params[:name].strip,:mobilephone =>  params[:mobilephone].strip, :address => params[:address].strip)
-      if customer.save #往用户表中插入数据
-        car_num = CarNum.create(:num => params[:car_num].strip) #往车牌号表中插入数据
-        CustomerNumRelation.create(:customer_id => customer.id, :car_num_id => car_num.id)#往用户-车牌-关系表中插入数据
+      customer = Customer.new(:name => params[:name].strip,:mobilephone =>  params[:mobilephone].strip,
+        :address => params[:address].strip)
+      if customer.save
+        car_num = CarNum.create(:num => params[:car_num].strip)
+        CustomerNumRelation.create(:customer_id => customer.id, :car_num_id => car_num.id)
         session[:customer_id] = customer.id
       end
     else
@@ -37,37 +35,26 @@ class HomepageController < ApplicationController  #总部控制器
     end
   end
   
-  def login       #登录页面
-     session[:current_url] = params[:cid]
-  end
-  
-  def login_create #登录验证
+  def login_create
     customer = Customer.find_by_name_and_mobilephone(params[:name].strip, params[:mobilephone].strip)
     if customer.nil?
-      redirect_to "/homepage/login"
+      flash[:notice] = "用户名或密码错误，请重新登录。"
+      redirect_to "/login"
     else
       session[:customer_id] = customer.id
-      redirect_to session[:current_url]
+      redirect_to "/homepage"
     end
   end
   
-  def logoff    #注销
-    if !session[:customer_id].nil?
+  def logout
       session[:customer_id] = nil
-      session[:current_url] = params[:cid]
-      redirect_to session[:current_url]
-    end
-  end
-  
-  def about_lantan  #关于澜泰
-    render "/homepage/company_introduce"
+      redirect_to root_path
   end
  
-
-  def contact_us #联系我们
+  def contact_us
     @sales_laster = Sale.find(:all, :conditions => ["status = ?",Sale::STATUS[:NOMAL]],
       :order => "created_at desc", :limit => Sale::NEW_NUM)
-    @store = Store.find(1)
+    @store = Store.first
   end
  
 end

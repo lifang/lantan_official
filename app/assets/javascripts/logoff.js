@@ -1,7 +1,3 @@
-function sure_logoff(){
-    return confirm("确定退出?");
-}
-
 function nav(){
     if (window.location.pathname =="/user_info/svcard_records")
     {

@@ -10,7 +10,7 @@
   <tbody>
     <% (@order || []).each do |order| %>
       <tr>
-        <td><%= show_time(order.created_at) %></td>
+        <td><%= order.created_at.strftime('%Y-%m-%d') if order.created_at %></td>
         <td><%= order.price  %></td>
         <td><%(order.order_prod_relations || []).each do |pro|%>
             <%= Product.find(pro.product_id).name %>

@@ -9,7 +9,7 @@
     <%= javascript_include_tag "application" %>
     <%= javascript_include_tag "headquarter-main","login_validate" %>
     <!--[if IE 6]>
-    <script src="js/DD_belatedPNG_0.0.8a-min.js"></script>
+    <script src="/assets/DD_belatedPNG_0.0.8a-min.js"></script>
     <script>
       DD_belatedPNG.fix('*');
     </script>
@@ -27,14 +27,14 @@
               <%= text_field_tag 'name' %>
             </div>
             <div class="login_list">
-              <label>手机号：</label>
+              <label>密码：</label>
               <%= password_field_tag 'mobilephone' %>
             </div>
             <div class="login_btn">
-              <button>登录</button>
+              <button type="submit">登录</button>
             </div>
           <% end %>
-          <div class="login_a"><a href="#">忘记密码?</a> | <a href="#">注册</a></div>
+          <div class="login_a"><a href="/regist">注册</a></div>
         </div>
       </div>
     </div>

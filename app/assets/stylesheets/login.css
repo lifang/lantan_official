@@ -3,6 +3,7 @@
 body { background: url(../assets/body_bg.jpg) repeat; font-family: "微软雅黑", "宋体", Arial; color: #333; font-size: 14px;}
 ul { list-style: none;}
 a { text-decoration: none;}
+.red {color: red;}
 button { font-family:"微软雅黑"; cursor: pointer; border: none;}
 .box { width: 1000px; margin: 0 auto;}
 .logo { 
@@ -53,8 +54,8 @@ button { font-family:"微软雅黑"; cursor: pointer; border: none;}
 .re_two { background: url(../assets/re_title.png) no-repeat 0 bottom;}
 .register_bg ul li { width: 470px; float: left; color: #FFF; line-height: 37px; padding-left: 30px;}
 
-.re_list { width: 350px; height: 40px; line-height: 40px; margin: 20px auto;}
-.re_list label { width: 60px; display: inline-block; text-align: right; float: left;}
+.re_list { width: 370px; height: 40px; line-height: 40px; margin: 20px auto;}
+.re_list label { width: 80px; display: inline-block; text-align: right; float: left;}
 .re_list input { height: 30px; line-height: 30px; width: 280px; _width: 280px;}
 
 .re_btn { margin-top: 30px;}
@@ -73,3 +74,4 @@ button { font-family:"微软雅黑"; cursor: pointer; border: none;}
 
 /*congratulations恭喜*/
 .congratulations { text-align: center; font-size: 18px; color: #e41a1d;}
+

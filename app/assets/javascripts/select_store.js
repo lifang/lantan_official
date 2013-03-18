@@ -20,7 +20,3 @@ $("#city_c_id").change(function(){
         }
     })
 })
-
-function sure_logoff(){
-    return confirm("确定退出?");
-}

@@ -12,7 +12,7 @@ class SalesController < ApplicationController
     else
     @sales = show_sale(@store_id)
     @laster_sales = Sale.find(:all,
-      :conditions => ["store_id = ? and status =?",@store_id,Sale::STATUS[:NOMAL]],
+      :conditions => ["store_id = ? and status =?",@store_id,Sale::STATUS[:RELEASE]],
       :order=>"started_at desc", :limit => Sale::LASTER_SALES)
     end
   end
@@ -34,7 +34,7 @@ class SalesController < ApplicationController
       @discount_price = @product.base_price - @sale.discount
     end
     @laster_sales = Sale.find(:all,
-      :conditions => ["store_id = ? and status =?",store_id,Sale::STATUS[:NOMAL]],
+      :conditions => ["store_id = ? and status =?",store_id,Sale::STATUS[:RELEASE]],
       :order=>"started_at desc", :limit => Sale::LASTER_SALES)
   end
   end

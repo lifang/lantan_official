@@ -6,12 +6,20 @@ LantanOfficial::Application.routes.draw do
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
   # Keep in mind you can assign values other than :controller and :action
+  match '/logout'=> 'homepage#logout'
+  match '/login'=> 'homepage#login'
+  match '/regist'=> 'homepage#regist'
+  match '/introduce'=> 'homepage#company_introduce'
+  match '/characteristic'=> 'homepage#characteristic_service'
+  match '/managment'=> 'homepage#managment_idea'
+  match '/culture'=> 'homepage#company_culture'
+  match '/team'=> 'homepage#team_introduce'
+  match '/store'=> 'homepage#store_introduce'
+  match '/contact_us'=> 'homepage#contact_us'
+  
   resources :user_info do 
     collection do
-      get :svcard_records
-      get :con_records
-      get :pcard_records
-      get :search
+      get :svcard_records, :con_records, :pcard_records, :search
     end
   end
   resources :product_information
@@ -20,45 +28,23 @@ LantanOfficial::Application.routes.draw do
   resources :sales
   resources :stores
   resources :teams
+  resources :surveys
   resources :homepage do
     collection do
-    get :login
-    get :logoff
-    get :regist
-    post :regist_create
-    post :login_create
-    get :about_lantan
-    get :company_introduce
-    get :company_culture
-    get :characteristic_service
-    get :managment_idea
-    get :store_introduce
-    get :team_introduce
-    get :sales_promotion
-    get :sv_cards
-    get :news_centre
-    get :customer_investigate
-    get :contact_us
-    get :show_sale
-    get :show_new
-    get :contact_us
-    post :provincechange
-    post :citychange
+    get :login, :logout, :regist
+    get :sales_promotion, :sv_cards, :news_centre, :show_sale, :show_new, :contact_us
+    post :regist_create, :login_create, :provincechange, :citychange
     end
   end
   resources :news
   resources :cards do
     collection do
-     get :alipay_exercise
-     get :alipay_compete
+     get :alipay_exercise, :alipay_compete
     end
   end
   resources :official_sale do
     collection do
-      post :province_change
-      post :city_change
-      post :province_change_reservations
-      post :city_change_reservations
+      post :province_change, :city_change, :province_change_reservations, :city_change_reservations
     end
   end
 

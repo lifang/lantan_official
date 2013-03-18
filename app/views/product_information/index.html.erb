@@ -5,13 +5,24 @@
 </div>
 <div class="clear"></div>
 <div class="text_box">
+
+  <div class="salesPro">
+    <img src="images/pro01.jpg"/>
+    <h1>供应澜泰合金轮圈翻新保养剂 轮毂养护</h1>
+    <span>2012-12-12</span>
+    <p>我们提供高品质的产品和服务：  澜泰是一家从事引进和开以及专业汽车美容养护授权为主的科技发展公司，将目前
+      的经营理念......</p>
+    <a href="#">详情&gt;&gt;</a>
+  </div>
+
+
   <ul class="news_list">
     <% (@products || []).each do |product| %>
-       <li><a href="/product_information/<%= product.id %>"><%= product.name %></a></li>
+      <li><a href="/product_information/<%= product.id %>"><%= product.name %></a></li>
     <%end%>
   </ul>
 </div>
 <div class="pageTurn">
-  <%= will_paginate  @products, :previous_label => "< Prev",
-    :next_label=> "Next >", :page_links =>"false" %>
+  <%= will_paginate  @products, :previous_label => "<<",
+    :next_label=> ">>", :page_links =>"false" %>
 </div>

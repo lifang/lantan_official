@@ -8,7 +8,7 @@
 <%= javascript_include_tag "application" %>
 <%= javascript_include_tag "main" %>
 <!--[if IE 6]>
-<script src="js/DD_belatedPNG_0.0.8a-min.js"></script>
+<script src="/assets/DD_belatedPNG_0.0.8a-min.js"></script>
 <script>
   DD_belatedPNG.fix('*');
 </script>
@@ -23,9 +23,9 @@
         <li>第一步填写账户信息</li>
         <li>第二步注册成功</li>
       </ul>
-      <div class="congratulations">恭喜您，注册成功！</div>
+      <div class="congratulations">恭喜您，注册成功，您的用户名为您的姓名，初始密码为手机密码！</div>
        <div class="re_btn">
-         <button onclick="window.location.href='<%= session[:current_url] %>'">返回浏览页面</button>
+         <button onclick="window.location.href='/'">返回首页</button>
       </div>
     </div>
   </div>
