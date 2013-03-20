@@ -215,10 +215,11 @@ img { border: none;}
 
 /*储值卡*/
 .card,.card_one,.card_two { padding-bottom: 15px; margin-bottom: 15px;}
-.c_one, .c_two, .c_three { width: 98px; height: 98px; text-indent: -999px; overflow: hidden; float: left; margin-right: 15px;}
+.c_one, .c_two, .c_three, .c_four { width: 98px; height: 98px; text-indent: -999px; overflow: hidden; float: left; margin-right: 15px;}
 .c_one {background: url(../assets/card_bg.png) no-repeat;}
 .c_two {background: url(../assets/card_bg.png) no-repeat 0 -99px;}
 .c_three {background: url(../assets/card_bg.png) no-repeat 0 -198px;}
+.c_four {background: url(../assets/card_bg.png) no-repeat 0 -297px;}
 
 .c_text { width: 520px; float: left; line-height: 24px;}
 .c_text ul { padding: 5px;}
