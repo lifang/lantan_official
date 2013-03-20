@@ -1,26 +1,19 @@
 <div class="r_menu">
   <ul>
-    <li><a href="#" class="hover">产品信息</a></li>
+    <li><a href="/product_information" class="hover">产品信息</a></li>
   </ul>
 </div>
 <div class="clear"></div>
 <div class="text_box">
-
-  <div class="salesPro">
-    <img src="images/pro01.jpg"/>
-    <h1>供应澜泰合金轮圈翻新保养剂 轮毂养护</h1>
-    <span>2012-12-12</span>
-    <p>我们提供高品质的产品和服务：  澜泰是一家从事引进和开以及专业汽车美容养护授权为主的科技发展公司，将目前
-      的经营理念......</p>
-    <a href="#">详情&gt;&gt;</a>
-  </div>
-
-
-  <ul class="news_list">
-    <% (@products || []).each do |product| %>
-      <li><a href="/product_information/<%= product.id %>"><%= product.name %></a></li>
-    <%end%>
-  </ul>
+  <% (@products || []).each do |product| %>
+    <div class="salesPro">
+      <img src="<%= product.img_url %>" alt="lantan" width="300" height="150" />
+      <h1><%= product.name %></h1>
+      <span><%= product.created_at.strftime('%Y-%m-%d') if product.created_at %></span>
+      <p><%= product.description %></p>
+      <a href="/product_information/<%= product.id %>">详情&gt;&gt;</a>
+    </div>
+  <% end %>
 </div>
 <div class="pageTurn">
   <%= will_paginate  @products, :previous_label => "<<",

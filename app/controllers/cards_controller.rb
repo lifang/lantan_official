@@ -4,11 +4,9 @@ class CardsController < ApplicationController #储值卡
 
   #储值卡页面
   def index
-    @sales_laster  = Sale.find(:all, :conditions => ["status = ? and store_id =? ",
-        Sale::STATUS[:NOMAL],Store::DEFAULT_ID],
-      :order => "created_at desc", :limit => Sale::NEW_NUM)
-    @sv_cards = SvCard.find(:all, :conditions => ["types = ?",
-        SvCard::CARD_TYPE[:NOTDISCOUNT]])
+    @sv_cards = SvCard.all.group_by{ |c| c.types }
+    puts "--------------------"
+    puts @sv_cards
   end
 
   #发送充值请求

@@ -3,19 +3,12 @@ class NewsController < ApplicationController #新闻控制器
 
   #新闻中心首页
   def index
-    @sales_laster = Sale.find(:all, :conditions => ["status = ? and store_id = ?",Sale::STATUS[:NOMAL],Store::DEFAULT_ID],
-      :order => "created_at desc", :limit => Sale::NEW_NUM)
-    @news = New.find(:all ,:conditions => ["status = ? ",New::DEFAULT_STATUS]).paginate(
+    @news = New.find(:all ,:conditions => ["status = ? ",New::STATUS[:NOMAL]]).paginate(
       :page => params[:page],:per_page => New::NEWS_PER_PAGE_NUM,:order => "created_at desc")
   end
+  
   #新闻详细
   def show
-    @sales_laster = Sale.find(:all, :conditions => ["status = ? and store_id = ?",Sale::STATUS[:NOMAL],Store::DEFAULT_ID],
-      :order => "created_at desc", :limit => Sale::NEW_NUM)
-    begin
       @new = New.find(params[:id].to_i)
-    rescue
-      redirect_to "/500"
-    end
   end
 end

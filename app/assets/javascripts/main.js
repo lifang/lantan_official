@@ -16,7 +16,6 @@ $(document).ready(function(){
 	},4000) //每3秒钟切换
 })
 
-<!-- 自动轮换内容 -->
 
 //product
 $(function(){

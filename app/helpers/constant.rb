@@ -9,4 +9,7 @@ module Constant
   PARTNER="2088002153002681"
   SELLER_EMAIL="yesen@yahoo.cn"
 
+  #上传图片的比例
+  PIC_SIZE=[50,100,148,300,700]
+
 end

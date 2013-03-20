@@ -1,15 +1,29 @@
 // JavaScript Document
 //nav
 //储值卡
-$(".card_two").css("display", "none");
-$(".card_three").css("display", "none");
+
 $(".btn_one").click(function(){
-    $(".card_one").slideUp();
-    $(".card_two").css("display", "inline");
+    $(".card_one").animate({
+        opacity:0
+    },600,function(){
+        $(".card_one").hide();
+        $(".card_two").css("display", "block");
+        $(".card_two").animate({
+            opacity:1
+        },600,function(){});
+    });
 });
+
 $(".btn_two").click(function(){
-    $(".card_two").slideUp();
-    $(".card_three").css("display", "inline");
+    $(".card_two").animate({
+        opacity:0
+    },600,function(){
+        $(".card_two").hide();
+        $(".card_three").css("display", "block");
+        $(".card_three").animate({
+            opacity:1
+        },600,function(){});
+    });
 });
   
   
@@ -40,8 +54,7 @@ $(function(){
         },
         function(){
             $(this).find(".second_menu").slideUp("slow");
-        }
-        )
+        })
 });
 
 //首页轮播
