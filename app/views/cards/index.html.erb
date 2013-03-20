@@ -29,36 +29,35 @@
           <div class="c_btn"><a href="javascript:void(0)" class="btn_two">下一步</a></div>
         </div>
 
-        <div class="card">
+        <div class="card card_three" style="display:none;opacity:0;">
           <div class="c_three">储值卡面额</div>
           <div class="c_text">
             <ul>
               <% (@sv_cards[SvCard::CARD_TYPE[:DISCOUNT]]).each do |sv_card| %>
                 <li>
-                  <input id="<%= sv_card.id %>" type="radio" name="sv_card" value="<%= sv_card.price %>"/><%= sv_card.price %>
+                  <input id="<%= sv_card.id %>" type="radio" name="sv_card" value="<%= sv_card.price %>"/>
+                  <%= sv_card.name %>
                 </li>
               <% end %>
             </ul>
           </div>
           <div class="clear"></div>
         </div>
-        <div class="card">
-          <div class="c_four">储值卡面额</div>
+        <div class="card card_three" style="display:none;opacity:0;">
+          <div class="c_four">打折卡</div>
           <div class="c_text">
             <ul>
-              <li><input name="" type="radio" value="">100元</li>
-              <li><input name="" type="radio" value="">200元</li>
-              <li><input name="" type="radio" value="">500元</li>
-              <li><input name="" type="radio" value="">1000元</li>
-              <li><input name="" type="radio" value="">2000元</li>
-              <li><input name="" type="radio" value="">5000元</li>
+              <% (@sv_cards[SvCard::CARD_TYPE[:NOTDISCOUNT]]).each do |sv_card| %>
+                <li>
+                  <input id="<%= sv_card.id %>" type="radio" name="sv_card" value="<%= sv_card.price %>"/>
+                  <%= sv_card.name %>
+                </li>
+              <% end %>
             </ul>
           </div>
           <div class="clear"></div>
           <div class="c_btn"><a href="javascript:void(0)" class="btn_three">完成</a></div>
         </div>
-
-
       </div>
     </div>
   </div>
