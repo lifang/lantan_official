@@ -26,8 +26,6 @@ class ApisController < ApplicationController
         params[:mobilephone].strip, params[:verify_code].strip])[0]
     status = 0
     message = "支付失败。"
-    puts "------------------"
-    puts record
     if record and  record.left_price >= params[:price].to_f
       left_price = record.left_price - params[:price].to_f
       SvcardUseRecord.create(:c_svc_relation_id => record.id, :types => SvcardUseRecord::TYPES[:OUT],
