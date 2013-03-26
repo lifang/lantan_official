@@ -5,5 +5,5 @@ class CSvcRelation < ActiveRecord::Base
   belongs_to :customer
 
   #储值卡显示条数
-  PER_PAGE = 10
+  PER_PAGE = 2
 end

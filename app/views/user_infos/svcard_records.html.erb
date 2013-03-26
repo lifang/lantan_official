@@ -11,14 +11,14 @@
     <% (@svcard_records || []).each do |record| %>
       <tr>
         <td><%= record.created_at.strftime('%Y-%m-%d') if record.created_at %></td>
-        <td><%= record.price %></td>
+        <td><%= record.use_price %></td>
         <td><%= record.content %> </td>
-        <td><%= record.over_price %></td>
+        <td><%= record.left_price %></td>
       </tr>
     <%end%>
   </tbody>
 </table>
 <div class="pageTurn">
-  <%= will_paginate  @svcard_records, :class => "pagination", :previous_label => "&lt;上一页",
-    :next_label=> "下一页&gt;"%>
+  <%= will_paginate  @svcard_records, :class => "pagination", :previous_label => "<<",
+    :next_label=> ">>" %>
 </div>

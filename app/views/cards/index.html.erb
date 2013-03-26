@@ -38,7 +38,7 @@
                   <input id="<%= sv_card.id %>" type="radio" name="sv_card" value="<%= sv_card.price %>"/>
                   <%= sv_card.name %>（<%= sv_card.price %>元）
                 </li>
-              <% end %>
+              <% end if @sv_cards and @sv_cards[SvCard::CARD_TYPE[:DISCOUNT]] %>
             </ul>
           </div>
           <div class="clear"></div>
@@ -52,7 +52,7 @@
                   <input id="<%= sv_card.id %>" type="radio" name="sv_card" value="<%= sv_card.price %>"/>
                   <%= sv_card.name %>（<%= sv_card.price %>元）
                 </li>
-              <% end %>
+              <% end if @sv_cards and @sv_cards[SvCard::CARD_TYPE[:NOTDISCOUNT]] %>
             </ul>
           </div>
           <div class="clear"></div>

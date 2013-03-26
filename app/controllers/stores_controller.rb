@@ -18,10 +18,8 @@ class StoresController < ApplicationController  #门店控制器
     @services = p_hash[SProduct::IS_SERVICE_VALUE[:YES]].group_by { |s| s.types } if p_hash and p_hash[SProduct::IS_SERVICE_VALUE[:YES]]
   end
 
-
+  #本方法需要挪
   def send_file
-    puts "-----------------------------"
-    puts params[:url]
     path="#{Rails.root}/public"
     dirs=["zip_dirs","/#{Time.now.strftime("%Y-%m").to_s}","/#{Time.now.strftime("%Y-%m-%d").to_s}"]
     dirs.each_with_index {|dir,index| Dir.mkdir path+dirs[0..index].join   unless File.directory? path+dirs[0..index].join }

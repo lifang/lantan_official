@@ -5,7 +5,7 @@ class CardsController < ApplicationController #储值卡
 
   #储值卡页面
   def index
-    @sv_cards = SvCard.all.group_by{ |c| c.types }
+    @sv_cards = SvCard.all.group_by{ |c| c.types } if SvCard.all
   end
 
   #发送充值请求
