@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130701051405) do
+ActiveRecord::Schema.define(:version => 20130701051406) do
 
   create_table "c_pcard_relations", :force => true do |t|
     t.integer  "customer_id"
@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(:version => 20130701051405) do
     t.string   "id_card"
     t.boolean  "is_billing"
     t.datetime "created_at"
+    t.string   "verify_code"
   end
 
   add_index "c_svc_relations", ["customer_id"], :name => "index_c_svc_relations_on_customer_id"
@@ -48,8 +49,7 @@ ActiveRecord::Schema.define(:version => 20130701051405) do
     t.integer "capital_id"
   end
 
-  add_index "car_brands", ["capital_id"], :name => "index_car_brands_on_capital_id"
-  add_index "car_brands", ["name"], :name => "index_car_brands_on_name"
+  add_index "car_brands", ["capital_id"], :name => "index_car_brands_capital_id"
 
   create_table "car_models", :force => true do |t|
     t.string  "name"
@@ -342,6 +342,7 @@ ActiveRecord::Schema.define(:version => 20130701051405) do
     t.float    "use_price"
     t.float    "left_price"
     t.datetime "created_at"
+    t.string   "content"
   end
 
   add_index "svcard_use_records", ["c_svc_relation_id"], :name => "index_svcard_use_records_on_c_svc_relation_id"

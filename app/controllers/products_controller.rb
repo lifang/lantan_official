@@ -2,33 +2,17 @@
 class ProductsController < ApplicationController    #产品与服务
   layout 'frontdoor'
   def index     #产品&服务
-    @store = Store.find(params[:store_id])
-    services = SProduct.find(:all, :conditions => ["is_service = ? and store_id = ?", Product::IS_SERVICE[:YES], params[:store_id]])
-    @service_hash = {}
-    Product::SERVICE_TYPES.each_key do |key|  #将Product类里面的服务类别迭代并将Products表中的数据按类别划分
-      services.each do |service|
-        if(service.types == key)
-          if @service_hash[key].nil?
-             @service_hash[key] = []     
-             @service_hash[key] << service
-          else
-            @service_hash[key] << service
-          end
-        end
-      end
-    end
-    @products = Product.find_all_by_is_service_and_store_id(Product::IS_SERVICE[:NO],
-      params[:store_id])
-    @laster_sales = Sale.find(:all,
-      :conditions => ["store_id = ? and status =?",@store.id,Sale::STATUS[:NOMAL]],
-      :order=>"started_at desc", :limit => Sale::LASTER_SALES)
+    @store = SStore.find_by_id(params[:store_id].to_i)
+    all_products = SProduct.find(:all, :select => "id, name, types, img_url, is_service",
+      :conditions => ["store_id = ?", params[:store_id].to_i]).group_by{ |t| t.is_service }
+    @services = all_products[SProduct::IS_SERVICE_VALUE[:YES]].group_by{ |t| t.types } if all_products and
+      all_products[SProduct::IS_SERVICE_VALUE[:YES]]
+    @products = all_products[SProduct::IS_SERVICE_VALUE[:NO]] if all_products
   end
 
   def show    #单个产品显示
-    @service_or_product = Product.find(params[:id])
-    @store = Store.find(@service_or_product.store_id)
-    @laster_sales = Sale.find(:all,
-      :conditions => ["store_id = ? and status =?",@store.id,Sale::STATUS[:NOMAL]],
-      :order=>"started_at desc", :limit => Sale::LASTER_SALES)
+    @store = SStore.find_by_id(params[:store_id].to_i)
+    @product = SProduct.find_by_id(params[:id].to_i)
+    @image_urls = SImageUrl.find(:all, :conditions => ["product_id = ?", @product.id])
   end
 end

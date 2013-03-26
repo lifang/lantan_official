@@ -36,7 +36,7 @@
               <% (@sv_cards[SvCard::CARD_TYPE[:DISCOUNT]]).each do |sv_card| %>
                 <li>
                   <input id="<%= sv_card.id %>" type="radio" name="sv_card" value="<%= sv_card.price %>"/>
-                  <%= sv_card.name %>
+                  <%= sv_card.name %>（<%= sv_card.price %>元）
                 </li>
               <% end %>
             </ul>
@@ -50,7 +50,7 @@
               <% (@sv_cards[SvCard::CARD_TYPE[:NOTDISCOUNT]]).each do |sv_card| %>
                 <li>
                   <input id="<%= sv_card.id %>" type="radio" name="sv_card" value="<%= sv_card.price %>"/>
-                  <%= sv_card.name %>
+                  <%= sv_card.name %>（<%= sv_card.price %>元）
                 </li>
               <% end %>
             </ul>

@@ -7,7 +7,6 @@
     <%= stylesheet_link_tag "headquarter-style" %>
     <%= javascript_include_tag "application" %>
     <%= javascript_include_tag "headquarter-main","logoff" %>
-
     <!--[if IE 6]>
     <script src="/assets/DD_belatedPNG_0.0.8a-min.js"></script>
     <script>
@@ -24,8 +23,8 @@
             <a href="/regist">注册</a> |
             <a href="/login">登录</a>
           <% else %>
-            欢迎用户<%= current_customer(session[:customer_id]).name %> |
-            <a href="/user_info/svcard_records?cid=<%= request.path %>">个人信息</a>|
+            欢迎用户<%= current_customer.name %> |
+            <a href="/user_infos/svcard_records">个人信息</a>|
             <a href="/logout">注销</a>
           <% end %>
         </div>
@@ -91,12 +90,12 @@
         <div class="serviceItems">
           <h1>服务项目</h1>
           <div class="serviceItems_div">
-            <% Product::SERVICE_TYPES.each do |key, value| %>
+            <% @services.each do |key, value| %>
               <div class="service_list">
-                <h2><%= value %></h2>
-                <% @service_hash[key].each_with_index do |service, index| %>
-                  <a href="/products/<%= service.id %>" target="_blank"><%= service.name %><% index %></a>
-                  <% if (index + 1) < @service_hash[key].length %>/<% end %>
+                <h2><%= Product::SERVICE_TYPES[key] %></h2>
+                <% value.each_with_index do |service, index| %>
+                  <a href="/products/<%= service.id %>" target="_blank"><%= service.name %></a>
+                  <% if (index + 1) < value.length %>/<% end %>
                 <% end %>
               </div>
             <% end %>

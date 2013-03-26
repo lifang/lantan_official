@@ -1,15 +1,14 @@
 <%  (@sales || []).each do |sale| %>
   <div class="salesList">
-        <a href="/official_sale/<%= sale.id %>"><%= image_tag ("#{sale.img_url}") %></a>
+    <a href="/official_sale/<%= sale.id %>"><img src="#{sale.img_url}" alt="lantan" width="350" height="150" /></a>
     <h2><%= sale.name %></h2>
-    <p><%=show_time( sale.started_at )%>&nbsp;-&nbsp;<%= show_time( sale.ended_at )%></p>
-    <% if sale.introduction.size>50 %>
-      <p><%= sale.introduction[0,50] %><%=link_to "详情/","/stores/#{@store_id}/sales/#{sale.id}"%></p>
-    <%else%>
-      <p><%= sale.introduction %><%=link_to "详情","/stores/#{@store_id}/sales/#{sale.id}"  %></p>
-    <%end%>
+    <p><% if sale.disc_time_types == Sale::DISC_TIME[:TIME] %>
+        <%= sale.started_at.strftime('%Y-%m-%d') if sale.started_at %>&nbsp;
+        至&nbsp;<%= sale.ended_at.strftime('%Y-%m-%d') if sale.ended_at %>
+      <% else %>
+        <%= Sale::DISC_TIME_NAME[sale.disc_time_types] %>
+      <% end %>
+    </p>
+    <p><%= sale.description %>...&nbsp;&nbsp;<%=link_to "详情>>","/stores/#{@store.id}/sales/#{sale.id}" %></p>
   </div>
 <% end %>
-
-
- 

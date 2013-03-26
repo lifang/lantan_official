@@ -24,8 +24,8 @@
         <li>第二步注册成功</li>
       </ul>
       <div class="congratulations">恭喜您，注册成功，您的用户名为您的姓名，初始密码为手机密码！</div>
-       <div class="re_btn">
-         <button onclick="window.location.href='/'">返回首页</button>
+       <div class="re_btn" id="return_f_page">
+         <button onclick="window.location.href='/'">5秒后将自动返回到首页</button>
       </div>
     </div>
   </div>
@@ -33,5 +33,8 @@
     <div><img src="/assets/foot_logo.png"/></div>
     <p>Copyright © 2013 杭州澜泰 版权所有</p>
   </div>
+  <script type="text/javascript">
+    self.setTimeout(function(){window.location.href="/"}, 25);
+  </script>
 </body>
 </html>

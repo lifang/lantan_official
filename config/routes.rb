@@ -17,17 +17,12 @@ LantanOfficial::Application.routes.draw do
   match '/store'=> 'homepage#store_introduce'
   match '/contact_us'=> 'homepage#contact_us'
   
-  resources :user_info do 
+  resources :user_infos do
     collection do
       get :svcard_records, :con_records, :pcard_records, :search
     end
   end
   resources :product_information
-  resources :products
-  resources :reservations
-  resources :sales
-  resources :stores
-  resources :teams
   resources :surveys
   resources :homepage do
     collection do
@@ -49,10 +44,19 @@ LantanOfficial::Application.routes.draw do
   end
 
   resources :stores do
+    collection do
+      post :send_file
+    end
     resources :products
     resources :reservations 
-    resources :teams
     resources :sales
+  end
+
+  resources :apis do
+    collection do
+      post :get_user_svcard
+      post :use_svcard
+    end
   end
 
  

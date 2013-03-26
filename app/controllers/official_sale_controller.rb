@@ -11,8 +11,6 @@ class OfficialSaleController < ApplicationController  #总店活动促销页面
   #官网活动促销详情
   def show
     @sale = Sale.find(params[:id])
-    puts "-------------------------"
-    puts @sale.to_json
     @products = Product.find_by_sql(["select p.name, s.prod_num from products p left join sale_prod_relations s
         on s.product_id = p.id where s.sale_id = ?", @sale.id])
   end
@@ -31,7 +29,7 @@ class OfficialSaleController < ApplicationController  #总店活动促销页面
   #选择框城市发生变化时
   def city_change
     items = ""
-    stores = Store.where("city_id = ?",params[:id]).all
+    stores = SStore.where("city_id = ?",params[:id]).all
     if stores.blank?
       items << "<li>对不起，该城市暂未有门店...</li>"
     else

@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+  <head>
+    <title>消费账单</title>
+    <%= stylesheet_link_tag "user_info_style" %>
+    <%= javascript_include_tag "application","logoff" %>
+  </head>
+  <body>
+    <div class="head">
+      <div class="box">
+        <div class="logo_user">个人信息中心</div>
+        <div class="login">你好：<a href="/">首页</a> | <%=  current_customer.name %> |
+          <a href="/logout">退出</a>
+        </div>
+      </div>
+    </div>
+    <div class="main">
+      <div class="box">
+        <div class="nav">
+          <ul>       
+            <li><a href="/user_infos/svcard_records">储值卡收支记录</a></li>
+            <li class="hover"><a href="/user_infos/con_records">消费账单</a></li>
+            <li><a href="/user_infos/pcard_records">套餐卡</a></li>
+          </ul>
+        </div>
+        <div class="main_body">
+          <%= yield %>
+        </div>
+      </div>
+    </div>
+    <div class="foot"><p>Copyright © 2013 杭州澜泰 版权所有</p></div>
+    <%= javascript_include_tag "logoff" %>
+  </body>
+</html>

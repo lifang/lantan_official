@@ -26,6 +26,7 @@ function my_validate(){
     alert("请至少选择一个服务项目!");
     return flag;
 }
+
 $(document).ready(function(){
     $( "#datepicker" ).datepicker({
         inline: true
