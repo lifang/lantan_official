@@ -15,17 +15,15 @@ class UserInfosController < ApplicationController
   
   #消费账单
   def con_records
-    search_records("4","0")
+    search_records("0","0")
   end
 
   #按要求查找记录
   def search
-    time = params[:time]  #判断选择情况
-    is_billing = params[:is_billing]
-    @orders = search_records(time,is_billing)
-    @time = time
-    @is_billing = is_billing
-    render "/user_info/con_records"
+    @time = params[:time]  #判断选择情况
+    @is_billing = params[:is_billing]
+    @orders = search_records(@time,@is_billing)
+    render "/user_infos/con_records"
   end
 
   #套餐卡消费记录
@@ -36,38 +34,18 @@ class UserInfosController < ApplicationController
   private
   
   def search_records(time,is_billing) #查找相应记录
-    if time == "0"  #当前月
+    time = time.to_i
+    case time
+    when 0, 1, 2
       @orders = Order.find(:all,
-        :conditions => [" subdate(now(),interval 1 month) < created_at and status = ?
-and is_billing = ? and c_svc_relation_id = 0 and c_pcard_relation_id = 0",
+        :conditions => [" subdate(now(),interval #{time+1} month) < created_at and status = ?
+and is_billing = ? ",
           Order::STATUS[:NOMAL],is_billing], :order => "created_at desc").paginate(
-        :page => params[:page],
-        :per_page =>Order::USER_INFO_PER_PAGE)
-    elsif time == "1" #近二月
-      @orders = Order.find(:all,
-        :conditions => ["subdate(now(),interval 2 month) < created_at and status = ?
- and is_billing = ? and c_svc_relation_id = 0 and c_pcard_relation_id = 0",
-          Order::STATUS[:NOMAL],is_billing], :order => "created_at desc").paginate(
-        :page => params[:page],
-        :per_page =>Order::USER_INFO_PER_PAGE)
-    elsif time == "2" #近三月
-      @orders = Order.find(:all,
-        :conditions => ["subdate(now(),interval 3 month) < created_at and status = ?
- and is_billing = ? and c_svc_relation_id = 0 and c_pcard_relation_id = 0",
-          Order::STATUS[:NOMAL],is_billing], :order => "created_at desc").paginate(
-        :page => params[:page],
-        :per_page =>Order::USER_INFO_PER_PAGE)
-    elsif time == "3" #全部
-      @orders = Order.find(:all,
-        :conditions => [" status = ? and is_billing = ?  and c_svc_relation_id = 0
-and c_pcard_relation_id = 0",Order::STATUS[:NOMAL],is_billing], :order => "created_at desc").paginate(
         :page => params[:page],
         :per_page =>Order::USER_INFO_PER_PAGE)
     else
       @orders = Order.find(:all,
-        :conditions => [" subdate(now(),interval 1 month) < created_at and status = ?
-and is_billing = ? and c_svc_relation_id = 0 and c_pcard_relation_id = 0",
-          Order::STATUS[:NOMAL],is_billing], :order => "created_at desc").paginate(
+        :conditions => [" status = ? and is_billing = ?",Order::STATUS[:NOMAL],is_billing], :order => "created_at desc").paginate(
         :page => params[:page],
         :per_page =>Order::USER_INFO_PER_PAGE)
     end

@@ -1,46 +1,18 @@
 <div class="search">
- 
-<div><label>消费账单：</label>
-    <%if @time == "0"%>
-      <input class="search_info" name="time" type="radio" value="0" checked="checked"/>&nbsp;当月账单&nbsp;&nbsp;&nbsp;&nbsp;
-    <%else%>
-      <input class="search_info" name="time" type="radio" value="0"/>&nbsp;当月账单&nbsp;&nbsp;&nbsp;&nbsp;
-    <%end%>
-    <% if @time == "1" %>
-      <input class="search_info" name="time" type="radio" value="1" checked="checked"/>&nbsp;近二月&nbsp;&nbsp;&nbsp;&nbsp;
-    <%else%>
-      <input class="search_info" name="time" type="radio" value="1"/>&nbsp;近二月&nbsp;&nbsp;&nbsp;&nbsp;
-    <%end%>
-    <%if @time == "2"%>
-      <input class="search_info" name="time" type="radio" value="2" checked="checked"/>&nbsp;近三月&nbsp;&nbsp;&nbsp;&nbsp;
-    <%else%>
-      <input class="search_info" name="time" type="radio" value="2"/>&nbsp;近三月&nbsp;&nbsp;&nbsp;&nbsp;
-    <%end%>
-    <%  if @time == "3"%>
-      <input class="search_info" name="time" type="radio" value="3" checked="checked"/>全部
-    <%else%>
-      <input class="search_info" name="time" type="radio" value="3"/>全部
-    </div>
 
-  <%end%>
-  <div>
-    <label>未开发票查询：</label>
-    <select id="is_billing" name="is_billing">
-      <%  if @is_billing == "1" %>
-        <option value="0" checked="checked">未开出</option>
-      <%else%>
-        <option value="0">未开出</option>
-      <%end%>
-      <%  if @is_billing == "1" %>
-        <option value="1" checked="checked">已开出</option>
-      <%else%>
-        <option value="1">已开出</option>
-      <%end%>
-      <%  if @is_billing == "2" %>
-        <option value="2" checked="checked">已寄出</option>
-      <%else%>
-        <option value="2">已寄出</option>
-      <%end%>
-    </select>
-  </div> <div><button class="search_btn" id="search_btn">查询</button></div>
+  <div><label>消费账单：</label>
+    <input class="search_info" name="time" type="radio" value="0" <%= @time == "0" ||  @time.nil? ? 'checked="checked"' : "" %>/>&nbsp;当月账单&nbsp;&nbsp;&nbsp;&nbsp;
+    <input class="search_info" name="time" type="radio" value="1" <%= @time == "1" ? 'checked="checked"' : "" %>/>&nbsp;近二月&nbsp;&nbsp;&nbsp;&nbsp;
+    <input class="search_info" name="time" type="radio" value="2" <%= @time == "2" ? 'checked="checked"' : "" %>/>&nbsp;近三月&nbsp;&nbsp;&nbsp;&nbsp;
+    <input class="search_info" name="time" type="radio" value="3" <%= @time == "3" ? 'checked="checked"' : "" %>/>全部
+    <div class="clear"></div>
+    <div>
+      <label>未开发票查询：</label>
+      <select id="is_billing" name="is_billing">
+        <option value="0" <%= @is_billing == "0" || @is_billing.nil? ? 'selected="selected"' : "" %>>未开出</option>
+        <option value="1" <%= @is_billing == "1" ? 'selected="selected"' : "" %>>已开出</option>
+        <option value="2" <%= @is_billing == "2" ? 'selected="selected"' : "" %>>已寄出</option>
+      </select>
+    </div> <div><button class="search_btn" id="search_btn">查询</button></div>
+  </div>
 </div>
