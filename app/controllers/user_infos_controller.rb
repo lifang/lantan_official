@@ -15,15 +15,19 @@ class UserInfosController < ApplicationController
   
   #消费账单
   def con_records
-    search_records("0","0")
+    @time = "0"
+    @is_billing = "0"
+    @orders = search_records(@time,@is_billing)
   end
 
-  #按要求查找记录
   def search
-    @time = params[:time]  #判断选择情况
-    @is_billing = params[:is_billing]
+    session[:time] = params[:time] if params[:time]
+    session[:is_billing] = params[:is_billing] if params[:is_billing]
+    @time = params[:time] || session[:time]
+    @is_billing = params[:is_billing] || session[:is_billing]
     @orders = search_records(@time,@is_billing)
-    render "/user_infos/con_records"
+    render :con_records
+
   end
 
   #套餐卡消费记录
@@ -42,12 +46,12 @@ class UserInfosController < ApplicationController
 and is_billing = ? ",
           Order::STATUS[:NOMAL],is_billing], :order => "created_at desc").paginate(
         :page => params[:page],
-        :per_page =>Order::USER_INFO_PER_PAGE)
+        :per_page =>1)
     else
       @orders = Order.find(:all,
         :conditions => [" status = ? and is_billing = ?",Order::STATUS[:NOMAL],is_billing], :order => "created_at desc").paginate(
         :page => params[:page],
-        :per_page =>Order::USER_INFO_PER_PAGE)
+        :per_page =>1)
     end
     return @orders
   end
