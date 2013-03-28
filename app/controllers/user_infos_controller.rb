@@ -42,16 +42,16 @@ class UserInfosController < ApplicationController
     case time
     when 0, 1, 2
       @orders = Order.find(:all,
-        :conditions => [" subdate(now(),interval #{time+1} month) < created_at and status = ?
-and is_billing = ? ",
-          Order::STATUS[:NOMAL],is_billing], :order => "created_at desc").paginate(
+        :conditions => [" subdate(now(),interval #{time+1} month) < orders.created_at and status = ?
+and is_billing = ? and customer_id = ?", Order::STATUS[:NOMAL],is_billing, session[:customer_id]], 
+        :order => "orders.created_at desc").paginate(
         :page => params[:page],
-        :per_page =>1)
+        :per_page =>Order::USER_INFO_PER_PAGE)
     else
       @orders = Order.find(:all,
-        :conditions => [" status = ? and is_billing = ?",Order::STATUS[:NOMAL],is_billing], :order => "created_at desc").paginate(
+        :conditions => [" status = ? and is_billing = ? and customer_id = ?",Order::STATUS[:NOMAL],is_billing,session[:customer_id]],:order => "orders.created_at desc").paginate(
         :page => params[:page],
-        :per_page =>1)
+        :per_page =>Order::USER_INFO_PER_PAGE)
     end
     return @orders
   end

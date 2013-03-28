@@ -1,5 +1,7 @@
 #encoding: utf-8
 class Product < ActiveRecord::Base
+  set_table_name :"lantan_db.products"
+  set_primary_key "id"
   has_many :sale_prod_relations
   has_many :res_prod_relations
   has_many :station_service_relations

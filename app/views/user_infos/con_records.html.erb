@@ -11,6 +11,7 @@
       <td>开据发票</td>
     </tr>
   </thead>
+  <% benchmark "Process time", :level => :info, :silence => true do %>
   <tbody>
     <tr>
       <%(@orders || []).each do |order|%>
@@ -23,11 +24,11 @@
               <td>数量</td>
               <td>单价（元）</td>
             </tr>
-            <% (order.order_prod_relations || []).each do |relation|  %>
+            <% (OrderProdRelation.includes(:product).where(:order_id => order.id) || []).each do |relation|  %>
               <tr>
-                <td><%= relation.product_id %></td>
+                <td><%= relation.product.try(:name) %></td>
                 <td><%= relation.pro_num %></td>
-                <td><%= relation.product_id %></td>
+                <td><%= relation.price %></td>
               </tr>
             <%end%>
           </table>
@@ -41,10 +42,11 @@
           <%end%>
         </td>
         <td><%= Store.find(order.store_id).name%> </td>
-        <td><%= order.is_billing %></td>
+        <td><%= order.billing_status %></td>
       </tr>
     <%end%>
   </tbody>
+  <% end %>
 </table>
 
 <div class="pageTurn">
