@@ -31,7 +31,7 @@ class HomepageController < ApplicationController  #总部控制器
       redirect_to "/login"
     else
       session[:customer_id] = customer.id
-      redirect_to (params[:last_url].nil? or params[:last_url].empty?) ? "/homepage" : params[:last_url]
+      redirect_to params[:last_url].nil?  ? "/homepage" : params[:last_url]
     end
   end
   

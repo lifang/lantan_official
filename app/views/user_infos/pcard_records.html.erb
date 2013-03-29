@@ -10,23 +10,27 @@
   </thead>
   <tbody>
     <% if @c_pcard_relations.blank? %>
-    <tr align="center">
-      <td colspan="4"><h4>您当前没有任何套餐消费记录！</h4></td>
-    </tr>
+      <tr align="center">
+        <td colspan="4"><h4>您当前没有任何套餐消费记录！</h4></td>
+      </tr>
     <% else %>
-    <% @c_pcard_relations.each do |cpr| %>
-      <%current_content= cpr.content.split("-") %>
-    <tr>
-      <td><%= current_content[0] %></td>
-      <td><%= current_content[1] %></td>
-      <td><%= current_content[2] %></td>
-      <td><%= current_content[3] %></td>
-    </tr>
-    <% end %>
+      <% @c_pcard_relations.each do |cpr| %>
+        <tr>
+          <td><%= cpr.name %></td>
+          <td>
+            <% @already_used_count[cpr.id].values.each do |v| %>
+              <%= v[0] %>：<%= v[1] %>次&nbsp;&nbsp;
+            <% end %>
+          </td>
+          <td>
+            <% cpr.content.split(",").each do |c| %>
+              <% v = c.split("-") %>
+              <%= v[1] %>：<%= v[2] %>次&nbsp;&nbsp;
+            <% end %>
+          </td>
+          <td><%= cpr.ended_at.strftime('%Y-%m-%d') if cpr.ended_at %></td>
+        </tr>
+      <% end %>
     <% end %>
   </tbody>
 </table>
-<div class="pageTurn">
-  <%= will_paginate @c_pcard_relations, :class => "pagination", :previous_label => "&lt;上一页",
-          :next_label=> "下一页&gt;"%>
-</div>

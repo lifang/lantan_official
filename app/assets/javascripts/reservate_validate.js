@@ -1,13 +1,13 @@
 $(document).ready(function(){
     $("#next_step").click(function(){
         if( $.trim($("#customer_name").val()) == ""){
-            alert("用户名不能为空!");
+            tishi_alert("用户名不能为空!");
         }else if($.trim($("#car_number").val()) == ""){
-            alert("车牌不能为空!");
+            tishi_alert("车牌不能为空!");
         }else if($.trim($("#telephone").val()) == ""){
-            alert("电话号码不能为空!");
+            tishi_alert("电话号码不能为空!");
         }else if($.trim($("#datepicker").val()) == ""){
-            alert("预约时间不能为空!");
+            tishi_alert("预约时间不能为空!");
         }else{
             $("#loginmessage").hide();
             $("#selectservice").show();
@@ -23,7 +23,7 @@ function my_validate(){
             return flag;
         }
     }
-    alert("请至少选择一个服务项目!");
+    tishi_alert("请至少选择一个服务项目!");
     return flag;
 }
 

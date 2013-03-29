@@ -104,7 +104,7 @@ $(".btn_three").click(function(){
     var sv_card =$('input:radio[name="sv_card"]:checked').val();
     if (sv_card == null)
     {
-        alert("请选择你要购买的储值卡！");
+        tishi_alert("请选择你要购买的储值卡！");
     }else{
         var a =$('input:radio[name="sv_card"]:checked').val()
         $(".btn_three").attr("href", "/cards/alipay_exercise?sv_card=" +
