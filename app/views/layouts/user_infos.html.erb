@@ -4,6 +4,7 @@
     <title>消费账单</title>
     <%= stylesheet_link_tag "user_info_style" %>
     <%= javascript_include_tag "application","logoff" %>
+    <%= csrf_meta_tags %>
   </head>
   <body>
     <div class="head">
@@ -21,7 +22,7 @@
             <li <% if controller.action_name == "svcard_records" %>class="hover"<% end %>>
               <a href="/user_infos/svcard_records">储值卡收支记录</a>
             </li>
-            <li <% if controller.action_name == "con_records" %>class="hover"<% end %>>
+            <li <% if controller.action_name == "con_records"  || controller.action_name == "search" %>class="hover"<% end %>>
               <a href="/user_infos/con_records">消费账单</a>
             </li>
             <li <% if controller.action_name == "pcard_records" %>class="hover"<% end %>>

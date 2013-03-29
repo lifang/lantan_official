@@ -17,11 +17,11 @@ LantanOfficial::Application.routes.draw do
   match '/store'=> 'homepage#store_introduce'
   match '/contact_us'=> 'homepage#contact_us'
   
-  resources :user_infos do
-    collection do
-      get :svcard_records, :con_records, :pcard_records, :search
-    end
-  end
+  #resources :user_infos
+  match "user_infos/con_records" => "user_infos#con_records"
+  match "user_infos/svcard_records" => "user_infos#svcard_records"
+  match "user_infos/pcard_records" => "user_infos#pcard_records"
+  match "user_infos/con_records/search" => "user_infos#search"
   resources :product_information
   resources :surveys
   resources :homepage do
