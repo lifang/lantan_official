@@ -39,10 +39,11 @@ LantanOfficial::Application.routes.draw do
   end
   resources :official_sale do
     collection do
-      post :province_change, :city_change, :province_change_reservations, :city_change_reservations
+      get :province_change, :city_change
+      post :province_change_reservations, :city_change_reservations
     end
   end
-
+  resources :products
   resources :stores do
     collection do
       post :send_file

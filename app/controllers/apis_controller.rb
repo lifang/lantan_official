@@ -5,7 +5,7 @@ class ApisController < ApplicationController
       left join lantan_db.customers c on c.id = csr.customer_id where c.mobilephone = ?",
         params[:mobilephone].strip])[0]
     status = 0
-    send_message = "余额不足，您的储值卡余额为#{record.left_price}元。"
+    send_message = "余额不足，您的储值卡余额为#{record.left_price}元。" if record
     if record and  record.left_price >= params[:price].to_f
       record.verify_code = proof_code(6)
       record.save
