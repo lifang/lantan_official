@@ -3,10 +3,8 @@
   <head>
     <meta charset="utf-8"/>
     <title>澜泰总部</title>
-    <%= stylesheet_link_tag "application" %>
-    <%= stylesheet_link_tag "headquarter-style" %>
-    <%= javascript_include_tag "application" %>
-    <%= javascript_include_tag "headquarter-main","logoff" %>
+    <%= stylesheet_link_tag "application", "headquarter-style" %>
+    <%= javascript_include_tag "application", "headquarter-main", "logoff", "left" %>
     <!--[if IE 6]>
     <script src="/assets/DD_belatedPNG_0.0.8a-min.js"></script>
     <script>
@@ -109,6 +107,5 @@
       <div><img src="/assets/foot_logo.png"/></div>
       <p>Copyright © 2013 杭州澜泰 版权所有</p>
     </div>
-    <%= javascript_include_tag "left" %>
   </body>
 </html>
