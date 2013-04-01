@@ -1,0 +1,8 @@
+<% if @stores.blank? %>
+  <li>对不起，该城市暂未有门店...</li>
+<% else %>
+  <% @stores.each do |s| %>
+    <li><a href="/stores/<%= s.id %>" target="_blank"><%= s.name %></a></li>
+  <% end %>
+<% end %>
+    

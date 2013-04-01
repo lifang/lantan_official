@@ -1,22 +1,21 @@
 $(document).ready(function(){
     $("#city_province_id").change(function(){
-    $.ajax({
-        type :"POST",
-        url:"/official_sale/province_change?id="+$("#city_province_id").attr("value"),
-        data :'text',
-        success: function(data) {
-            $("#city_city_id").html(data);
-        }
-    })
-})
-$("#city_city_id").change(function(){
-    $.ajax({
-        type :"POST",
-        url:"/official_sale/city_change?id="+$("#city_city_id").attr("value"),
-        data :'text',
-        success: function(data)  {
-            $("#stores_list").html(data);
-        }
-    })
-})
+        var id = $("#city_province_id").val();
+        $.ajax({
+            async:true,
+            type : 'get',
+            dataType : 'script',
+            url:"/official_sale/province_change",
+            data : {id : id}
+        })
+    });
+
+    $("#city_city_id").change(function(){
+        var city_id = $("#city_city_id").val();
+        $.ajax({
+            type : 'get',
+            url:"/official_sale/city_change",
+            data : {id : city_id}
+        })
+    });
 })
