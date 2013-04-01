@@ -11,7 +11,6 @@
       <td>开据发票</td>
     </tr>
   </thead>
-  <% benchmark "Process time", :level => :info, :silence => true do %>
   <tbody>
     <tr>
       <%(@orders || []).each do |order|%>
@@ -46,7 +45,6 @@
       </tr>
     <%end%>
   </tbody>
-  <% end %>
 </table>
 
 <div class="pageTurn">
