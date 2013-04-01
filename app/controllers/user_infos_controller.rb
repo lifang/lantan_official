@@ -32,14 +32,36 @@ class UserInfosController < ApplicationController
 
   #套餐卡消费记录
   def pcard_records
-    #获取当前用户的所有客户-套餐数据
-    @c_pcard_relations = CPcardRelation.find(:all, :conditions =>["customer_id = ? and status = ?", session[:customer_id], CPcardRelation::STATUS[:NORMAL]]).paginate( :page => params[:page],:per_page => 1)
+    @c_pcard_relations = CPcardRelation.find_by_sql(["select p.id, p.name, cpr.content, cpr.ended_at
+        from lantan_db.c_pcard_relations cpr
+        inner join lantan_db.package_cards p on p.id = cpr.package_card_id
+        where cpr.status = ? and cpr.customer_id = ?",
+        CPcardRelation::STATUS[:NORMAL], session[:customer_id]])
+    @already_used_count = {}
+    @c_pcard_relations.each do |r|
+      service_infos = r.content.split(",")
+      single_car_content = {}
+      service_infos.each do |s|
+        content_arr = s.split("-")
+        single_car_content[content_arr[0].to_i] = [content_arr[1], content_arr[2].to_i]
+      end
+      @already_used_count[r.id] = single_car_content
+    end
+
+    @pcard_prod_relations = PcardProdRelation.find(:all, :conditions => ["package_card_id in (?)", @c_pcard_relations])
+    @pcard_prod_relations.each do |ppr|
+      used_count = ppr.product_num - @already_used_count[ppr.package_card_id][ppr.product_id][1] if @already_used_count[ppr.package_card_id][ppr.product_id]
+      @already_used_count[ppr.package_card_id][ppr.product_id][1] = used_count ? used_count : 0
+    end
   end
+
+  
   private
   
   def search_records(time,is_billing) #查找相应记录
     time = time.to_i
     case time
+
     when 0, 1, 2
       @orders = Order.find(:all,
         :conditions => [" subdate(now(),interval #{time+1} month) < orders.created_at and status = ?
@@ -55,4 +77,6 @@ and is_billing = ? and customer_id = ?", Order::STATUS[:NOMAL],is_billing, sessi
     end
     return @orders
   end
+
+  
 end
