@@ -1,4 +1,4 @@
-<%= render("/user_info/search")  %>
+<%= render("/user_infos/search")  %>
 <table width="100%" border="0" cellspacing="0" cellpadding="0" class="data_table">
   <thead>
     <tr class="hbg">
@@ -23,31 +23,33 @@
               <td>数量</td>
               <td>单价（元）</td>
             </tr>
-            <% (order.order_prod_relations || []).each do |relation|  %>
+            <% (OrderProdRelation.includes(:product).where(:order_id => order.id) || []).each do |relation|  %>
               <tr>
-                <td><%= relation.product_id %></td>
+                <td><%= relation.product.try(:name) %></td>
                 <td><%= relation.pro_num %></td>
-                <td><%= relation.product_id %></td>
+                <td><%= relation.price %></td>
               </tr>
             <%end%>
           </table>
         </td>
         <td><%=  order.price%></td>
         <td>
-          <% if  OrderPayType.find(order.types).pay_type == 1%>
+          <% if  OrderPayType.find_by_id(order.types).pay_type == 1%>
             <%=  OrderPayType::TYPES[:one]%>
-          <%elsif OrderPayType.find(order.types).pay_type == 2%>
+          <%elsif OrderPayType.find_by_id(order.types).pay_type == 2%>
             <%=  OrderPayType::TYPES[:two]%>
           <%end%>
         </td>
         <td><%= Store.find(order.store_id).name%> </td>
-        <td><%= order.is_billing %></td>
+        <td><%= order.billing_status %></td>
       </tr>
     <%end%>
   </tbody>
 </table>
+
 <div class="pageTurn">
   <%= will_paginate  @orders, :class => "pagination", :previous_label => "&lt;上一页",
     :next_label=> "下一页&gt;"%>
 </div>
+
 <%= javascript_include_tag "application","user_info_main" %>

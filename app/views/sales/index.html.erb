@@ -9,7 +9,7 @@
     <div class="rightAera">
       <div class="rightTitle">
         <h1>促销活动</h1>
-        <%= render("/homepage/sales_list") %>
+        <%= render("sales_list") %>
       </div>
       <div class="pageTurn">
         <%= will_paginate  @sales, :class => "pagination", :previous_label => "&lt;上一页",

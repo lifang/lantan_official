@@ -6,7 +6,6 @@
 <%= stylesheet_link_tag "application" %>
 <%= stylesheet_link_tag "login" %>
 <%= javascript_include_tag "application" %>
-<%= javascript_include_tag "main" %>
 <%= javascript_include_tag "regist_validate" %>
 <!--[if IE 6]>
 <script src="/assets/DD_belatedPNG_0.0.8a-min.js"></script>
@@ -49,6 +48,7 @@
     <% end %>
     </div>
   </div>
+  <%= render :partial => "/common/tishi_alert" %>
   <div class="foot">
     <div><img src="/assets/foot_logo.png"/></div>
     <p>Copyright © 2013 杭州澜泰 版权所有</p>

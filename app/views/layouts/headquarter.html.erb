@@ -13,6 +13,7 @@
       DD_belatedPNG.fix('*');
     </script>
     <![endif]-->
+    <%= csrf_meta_tags %>
   </head>
   <body>
     <div class="head">
@@ -21,11 +22,9 @@
         <div class="login">
           <% if session[:customer_id].nil? %>
             <a href="/regist">注册</a> |
-            <a href="/regist">登录</a>
+            <a href="/login">登录</a>
           <% else %>
-            欢迎您，<%= current_customer(session[:customer_id]).name %>|
-            <a href="/user_info/svcard_records?cid=<%= request.path %>">个人信息</a>|
-            <a href="/logout" >注销</a>
+            你好，<%= current_customer.name %>&nbsp;|<a href="/user_infos/svcard_records">个人信息</a>|<a href="/logout">注销</a>
           <% end %>
         </div>
         <div id="navigation" class="nav">
@@ -65,6 +64,7 @@
         </div>
       </div>
     </div>
+    <%= render :partial => "/common/tishi_alert" %>
     <div class="foot">
       <div><img src="/assets/foot_logo.png"/></div>
       <p>Copyright © 2013 杭州澜泰 版权所有</p>

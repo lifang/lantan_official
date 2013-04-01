@@ -1,6 +1,6 @@
 <div class="r_menu">
   <ul>
-    <li><a href="/product_information/<%= @product.id %>" class="hover">产品信息</a></li>
+    <li><a class="hover">产品信息</a></li>
   </ul>
 </div>
 <div class="clear"></div>
@@ -11,7 +11,8 @@
   </div>
   <div class="pro_show">
     <div class="bigImg jqzoom">
-      <img src="<%= @product.img_url.gsub("img#{@product.id}", "img#{@product.id}_#{Constant::PIC_SIZE[3]}") if @product.img_url %>" alt="lantan" />
+      <img src="<%= @product.img_url.gsub("img#{@product.id}", "img#{@product.id}_#{Constant::PIC_SIZE[3]}") if @product.img_url %>"
+           jqimg = "<%= @product.img_url %>" alt="lantan" />
     </div>
     <div class="pic_show">
       <ul>
@@ -28,6 +29,6 @@
   <div class="clear"></div>
   <div class="pro_text">
     <h2>详细信息</h2>
-    <p><%= @product.introduction.html_safe %></p>
+    <p><%= @product.introduction %></p>
   </div>
 </div>

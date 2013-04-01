@@ -11,35 +11,18 @@ class OfficialSaleController < ApplicationController  #总店活动促销页面
   #官网活动促销详情
   def show
     @sale = Sale.find(params[:id])
-    puts "-------------------------"
-    puts @sale.to_json
     @products = Product.find_by_sql(["select p.name, s.prod_num from products p left join sale_prod_relations s
         on s.product_id = p.id where s.sale_id = ?", @sale.id])
   end
 
   #选择框省份发生变化时
   def province_change
-    options = "<option value='0'>--请选择--</option>"
-    city = City.where("parent_id = ?",params[:id]).all
-    
-    city.each do |c|
-      options << "<option value=#{c.id}>#{c.name}</option>"
-    end
-    render :text => options
+    @cities = params[:id].eql?("0") ? [] : City.where("parent_id = #{params[:id]}")
   end
   
   #选择框城市发生变化时
   def city_change
-    items = ""
-    stores = Store.where("city_id = ?",params[:id]).all
-    if stores.blank?
-      items << "<li>对不起，该城市暂未有门店...</li>"
-    else
-      stores.each do |s|
-        items << "<li><a href = '/stores/#{s.id}' target='_blank'>#{s.name}</a></li>"
-      end
-    end
-    render :text => items
+    @stores = SStore.where("city_id = #{params[:id]}")
   end
   
   #在线预约 -选择框省份发生变化时

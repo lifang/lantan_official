@@ -71,13 +71,10 @@ img { border: none;}
 .pageTurn a { border: 2px #f0f0f0 solid; padding: 2px 5px; margin: 0px 2px; color: #CB5C5C;}
 .pageTurn a:hover, .pageTurn a:active { border: 2px #930205 solid; color: #ff5a00;}
 
-.pageTurn a.current {border: 2px #930205 solid; padding: 2px 5px; font-weight: bold; color: #fff; background: #930205;}
-.pageTurn a.disabled {display: none;}
+.pageTurn em {border: 2px #930205 solid; padding: 2px 5px; font-weight: bold; color: #fff; background: #930205;}
+.pageTurn span.disabled {display: none;}
 .serve dd a { color: #333;}
 .pageTurn span{border: 2px #f0f0f0 solid; padding: 2px 5px; margin: 0px 2px; color: #CB5C5C;}
-
-
-
 
 
 /*search*/
@@ -110,3 +107,24 @@ img { border: none;}
 /*foot*/
 .foot { border-top: 1px #cccccc solid; padding: 15px 0; font-size: 12px;}
 .foot p { text-align: center; line-height: 32px; color:#c3c3c3;}
+/*tab_alert*/
+.tab_alert {
+    width: 500px;
+	padding: 10px;
+	border-radius: 0.6em;
+	background: url(/assets/black.png) repeat;
+	box-shadow: 2px 2px 2px rgba(0,0,0,0.3);
+	position: absolute;
+}
+.tab_alert_box { background: #FFF; overflow: hidden; border-radius: 0.6em;}
+.tabox_h { line-height: 24px; margin: 20px auto; text-align: center; color:#930205;}
+.close {
+    width: 10px;
+	height: 10px;
+	background: url(/assets/x.png) no-repeat;
+	text-indent: -999px;
+	position: absolute;
+	top: 15px;
+	right: 15px;
+	overflow: hidden;
+}

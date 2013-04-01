@@ -1,33 +1,14 @@
 <div class="main">
   <div class="box">
     <div class="leftAera">
-      <%=render "stores/store_info" %>
+      <%= render "stores/store_info" %>
       <div class="leftSales">
-        <%=render("/sales/laster_sales")%>
+        <%= render "/sales/laster_sales" %>
       </div>
     </div>
     <div class="rightAera">
-      <div class="rightTitle">
-        <div class="pro_show">
-          <div class="bigImg jqzoom"><img src="/assets/lt_big.jpg" jqimg = "/assets/lt_show.jpg" /></div>
-          <div class="pic_show">
-            <ul>
-              <%= image_tag("lt.jpg") %>
-              <%= image_tag("lt01.jpg") %>
-              <%= image_tag("lt01.jpg") %>
-              <%= image_tag("lt01.jpg") %>
-              <%= image_tag("lt01.jpg") %>
-            </ul>
-          </div>
-        </div>
-        <div class="pro_price">
-          <%=render("show_sales")%>
-        </div>
-        <div class="clear"></div>
-        <div class="pro_text">
-          <p><%= @product.description  %></p>
-          <p>  <%= @product.introduction  %></p>
-        </div>
+      <div class="salesDetail">
+        <%= render "show_sales" %>
       </div>
     </div>
   </div>

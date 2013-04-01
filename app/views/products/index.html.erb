@@ -1,27 +1,32 @@
 <div class="main">
-  <div class="box">        <div class="leftAera">
-      <%=render "stores/store_info" %>
+  <div class="box">
+    <div class="leftAera">
+      <%= render "stores/store_info" %>
       <div class="leftSales">
-        <%=render("/sales/laster_sales")%>
+        <%= render ("/sales/laster_sales") %>
       </div>
     </div><div class="rightAera">
       <div class="rightTitle">
         <h1>服务</h1>
-        <% Product::SERVICE_TYPES.each do |key,value|   %>
+        <% @services.each do |key, value| %>
           <dl class="serve">
-            <dt><%= value %></dt>
-            <% @service_hash[key].to_a.each do |service| %>
-              <dd><a href="/products/<%= service.id %>"><%= service.name %>\</a></dd>
+            <dt><%= SProduct::SERVICE_TYPES[key] %></dt>
+            <dd><% value.each_with_index do |service, index| %>
+              <a href="/stores/<%= @store.id %>/products/<%= service.id %>"><%= service.name %></a>
+                <% if (index + 1) < value.length %>&nbsp;/&nbsp;<% end %>              
             <% end %>
+            </dd>
           </dl>
-        <% end %>
+        <% end if @services %>
       </div>
       <div class="rightTitle">
         <h1>产品</h1>
         <ul class="product">
           <% @products.each do |p|%>
-            <li><img src= <%= p.img_url %>/><a href="/products/<%= p.id %>"><%= p.name %></a></li>
-          <% end %>
+            <li><img src= <%= p.img_url.gsub("img#{p.id}", "img#{p.id}_#{Constant::PIC_SIZE[5]}") if p.img_url %>/>
+              <a href="/stores/<%= @store.id %>/products/<%= p.id %>"><%= p.name %></a>
+            </li>
+          <% end if @products %>
         </ul>
       </div>
     </div>

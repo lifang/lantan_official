@@ -1,36 +1,31 @@
 #encoding: utf-8
 class CardsController < ApplicationController #储值卡
   layout "headquarter"
+  before_filter :sign?, :only => "alipay_exercise"
 
   #储值卡页面
   def index
-    @sv_cards = SvCard.all.group_by{ |c| c.types }
-    puts "--------------------"
-    puts @sv_cards
+    @sv_cards = SvCard.all.group_by{ |c| c.types } if SvCard.all
   end
 
   #发送充值请求
   def alipay_exercise
-    if session[:customer].nil?
-      redirect_to "/homepage/login"
-    else
-      sv_card = SvCard.find(params[:sv_card].to_i)  #购买的储值卡
-      #支付宝中我们要用到的也写参数
-      options ={
-        :service=>"create_direct_pay_by_user",
-        :notify_url=>Constant::SERVER_PATH+"/cards/alipay_compete",  #请求地址
-        :subject=>"会员购买#{sv_card.price}产品", #物品名称
-        :total_fee =>params[:total_fee]  #订单总金额
-      }
-      out_trade_no="#{session[:customer_id]}_#{
-      Time.now.strftime("%Y%m%d%H%M%S")}#{Time.now.to_i}_#{params[:sv_card]}"#订单号
-      options.merge!(:seller_email => Constant::SELLER_EMAIL, :partner => Constant::PARTNER,
-        :_input_charset=>"utf-8", :out_trade_no=>out_trade_no,:payment_type => 1)
-      options.merge!(:sign_type => "MD5",
-        :sign =>Digest::MD5.hexdigest(options.sort.map{|k,v|"#{k}=#{v}"}.join("&")+Constant::PARTNER_KEY))
-      redirect_to "#{Constant::PAGE_WAY}?#{options.sort.map{|k, v| "
-      #{CGI::escape(k.to_s)}=#{CGI::escape(v.to_s)}"}.join('&')}"
-    end
+    sv_card = SvCard.find(params[:sv_card].to_i)  #购买的储值卡
+    #支付宝中我们要用到的也写参数
+    options ={
+      :service=>"create_direct_pay_by_user",
+      :notify_url=>Constant::SERVER_PATH+"/cards/alipay_compete",  #请求地址
+      :subject=>"会员购买#{sv_card.price}产品", #物品名称
+      :total_fee =>params[:total_fee]  #订单总金额
+    }
+    out_trade_no="#{session[:customer_id]}_#{
+    Time.now.strftime("%Y%m%d%H%M%S")}#{Time.now.to_i}_#{params[:sv_card]}"#订单号
+    options.merge!(:seller_email => Constant::SELLER_EMAIL, :partner => Constant::PARTNER,
+      :_input_charset=>"utf-8", :out_trade_no=>out_trade_no,:payment_type => 1)
+    options.merge!(:sign_type => "MD5",
+      :sign =>Digest::MD5.hexdigest(options.sort.map{|k,v|"#{k}=#{v}"}.join("&")+Constant::PARTNER_KEY))
+    redirect_to "#{Constant::PAGE_WAY}?#{options.sort.map{|k, v| "
+    #{CGI::escape(k.to_s)}=#{CGI::escape(v.to_s)}"}.join('&')}"
   end
 
   #充值异步回调

@@ -1,5 +1,8 @@
+#encoding: utf-8
 class CarNum < ActiveRecord::Base
-  attr_accessible :num, :car_model_id
+  set_table_name :"lantan_db.car_nums"
+  set_primary_key "id"
+  attr_accessible :num
   belongs_to :car_model
   has_one :customer_num_relation
   has_many :orders

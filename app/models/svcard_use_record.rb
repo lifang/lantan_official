@@ -1,6 +1,6 @@
 #encoding: utf-8
 class SvcardUseRecord < ActiveRecord::Base
+  attr_accessible :c_svc_relation_id, :types, :use_price, :left_price, :content
   belongs_to :c_svc_relation
-  SVCARD_TYPE = {:TYPR_ONR => 0, :TYPE_TWO => 1} #type_one =>  储值卡，type_two =>  打折卡
-  
+  TYPES = {:IN => 0, :OUT => 1}  #0 充值， 1 消费
 end

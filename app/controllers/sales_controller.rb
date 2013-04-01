@@ -4,46 +4,19 @@ class SalesController < ApplicationController
   
   #门店活动促销首页
   def index
-    @store_id = params[:store_id].to_i
-    begin
-    @store = Store.find(@store_id)
-    rescue
-     redirect_to "/500"
-    else
-    @sales = show_sale(@store_id)
-    @laster_sales = Sale.find(:all,
-      :conditions => ["store_id = ? and status =?",@store_id,Sale::STATUS[:RELEASE]],
-      :order=>"started_at desc", :limit => Sale::LASTER_SALES)
-    end
+    @store = SStore.find_by_id(params[:store_id].to_i)
+    @sales = SSale.find(:all, :conditions =>["status = ?  and store_id = ?",
+        SSale::STATUS[:RELEASE], @store.id]).paginate(:page => params[:page],
+      :per_page => SSale::SALES_PER_PAGE_NUM,:order => "created_at desc")
   end
 
   #门店活动详情
   def show
-    @title = "活动详情"
-    store_id =params[:store_id].to_i
-    begin
-    @sale = Sale.find(params[:id])
-    @store = Store.find(store_id)
-    rescue
-    redirect_to "/500"
-    else
-    @product= @sale.sale_prod_relations.first.product
-    if @sale.disc_types == 1#打折
-      @discount_price = discount_price(@product.base_price,@sale.discount)
-    elsif @sale.disc_types == 0#金额
-      @discount_price = @product.base_price - @sale.discount
-    end
-    @laster_sales = Sale.find(:all,
-      :conditions => ["store_id = ? and status =?",store_id,Sale::STATUS[:RELEASE]],
-      :order=>"started_at desc", :limit => Sale::LASTER_SALES)
-  end
-  end
-  private
-  #门店所有活动
-  def show_sale(store_id)
-    Sale.find(:all, :conditions =>["status = ?  and (store_id = ? or store_id = ?)",
-        Sale::STATUS[:NOMAL],store_id,Store::DEFAULT_ID]).paginate(:page => params[:page],
-      :per_page => Sale::SALES_PER_PAGE_NUM,:order => "created_at desc")
+    @store = SStore.find_by_id(params[:store_id].to_i)
+    @sale = SSale.find_by_id(params[:id].to_i)
+    @products = SProduct.find_by_sql(["select p.name, s.prod_num from lantan_db.products p
+        left join lantan_db.sale_prod_relations s
+        on s.product_id = p.id where s.sale_id = ?", @sale.id])
   end
 
   #门店活动产品/服务，价格计算
