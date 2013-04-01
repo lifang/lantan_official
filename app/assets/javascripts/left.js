@@ -1,4 +1,5 @@
-$("#city_province_id").change(function(){
+$(document).ready(function(){
+    $("#city_province_id").change(function(){
     $.ajax({
         type :"POST",
         url:"/official_sale/province_change?id="+$("#city_province_id").attr("value"),
@@ -17,4 +18,5 @@ $("#city_city_id").change(function(){
             $("#stores_list").html(data);
         }
     })
+})
 })
