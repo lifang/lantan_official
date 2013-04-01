@@ -222,7 +222,7 @@ ActiveRecord::Schema.define(:version => 20130701051405) do
     t.string   "name"
     t.float    "base_price"
     t.float    "sale_price"
-    t.text     "description"
+    t.string   "description"
     t.integer  "types"
     t.string   "service_code"
     t.boolean  "status"
