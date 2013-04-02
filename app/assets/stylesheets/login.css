@@ -86,16 +86,18 @@ button { font-family:"微软雅黑"; cursor: pointer; border: none;}
 }
 .tab_alert_box { background: #FFF; overflow: hidden; border-radius: 0.6em;}
 .tabox_h { line-height: 24px; margin: 20px auto; text-align: center; color:#930205;}
-.close {
-    width: 10px;
-	height: 10px;
-	background: url(/assets/x.png) no-repeat;
+.x, .close {
+	display:block;
 	text-indent: -999px;
-	position: absolute;
-	top: 15px;
-	right: 15px;
 	overflow: hidden;
+	position: absolute;
+	top: 5px;
+	right: 5px;
+	cursor: pointer;
+	z-index: 110;
 }
+.x { width: 10px; height: 10px; background: url(/assets/x.png) no-repeat 0 0; top: 14px; right: 14px; }
+.close { width: 13px; height: 13px; background: url(/assets/close.jpg) no-repeat ; }
 
 /*tab_popup*/
 .tab_popup { width: 650px; padding: 10px; background: url(/assets/black.png) repeat; border-radius: 0.6em; position: absolute;}

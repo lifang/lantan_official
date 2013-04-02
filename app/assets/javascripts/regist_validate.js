@@ -19,7 +19,6 @@ function regist_validate(){
 }
 
 function pop_xieyi(){
-    alert("test");
     var scolltop = document.body.scrollTop|document.documentElement.scrollTop;
     var win_height = document.documentElement.clientHeight;//jQuery(document).height();
     var z_layer_height = $("#xieyi_div").height();
