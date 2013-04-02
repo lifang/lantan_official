@@ -28,10 +28,10 @@
               </tr>
               <tr>
                 <td align="right">电话：</td>
-                <td><input name="telephone" type="text" id="telephone" 
+                <td><input name="telephone" type="text" id="telephone"
                            value="<%= current_customer.mobilephone if current_customer %>" /></td>
                 <td align="right">预约时间：</td>
-                <td><input name="res_time" type="text" id="datepicker"/></td>
+                <td><input name="res_time" type="text" id="datepicker" readonly/></td>
               </tr>
               <tr>
                 <td colspan="4">
@@ -48,33 +48,56 @@
                   <label id="emselect"></label>
                 </td>
               </tr>
-              <tr>
-                <td>&nbsp;</td>
-                <% @services.first(3).each do |service|%>
-                  <td>
-                    <div class="td_item">
-                      <img  alt="lantan" width="120" height="90"
-                        src="<%= service.img_url.gsub("img#{service.id}", "img#{service.id}_#{Constant::PIC_SIZE[6]}") if service.img_url %>" />
-                      <p><input type="checkbox" name="select_service[]"  value='<%= service.id %>' /><%= service.name %></p>
-                    </div>
+              <% if @services.blank? %>
+                <tr>
+                <h1>当前门店无产品或服务!</h1>
+                </tr>
+              <% else %>
+                <% if  @services.length > 3 %>
+                  <tr>
+                    <td>&nbsp;</td>
+                    <% @services.first(3).each do |service|%>
+                      <td>
+                        <div class="td_item">
+                          <img  alt="lantan" width="120" height="90"
+                                src="<%= service.img_url.gsub("img#{service.id}", "img#{service.id}_#{Constant::PIC_SIZE[6]}") if service.img_url %>" />
+                          <p><input type="checkbox" name="select_service[]"  value='<%= service.id %>' /><%= service.name %></p>
+                        </div>
+                      </td>
+                    <% end %>
+                  </tr>
+                  <tr>
+                    <td>&nbsp;</td>
+                    <td colspan="3">
+                      <ul class="td_item_ul">
+                        <% @services[3..@services.length-1].each do |service| %>
+                          <li><input type="checkbox" name="select_service[]" value='<%= service.id %>' /><%= service.name %></li>
+                        <% end %>
+                      </ul>
+                    </td>
+                  </tr>
+                <% else %>
+                  <tr>
+                    <td>&nbsp;</td>
+                    <% @services.each do |service|%>
+                      <td>
+                        <div class="td_item">
+                          <img  alt="lantan" width="120" height="90"
+                                src="<%= service.img_url.gsub("img#{service.id}", "img#{service.id}_#{Constant::PIC_SIZE[6]}") if service.img_url %>" />
+                          <p><input type="checkbox" name="select_service[]"  value='<%= service.id %>' /><%= service.name %></p>
+                        </div>
+                      </td>
+                    <% end %>
+                  </tr>
+                <% end %>
+              <% end %>
+              <% if !@services.blank? %>
+                <tr>
+                  <td colspan="4">
+                    <input type="submit" class="btn" value="提交预约" id="check"/>
                   </td>
-                <% end unless @services.blank? %>
-              </tr>
-              <tr>
-                <td>&nbsp;</td>
-                <td colspan="3">
-                  <ul>
-                    <% @services[3..@services.length-1].each do |service| %>
-                      <li><input type="checkbox" name="select_service[]" value='<%= service.id %>' /><%= service.name %></li>
-                    <% end unless @services.blank? %>
-                  </ul>
-                </td>
-              </tr>
-              <tr>
-                <td colspan="4">
-                  <input type="submit" class="btn" value="提交预约" id="check"/>
-                </td>
-              </tr>
+                </tr>
+              <% end %>
             </table>
           <% end %>
         </div>

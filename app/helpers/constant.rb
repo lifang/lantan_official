@@ -16,5 +16,5 @@ module Constant
   MESSAGE_URL = "http://mt.yeion.com"
   USERNAME = "XCRJ"
   PASSWORD = "123456"
-
+ 
 end
