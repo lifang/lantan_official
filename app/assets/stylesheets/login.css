@@ -96,3 +96,24 @@ button { font-family:"微软雅黑"; cursor: pointer; border: none;}
 	right: 15px;
 	overflow: hidden;
 }
+
+/*tab_popup*/
+.tab_popup { width: 650px; padding: 10px; background: url(/assets/black.png) repeat; border-radius: 0.6em; position: absolute;}
+.popup_box { background: #FFF;}
+.popup_box h1 {
+    height: 32px;
+	line-height: 32px;
+	background: #930205;
+	color: #FFF;
+	font-size: 16px;
+	padding-left: 20px;
+	position: relative;
+}
+.popup_body { overflow: hidden; padding: 10px; position: relative;}
+.popup_body_area { overflow: hidden;}
+
+/*协议*/
+.agreement_text { width: 600px; height: 400px; margin: 0 auto; overflow-y: auto; font-size: 12px;}
+.agreement_text p { margin-top: 10px;}
+.agreement_btn { width: 160px; margin: 20px auto;}
+.agreement_btn input { width: 160px; height: 32px; line-height: 32px; background: #930205; cursor: pointer; color: #FFF;}
