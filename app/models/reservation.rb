@@ -1,6 +1,6 @@
 #encoding: utf-8
 class Reservation < ActiveRecord::Base
-  set_table_name :"lantan_db.reservations"
+  set_table_name :"lantan_db_all.reservations"
   set_primary_key "id"
   attr_accessible :car_num_id, :res_time, :store_id, :status
   belongs_to :s_store

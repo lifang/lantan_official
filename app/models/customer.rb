@@ -1,6 +1,6 @@
 #encoding: utf-8
 class Customer < ActiveRecord::Base
-  set_table_name :"lantan_db.customers"
+  set_table_name :"lantan_db_all.customers"
   set_primary_key "id"
   attr_accessible :name, :mobilephone, :address, :status, :types
   has_many :customer_num_relations
