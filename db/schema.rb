@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130701051424) do
+ActiveRecord::Schema.define(:version => 20130701051427) do
 
   create_table "c_pcard_relations", :force => true do |t|
     t.integer  "customer_id"
@@ -49,8 +49,7 @@ ActiveRecord::Schema.define(:version => 20130701051424) do
     t.integer "capital_id"
   end
 
-  add_index "car_brands", ["capital_id"], :name => "index_car_brands_on_capital_id"
-  add_index "car_brands", ["name"], :name => "index_car_brands_on_name"
+  add_index "car_brands", ["capital_id"], :name => "index_car_brands_capital_id"
 
   create_table "car_models", :force => true do |t|
     t.string   "name"
@@ -63,11 +62,14 @@ ActiveRecord::Schema.define(:version => 20130701051424) do
   add_index "car_models", ["name"], :name => "index_car_models_on_name"
 
   create_table "car_nums", :force => true do |t|
-    t.string  "num"
-    t.integer "car_model_id"
+    t.string   "num"
+    t.integer  "car_model_id"
+    t.datetime "created_at"
+    t.integer  "buy_year"
   end
 
   add_index "car_nums", ["car_model_id"], :name => "index_car_nums_on_car_model_id"
+  add_index "car_nums", ["created_at"], :name => "index_car_nums_on_created_at"
   add_index "car_nums", ["num"], :name => "index_car_nums_on_num"
 
   create_table "chart_images", :force => true do |t|
@@ -91,11 +93,13 @@ ActiveRecord::Schema.define(:version => 20130701051424) do
   add_index "cities", ["parent_id"], :name => "index_cities_on_parent_id"
 
   create_table "customer_num_relations", :force => true do |t|
-    t.integer "customer_id"
-    t.integer "car_num_id"
+    t.integer  "customer_id"
+    t.integer  "car_num_id"
+    t.datetime "created_at"
   end
 
   add_index "customer_num_relations", ["car_num_id"], :name => "index_customer_num_relations_on_car_num_id"
+  add_index "customer_num_relations", ["created_at"], :name => "index_customer_num_relations_on_created_at"
   add_index "customer_num_relations", ["customer_id"], :name => "index_customer_num_relations_on_customer_id"
 
   create_table "customers", :force => true do |t|
@@ -202,6 +206,7 @@ ActiveRecord::Schema.define(:version => 20130701051424) do
     t.integer  "store_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "remark"
   end
 
   add_index "materials", ["name"], :name => "index_materials_on_name"
@@ -312,7 +317,7 @@ ActiveRecord::Schema.define(:version => 20130701051424) do
     t.string   "name"
     t.float    "base_price"
     t.float    "sale_price"
-    t.string   "description"
+    t.text     "description"
     t.integer  "types"
     t.string   "service_code"
     t.boolean  "status"
@@ -378,8 +383,6 @@ ActiveRecord::Schema.define(:version => 20130701051424) do
     t.string   "name"
     t.datetime "created_at"
   end
-
-  add_index "roles", ["created_at"], :name => "index_roles_on_created_at"
 
   create_table "sale_prod_relations", :force => true do |t|
     t.integer "sale_id"
@@ -452,7 +455,6 @@ ActiveRecord::Schema.define(:version => 20130701051424) do
     t.datetime "updated_at"
   end
 
-  add_index "staffs", ["created_at"], :name => "index_staffs_on_created_at"
   add_index "staffs", ["level"], :name => "index_staffs_on_level"
   add_index "staffs", ["name"], :name => "index_staffs_on_name"
   add_index "staffs", ["position"], :name => "index_staffs_on_position"
@@ -522,6 +524,7 @@ ActiveRecord::Schema.define(:version => 20130701051424) do
     t.float    "use_price"
     t.float    "left_price"
     t.datetime "created_at"
+    t.string   "content"
   end
 
   add_index "svcard_use_records", ["c_svc_relation_id"], :name => "index_svcard_use_records_on_c_svc_relation_id"
