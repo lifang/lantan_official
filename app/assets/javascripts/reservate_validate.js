@@ -8,6 +8,8 @@ $(document).ready(function(){
             tishi_alert("电话号码不能为空!");
         }else if($.trim($("#datepicker").val()) == ""){
             tishi_alert("预约时间不能为空!");
+        }else if(new Date($("#datepicker").val()) < new Date()){
+            tishi_alert("预约时间必须在当前时间之后!");
         }else{
             $("#loginmessage").hide();
             $("#selectservice").show();
