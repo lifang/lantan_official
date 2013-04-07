@@ -1,7 +1,6 @@
 #encoding: utf-8
-#官网客户个人信息控制器
 class UserInfosController < ApplicationController
-  include  ApplicationHelper
+
   before_filter :sign?
   layout "user_infos"
 
