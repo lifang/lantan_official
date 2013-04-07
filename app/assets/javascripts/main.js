@@ -40,10 +40,14 @@ $(function(){
 
 //弹出层
 function tishi_alert(message){
-    var doc_width = $(document).width();
     $(".tabox_h").html(message);
+    var scolltop = document.body.scrollTop|document.documentElement.scrollTop;
+    var win_height = document.documentElement.clientHeight;//jQuery(document).height();
+    var z_layer_height = $(".tab_alert").height();
+    $(".tab_alert").css('top',(win_height-z_layer_height)/2 + scolltop);
+
+    var doc_width = $(document).width();    
     var layer_width = $(".tab_alert").width();
-    $(".tab_alert").css('top',"80px");
     $(".tab_alert").css('left',(doc_width-layer_width)/2);
     $(".tab_alert").css('display','block');
     jQuery('.tab_alert').fadeTo("slow",1);

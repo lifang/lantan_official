@@ -256,7 +256,7 @@ img { border: none;}
 .pro_text p { text-indent: 24px;}
 
 /*tab_popup*/
-.tab_popup { width: 650px; padding: 10px; background: url(../assets/black.png) repeat; border-radius: 0.6em;}
+.tab_popup { width: 650px; padding: 10px; background: url(/assets/black.png) repeat; border-radius: 0.6em;}
 .popup_box { background: #FFF;}
 .popup_box h1 { 
     height: 32px; 
