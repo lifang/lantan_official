@@ -16,8 +16,7 @@
     <div class="box">
       <a href="/"><div class="logo">杭州澜泰科技有限公司</div></a>
       <div class="login_bg">
-        <div class="login_box">
-         <%= flash[:notice] %>
+        <div class="login_box">        
           <%= form_tag "/homepage/login_create",:onsubmit => "return login_validate()" do %>
           <input type="hidden" name="last_url" id="last_url" value="<%= params[:last_url] %>"/>
             <h1>用户登录</h1>
@@ -34,8 +33,13 @@
             </div>
           <% end %>
           <div class="login_a">
-            <a href="/regist">注册</a>
+            <a href="/regist">注册新用户</a>
           </div>
+             <% if flash[:notice] %>
+          <div class="login_alert">
+          <%= flash[:notice] %>
+          </div>
+          <% end %>
         </div>
       </div>
     </div>
@@ -44,5 +48,6 @@
       <div><img src="/assets/foot_logo.png"/></div>
       <p>Copyright © 2013 杭州澜泰 版权所有</p>
     </div>
+
   </body>
 </html>

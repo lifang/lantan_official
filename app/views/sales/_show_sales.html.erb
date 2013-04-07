@@ -22,4 +22,4 @@
   <% end %>
 </p>
 <p><% unless @sale.car_num.nil? %>本次活动限制车辆数<span class="red"><%= @sale.car_num %></span>辆<% end %></p>
-<p><% unless @sale.everycar_times.nil? %>每辆车可参与本次活动<span class="red"><%= @sale.everycar_times %></span>次<% end %></p>
+<p><% unless @sale.everycar_times.nil? %>每辆车可参与本次活动: <span class="red"><%= @sale.everycar_times %></span>次<% end %></p>
