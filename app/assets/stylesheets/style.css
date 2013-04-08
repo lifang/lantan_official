@@ -232,7 +232,7 @@ img { border: none;}
 	z-index: 110;
 }
 .x { width: 10px; height: 10px; background: url(../assets/x.png) no-repeat 0 0; top: 14px; right: 14px; }
-.close { width: 13px; height: 13px; background: url(../assets/close.jpg) no-repeat ; }
+.close { width: 13px; height: 13px; background: url(../assets/close.png) no-repeat ; }
 /*产品介绍--------*/
 .pro_box { padding: 10px; line-height: 24px;}
 .pro_name { margin: 5px 0;}
