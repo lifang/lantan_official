@@ -1,22 +1,18 @@
 $("#city_p_id").change(function(){
+    var id = $("#city_p_id").val();
     $.ajax({
-        type :"POST",
-        url:"/official_sale/province_change_reservations/?id="+$("#city_p_id").attr("value"),
-        data :'text',
-        success: function(data)
-        {
-            $("#city_c_id").html(data);
-        }
+        async:true,
+        type : 'get',
+        dataType : 'script',
+        url:"/official_sale/province_change?common=footer",
+        data : {id : id}
     })
 })
 $("#city_c_id").change(function(){
+    var city_id = $("#city_c_id").val();
     $.ajax({
-        type :"POST",
-        url:"/official_sale/city_change_reservations/?id="+$("#city_c_id").attr("value"),
-        data :'text',
-        success: function(data)
-        {
-            $("#stores_list_table").html(data);
-        }
+        type : 'get',
+        url:"/official_sale/city_change?common=footer",
+        data : {id : city_id}
     })
 })
