@@ -275,3 +275,6 @@ img { border: none;}
 .agreement_text p { margin-top: 10px;}
 .agreement_btn { width: 160px; margin: 20px auto;}
 .agreement_btn input { width: 160px; height: 32px; line-height: 32px; background: #930205; cursor: pointer; color: #FFF;}
+
+.arrange td input { height: 24px; line-height: 24px; float: left;}
+.arrange td select { margin-left: 10px;height: 26px; line-height: 26px;float: left;}
