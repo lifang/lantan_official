@@ -21,11 +21,13 @@ class StoresController < ApplicationController  #门店控制器
   #本方法需要挪
   def send_file
     path="#{Rails.root}/public/"
-    dirs=["zip_dirs","/#{Time.now.strftime("%Y-%m").to_s}","/#{Time.now.strftime("%Y-%m-%d").to_s}"]
+    dirs=["syncs_data","/#{Time.now.strftime("%Y-%m").to_s}","/#{Time.now.strftime("%Y-%m-%d").to_s}"]
     dirs.each_with_index {|dir,index| Dir.mkdir path+dirs[0..index].join unless File.directory? path+dirs[0..index].join }
     filename = params[:url].original_filename
     File.open(path+dirs.join("")+"/"+filename, "wb")  {|f|  f.write(params[:url].read) }
     render :text=>"success"
   end
+
+
 
 end
