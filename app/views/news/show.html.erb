@@ -7,5 +7,5 @@
 <div class="text_box">
   <h1><%= @new.title %></h1>
   <em><%= @new.created_at.strftime('%Y-%m-%d') if @new.created_at %></em>
-  <p><%= raw(@new.content) %></p>
+  <div class="text_box_content"><p><%= raw(@new.content) %></p></div>
 </div>

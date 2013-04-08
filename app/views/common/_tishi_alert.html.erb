@@ -4,3 +4,8 @@
     <div class="tabox_h"></div>
   </div>
 </div>
+<% if flash[:notice] %>
+<script type="text/javascript">
+  tishi_alert("<%= flash[:notice] %>");
+</script>
+<% end %>
