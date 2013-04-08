@@ -28,7 +28,7 @@
           <div class="clear"></div>
           <div class="c_btn"><a href="javascript:void(0)" class="btn_two">下一步</a></div>
         </div>
-
+        <% if @sv_cards  %>
         <div class="card card_three" style="display:none;opacity:0;">
           <div class="c_three">储值卡面额</div>
           <div class="c_text">
@@ -38,7 +38,7 @@
                   <input id="<%= sv_card.id %>" type="radio" name="sv_card" value="<%= sv_card.price %>"/>
                   <%= sv_card.name %>（<%= sv_card.price %>元）
                 </li>
-              <% end if @sv_cards and @sv_cards[SvCard::CARD_TYPE[:DISCOUNT]] %>
+              <% end if @sv_cards[SvCard::CARD_TYPE[:DISCOUNT]] %>
             </ul>
           </div>
           <div class="clear"></div>
@@ -52,12 +52,15 @@
                   <input id="<%= sv_card.id %>" type="radio" name="sv_card" value="<%= sv_card.price %>"/>
                   <%= sv_card.name %>（<%= sv_card.price %>元）
                 </li>
-              <% end if @sv_cards and @sv_cards[SvCard::CARD_TYPE[:NOTDISCOUNT]] %>
+              <% end if @sv_cards[SvCard::CARD_TYPE[:NOTDISCOUNT]] %>
             </ul>
           </div>
           <div class="clear"></div>
           <div class="c_btn"><a href="javascript:void(0)" class="btn_three">完成</a></div>
         </div>
+        <% else %>
+        <div>暂无储值卡/打折卡销售。</div>
+        <% end %>
       </div>
     </div>
   </div>

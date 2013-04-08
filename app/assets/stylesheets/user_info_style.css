@@ -18,7 +18,7 @@ img { border: none;}
 .logo_user { 
     width: 400px; 
 	height: 75px; 
-	background: url(logo.png) no-repeat; 
+	background: url(/assets/logo_user.png) no-repeat;
 	overflow: hidden; 
 	text-indent: -999px;
 	float: left;
