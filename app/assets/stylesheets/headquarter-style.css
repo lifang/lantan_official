@@ -191,6 +191,8 @@ img { border: none;}
 .text_ul li { line-height: 32px; list-style: inside disc;}
 .text_box em { font-size: 12px; color: #999;}
 
+.text_box_content { width: 660px; overflow: hidden;}
+
 .text_table { background: #d4d8db; margin: 20px; width: 520px; _width: 560px;}
 .text_table td { background:  #FFF; padding: 5px 10px 15px 10px;}
 .text_table td.t_head { 

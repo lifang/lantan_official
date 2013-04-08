@@ -4,7 +4,7 @@ function login_validate(){
         return false;
     }
     else if($.trim($("#mobilephone").val()) == ""){
-        tishi_alert("手机号不能为空!");
+        tishi_alert("密码不能为空!");
         return false;
     }
     else{

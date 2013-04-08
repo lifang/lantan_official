@@ -3,7 +3,7 @@ class NewsController < ApplicationController #新闻控制器
 
   #新闻中心首页
   def index
-    @news = New.find(:all ,:conditions => ["status = ? ",New::STATUS[:NOMAL]]).paginate(
+    @news = New.find(:all ,:conditions => ["status = ? ",New::STATUS[:NORMAL]]).paginate(
       :page => params[:page],:per_page => New::NEWS_PER_PAGE_NUM,:order => "created_at desc")
   end
   

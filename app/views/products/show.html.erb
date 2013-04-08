@@ -37,8 +37,9 @@
         </div>
         <div class="clear"></div>
         <div class="pro_text">
-          <p><%= @product.introduction %></p>
+          <p><%= @product.introduction.html_safe if @product.introduction %></p>
         </div>
       </div>
     </div>
-  </div></div>
+  </div>
+</div>

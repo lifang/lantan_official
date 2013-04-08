@@ -1,1 +1,5 @@
+<% if @common.eql?('footer') %>
+$("#stores_list_table").html('<%= escape_javascript(render :partial => '/official_sale/stores') %>');
+<% else %>
 $("#stores_list").html('<%= escape_javascript(render :partial => '/official_sale/stores') %>');
+<% end %>

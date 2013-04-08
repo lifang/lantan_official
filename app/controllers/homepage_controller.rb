@@ -27,7 +27,7 @@ class HomepageController < ApplicationController  #总部控制器
   def login_create
     customer = Customer.find_by_name_and_mobilephone(params[:name].strip, params[:mobilephone].strip)
     if customer.nil?
-      flash[:notice] = "用户名或密码错误，请重新登录。"
+      flash[:notice] = "用户名或密码错误，请重新登录!"
       redirect_to "/login"
     else
       session[:customer_id] = customer.id

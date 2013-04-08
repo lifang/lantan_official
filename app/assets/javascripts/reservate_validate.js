@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    $("#next_step").click(function(){
+    $("#next_step").click(function(){ //预约验证
         if( $.trim($("#customer_name").val()) == ""){
             tishi_alert("用户名不能为空!");
         }else if($.trim($("#car_number").val()) == ""){
@@ -8,27 +8,22 @@ $(document).ready(function(){
             tishi_alert("电话号码不能为空!");
         }else if($.trim($("#datepicker").val()) == ""){
             tishi_alert("预约时间不能为空!");
+        }else if(new Date($("#datepicker").val()) < new Date()){
+            tishi_alert("预约时间必须在当前时间之后!");
         }else{
             $("#loginmessage").hide();
             $("#selectservice").show();
         }
     });
-});
-function my_validate(){
-    var services = document.getElementsByName("select_service[]");
-    var flag = false;
-    for(var i=0;i<services.length;i++){
-        if(services[i].checked){
-            flag = true;
-            return flag;
-        }
-    }
-    tishi_alert("请至少选择一个服务项目!");
-    return flag;
-}
 
-$(document).ready(function(){
-    $( "#datepicker" ).datepicker({
+    $("#check").click(function(){ //预约选择项目验证
+        if(($(".td_item :checked").length + $(".td_item_ul :checked").length) <= 0){
+           tishi_alert("请至少选择一个服务项目!");
+           return false;
+        }
+    })
+
+    $( "#datepicker" ).datepicker({ //预约时间插件
         inline: true
     });
-})
+});

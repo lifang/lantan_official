@@ -1,7 +1,6 @@
 #encoding: utf-8
-#官网客户个人信息控制器
 class UserInfosController < ApplicationController
-  include  ApplicationHelper
+
   before_filter :sign?
   layout "user_infos"
 
@@ -33,8 +32,8 @@ class UserInfosController < ApplicationController
   #套餐卡消费记录
   def pcard_records
     @c_pcard_relations = CPcardRelation.find_by_sql(["select p.id, p.name, cpr.content, cpr.ended_at
-        from lantan_db.c_pcard_relations cpr
-        inner join lantan_db.package_cards p on p.id = cpr.package_card_id
+        from lantan_db_all.c_pcard_relations cpr
+        inner join lantan_db_all.package_cards p on p.id = cpr.package_card_id
         where cpr.status = ? and cpr.customer_id = ?",
         CPcardRelation::STATUS[:NORMAL], session[:customer_id]])
     @already_used_count = {}

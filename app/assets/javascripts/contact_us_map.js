@@ -1,5 +1,5 @@
-function initMap(){
-    createMap();//创建地图
+function initMap(juli){
+    createMap(juli);//创建地图
     setMapEvent();//设置地图事件
     addMapControl();//向地图添加控件
     addMarker();//向地图中添加marker
@@ -7,10 +7,12 @@ function initMap(){
 }
 
 //创建地图函数：
-function createMap(){
+function createMap(juli){
     var map = new BMap.Map("contact_us_map");//在百度地图容器中创建一个地图
     var point = new BMap.Point(center_j,center_w);//定义一个中心点坐标
-    map.centerAndZoom(point,10);//设定地图的中心点和坐标并将地图显示在地图容器中
+
+    map.centerAndZoom(point,juli);//设定地图的中心点和坐标并将地图显示在地图容器中
+
     window.map = map;//将map变量存储在全局
 }
 

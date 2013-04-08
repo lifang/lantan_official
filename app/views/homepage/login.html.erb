@@ -4,7 +4,7 @@
     <meta charset="utf-8"/>
     <title>澜泰总部-login</title>
     <%= stylesheet_link_tag "application", "login" %>
-    <%= javascript_include_tag "application", "headquarter-main","login_validate" %>
+    <%= javascript_include_tag "application","login_validate" %>
     <!--[if IE 6]>
     <script src="/assets/DD_belatedPNG_0.0.8a-min.js"></script>
     <script>
@@ -16,7 +16,7 @@
     <div class="box">
       <a href="/"><div class="logo">杭州澜泰科技有限公司</div></a>
       <div class="login_bg">
-        <div class="login_box">
+        <div class="login_box">        
           <%= form_tag "/homepage/login_create",:onsubmit => "return login_validate()" do %>
           <input type="hidden" name="last_url" id="last_url" value="<%= params[:last_url] %>"/>
             <h1>用户登录</h1>
@@ -32,7 +32,14 @@
               <button type="submit">登录</button>
             </div>
           <% end %>
-          <div class="login_a"><a href="/regist">注册</a></div>
+          <div class="login_a">
+            <a href="/regist">注册新用户</a>
+          </div>
+             <% if flash[:notice] %>
+          <div class="login_alert">
+          <%= flash[:notice] %>
+          </div>
+          <% end %>
         </div>
       </div>
     </div>
@@ -41,5 +48,6 @@
       <div><img src="/assets/foot_logo.png"/></div>
       <p>Copyright © 2013 杭州澜泰 版权所有</p>
     </div>
+
   </body>
 </html>
