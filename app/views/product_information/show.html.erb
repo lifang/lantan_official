@@ -1,6 +1,6 @@
 <div class="r_menu">
   <ul>
-    <li><a class="hover">产品信息</a></li>
+    <li><a class="hover"><% if @product.is_service %>服务信息<% else %>产品信息<% end %></a></li>
   </ul>
 </div>
 <div class="clear"></div>
