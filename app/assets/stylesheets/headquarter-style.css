@@ -225,7 +225,7 @@ img { border: none;}
 
 .c_text { width: 520px; float: left; line-height: 24px;}
 .c_text ul { padding: 5px;}
-.c_text ul li { width: 157px; float: left; height: 40px; line-height: 40px;}
+.c_text ul li { padding: 0 10px; float: left; height: 40px; line-height: 40px;}
 .c_text ul li input { margin-right: 10px;}
 .c_btn { margin-top: 30px;}
 
