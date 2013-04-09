@@ -43,15 +43,14 @@ class UserInfosController < ApplicationController
         single_car_content = {}
         service_infos.each do |s|
           content_arr = s.split("-")
-          single_car_content[content_arr[0].to_i] = [content_arr[1], content_arr[2].to_i]
+          single_car_content[content_arr[0].to_i] = [content_arr[1], content_arr[2].to_i] if content_arr.length == 3
         end
-        @already_used_count[r.id] = single_car_content
+        @already_used_count[r.id] = single_car_content unless single_car_content.empty?
       end
-
       @pcard_prod_relations = PcardProdRelation.find(:all, :conditions => ["package_card_id in (?)", @c_pcard_relations])
       @pcard_prod_relations.each do |ppr|
-        used_count = ppr.product_num - @already_used_count[ppr.package_card_id][ppr.product_id][1] if @already_used_count[ppr.package_card_id][ppr.product_id]
-        @already_used_count[ppr.package_card_id][ppr.product_id][1] = used_count ? used_count : 0
+        used_count = ppr.product_num - @already_used_count[ppr.package_card_id][ppr.product_id][1] if !@already_used_count.empty? and @already_used_count[ppr.package_card_id][ppr.product_id]
+        @already_used_count[ppr.package_card_id][ppr.product_id][1] = used_count ? used_count : 0 unless @already_used_count.empty?
       end
     end
   end
