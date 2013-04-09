@@ -26,6 +26,14 @@
        <%= form_for "customer", :url => "/homepage/regist_create",
          :html => {:onsubmit => "return regist_validate()"} do %>
         <div class="re_list">
+          <label>用户名：<span class="red">*</span></label>
+          <%= text_field_tag "username" %>
+        </div>
+        <div class="re_list">
+          <label>密码：<span class="red">*</span></label>
+          <%= password_field_tag "password" %>
+        </div>
+        <div class="re_list">
           <label>姓名：<span class="red">*</span></label>
           <%= text_field_tag "name" %>
         </div>
