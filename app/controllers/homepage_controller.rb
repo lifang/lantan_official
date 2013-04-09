@@ -12,8 +12,11 @@ class HomepageController < ApplicationController  #总部控制器
   def regist_create 
     if Customer.find_by_name_and_mobilephone(params[:name].strip, params[:mobilephone].strip).nil?
       Customer.transaction do 
-        customer = Customer.create(:name => params[:name].strip,:mobilephone =>  params[:mobilephone].strip,
-          :address => params[:address].strip, :status => Customer::STATUS[:NOMAL], :types => Customer::TYPES[:NORMAL])
+        customer = Customer.new(:name => params[:name].strip,:mobilephone =>  params[:mobilephone].strip,
+          :address => params[:address].strip, :status => Customer::STATUS[:NOMAL], 
+          :types => Customer::TYPES[:NORMAL], :username => params[:username], :password => params[:password])
+        customer.encrypt_password
+        customer.save
         car_num = CarNum.create(:num => params[:car_num].strip)
         CustomerNumRelation.create(:customer_id => customer.id, :car_num_id => car_num.id)
         session[:customer_id] = customer.id
@@ -25,14 +28,23 @@ class HomepageController < ApplicationController  #总部控制器
   end
   
   def login_create
-    customer = Customer.find_by_name_and_mobilephone(params[:name].strip, params[:mobilephone].strip)
-    if customer.nil?
+    customer = Customer.find_by_username(params[:user_name])
+    if customer.nil? or !customer.has_password?(params[:user_password])
       flash[:notice] = "用户名或密码错误，请重新登录!"
       redirect_to "/login"
     else
       session[:customer_id] = customer.id
       redirect_to params[:last_url].nil?  ? "/homepage" : params[:last_url]
     end
+
+#    customer = Customer.find_by_name_and_mobilephone(params[:name].strip, params[:mobilephone].strip)
+#    if customer.nil?
+#      flash[:notice] = "用户名或密码错误，请重新登录!"
+#      redirect_to "/login"
+#    else
+#      session[:customer_id] = customer.id
+#      redirect_to params[:last_url].nil?  ? "/homepage" : params[:last_url]
+#    end
   end
   
   def logout
