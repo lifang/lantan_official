@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130701051427) do
+ActiveRecord::Schema.define(:version => 20130701051430) do
 
   create_table "c_pcard_relations", :force => true do |t|
     t.integer  "customer_id"
@@ -226,7 +226,7 @@ ActiveRecord::Schema.define(:version => 20130701051427) do
   create_table "news", :force => true do |t|
     t.string   "title"
     t.text     "content"
-    t.boolean  "status"
+    t.integer  "status"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -374,6 +374,7 @@ ActiveRecord::Schema.define(:version => 20130701051427) do
     t.integer  "role_id"
     t.integer  "num"
     t.datetime "created_at"
+    t.string   "model_name"
   end
 
   add_index "role_model_relations", ["created_at"], :name => "index_role_model_relations_on_created_at"
@@ -410,6 +411,8 @@ ActiveRecord::Schema.define(:version => 20130701051427) do
     t.datetime "updated_at"
     t.string   "description"
     t.string   "code"
+    t.boolean  "is_subsidy"
+    t.string   "sub_content"
   end
 
   add_index "sales", ["created_at"], :name => "index_sales_on_created_at"
