@@ -50,7 +50,7 @@ button { font-family:"微软雅黑"; cursor: pointer; border: none;}
 .foot p { text-align: center; line-height: 32px; color:#c3c3c3;}
 
 /*register注册*/
-.register_bg { width: 1000px; padding: 10px 0; height: 370px;}
+.register_bg { width: 1000px; padding: 10px 0;}
 .register_bg ul { height: 37px; width: 1000px; display: block; margin-bottom: 30px;}
 .re_one { background: url(../assets/re_title.png) no-repeat 0 0;}
 .re_two { background: url(../assets/re_title.png) no-repeat 0 bottom;}

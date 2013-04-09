@@ -37,20 +37,22 @@ class UserInfosController < ApplicationController
         where cpr.status = ? and cpr.customer_id = ?",
         CPcardRelation::STATUS[:NORMAL], session[:customer_id]])
     @already_used_count = {}
-    @c_pcard_relations.each do |r|
-      service_infos = r.content.split(",")
-      single_car_content = {}
-      service_infos.each do |s|
-        content_arr = s.split("-")
-        single_car_content[content_arr[0].to_i] = [content_arr[1], content_arr[2].to_i]
+    unless @c_pcard_relations.blank?
+      @c_pcard_relations.each do |r|
+        service_infos = r.content.split(",")
+        single_car_content = {}
+        service_infos.each do |s|
+          content_arr = s.split("-")
+          single_car_content[content_arr[0].to_i] = [content_arr[1], content_arr[2].to_i]
+        end
+        @already_used_count[r.id] = single_car_content
       end
-      @already_used_count[r.id] = single_car_content
-    end
 
-    @pcard_prod_relations = PcardProdRelation.find(:all, :conditions => ["package_card_id in (?)", @c_pcard_relations])
-    @pcard_prod_relations.each do |ppr|
-      used_count = ppr.product_num - @already_used_count[ppr.package_card_id][ppr.product_id][1] if @already_used_count[ppr.package_card_id][ppr.product_id]
-      @already_used_count[ppr.package_card_id][ppr.product_id][1] = used_count ? used_count : 0
+      @pcard_prod_relations = PcardProdRelation.find(:all, :conditions => ["package_card_id in (?)", @c_pcard_relations])
+      @pcard_prod_relations.each do |ppr|
+        used_count = ppr.product_num - @already_used_count[ppr.package_card_id][ppr.product_id][1] if @already_used_count[ppr.package_card_id][ppr.product_id]
+        @already_used_count[ppr.package_card_id][ppr.product_id][1] = used_count ? used_count : 0
+      end
     end
   end
 

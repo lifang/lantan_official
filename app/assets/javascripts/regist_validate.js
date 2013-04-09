@@ -1,6 +1,14 @@
 function regist_validate(){
-    if ($.trim($("#name").val()) == ""){
+    if ($.trim($("#username").val()) == ""){
         tishi_alert("用户名不能为空！")
+        return false;
+    }
+    if ($.trim($("#password").val()) == ""){
+        tishi_alert("密码不能为空！")
+        return false;
+    }
+    if ($.trim($("#name").val()) == ""){
+        tishi_alert("姓名不能为空！")
         return false;
     }
     if($.trim($("#car_num").val()) == ""){
