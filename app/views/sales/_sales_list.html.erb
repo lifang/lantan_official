@@ -9,6 +9,6 @@
         <%= Sale::DISC_TIME_NAME[sale.disc_time_types] %>
       <% end %>
     </p>
-    <p><%= sale.description %>...&nbsp;&nbsp;<%=link_to "详情>>","/stores/#{@store.id}/sales/#{sale.id}" %></p>
+    <p><%= sale.description.html_safe if sale.description %>...&nbsp;&nbsp;<%=link_to "详情>>","/stores/#{@store.id}/sales/#{sale.id}" %></p>
   </div>
 <% end %>
