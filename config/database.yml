@@ -16,17 +16,17 @@ development:
   pool: 5
   username: root
   password: comdo2012
-  host: localhost
+  host: 192.168.0.250
 
 storedb:
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  database: lantan_db_all
+  database: lantan_db
   pool: 5
   username: root
   password: comdo2012
-  host: 192.168.0.250
+  host: localhost
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".

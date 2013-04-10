@@ -10,11 +10,10 @@ module Constant
   SELLER_EMAIL="yesen@yahoo.cn"
 
   #上传图片的比例
-  PIC_SIZE = [50,100,148,300,700,245,120]
+  PIC_SIZE = [50,100,148,300,700,246,154]
 
   #发短信url
   MESSAGE_URL = "http://mt.yeion.com"
   USERNAME = "XCRJ"
   PASSWORD = "123456"
- 
 end

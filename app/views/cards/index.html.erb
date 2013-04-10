@@ -28,7 +28,7 @@
           <div class="clear"></div>
           <div class="c_btn"><a href="javascript:void(0)" class="btn_two">下一步</a></div>
         </div>
-        <% if @sv_cards  %>
+        <% unless @sv_cards.empty? %>
         <div class="card card_three" style="display:none;opacity:0;">
           <div class="c_three">储值卡面额</div>
           <div class="c_text">
@@ -59,7 +59,7 @@
           <div class="c_btn"><a href="javascript:void(0)" class="btn_three">完成</a></div>
         </div>
         <% else %>
-        <div>暂无储值卡/打折卡销售。</div>
+        <div class="card card_three" style="display:none;opacity:0;">暂无储值卡/打折卡销售。</div>
         <% end %>
       </div>
     </div>

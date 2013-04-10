@@ -11,7 +11,6 @@
       <select id="is_billing" name="is_billing">
         <option value="0" <%= @is_billing == "0" || @is_billing.nil? ? 'selected="selected"' : "" %>>未开出</option>
         <option value="1" <%= @is_billing == "1" ? 'selected="selected"' : "" %>>已开出</option>
-        <option value="2" <%= @is_billing == "2" ? 'selected="selected"' : "" %>>已寄出</option>
       </select>
     </div>
     <div><button type="submit" class="search_btn">查询</button></div>

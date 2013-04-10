@@ -51,7 +51,7 @@ function tishi_alert(message){
     $(".tab_alert").css('left',(doc_width-layer_width)/2);
     $(".tab_alert").css('display','block');
     jQuery('.tab_alert').fadeTo("slow",1);
-    $(".tab_alert .close").click(function(){
+    $(".tab_alert .x").click(function(){
         $(".tab_alert").css('display','none');
     })
     setTimeout(function(){

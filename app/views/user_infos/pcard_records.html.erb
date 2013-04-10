@@ -20,7 +20,7 @@
           <td>
             <% @already_used_count[cpr.id].values.each do |v| %>
               <%= v[0] %>：<%= v[1] %>次&nbsp;&nbsp;
-            <% end %>
+            <% end unless @already_used_count.empty? %>
           </td>
           <td>
             <% cpr.content.split(",").each do |c| %>

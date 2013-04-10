@@ -31,7 +31,28 @@
                 <td><input name="telephone" type="text" id="telephone"
                            value="<%= current_customer.mobilephone if current_customer %>" /></td>
                 <td align="right">预约时间：</td>
-                <td><input name="res_time" type="text" id="datepicker" readonly/></td>
+                <td>
+                  <input name="res_day" type="text" id="datepicker" readonly/>
+                  <select name="res_hour">
+                    <option value="08">08时</option>
+                    <option value="09">09时</option>
+                    <option value="10">10时</option>
+                    <option value="11">11时</option>
+                    <option value="12">12时</option>
+                    <option value="13">13时</option>
+                    <option value="14">14时</option>
+                    <option value="15">15时</option>
+                    <option value="16">16时</option>
+                    <option value="17">17时</option>
+                    <option value="18">18时</option>
+                  </select>
+                  <select name="res_mins">
+                    <option value="00">00分</option>
+                    <option value="15">15分</option>
+                    <option value="30">30分</option>
+                    <option value="45">45分</option>
+                  </select>
+                </td>
               </tr>
               <tr>
                 <td colspan="4">

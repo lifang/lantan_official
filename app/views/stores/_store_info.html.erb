@@ -8,29 +8,28 @@
     <li>联 系 人： <%= @store.contact %></li>
     <li>电子邮件： <%= @store.email %></li>
   </ul>
-  <div id="map">
-    <script type="text/javascript">
-      var position="<%= @store.position  %>";
-      var position_j_w= position.toString().split(',');
-      var center_j=position_j_w[0];
-      var center_w=position_j_w[1];
-      //标注点数组
-      var markerArr = [{
-          title:"<%= @store.name %>",
-          content:"<%= @store.address %>",
-          point: center_j+"|"+center_w  ,//"116.419217|39.941715"
-          isOpen:1,
-          icon:{
-            w:21,
-            h:21,
-            l:0,
-            t:0,
-            x:6,
-            lb:5
-          }
+  <div id="map"></div>
+  <script type="text/javascript">
+    var position="<%= @store.position  %>";
+    var position_j_w= position.toString().split(',');
+    var center_j=position_j_w[0];
+    var center_w=position_j_w[1];
+    //标注点数组
+    var markerArr = [{
+        title:"<%= @store.name %>",
+        content:"<%= @store.address %>",
+        point: center_j+"|"+center_w  ,//"116.419217|39.941715"
+        isOpen:1,
+        icon:{
+          w:21,
+          h:21,
+          l:0,
+          t:0,
+          x:6,
+          lb:5
         }
-      ];
-      initMap(15);//创建和初始化地图
-    </script>
-  </div>
+      }
+    ];
+    initMap(15,"map");//创建和初始化地图
+  </script>
 <% end %>
