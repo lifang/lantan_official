@@ -8,7 +8,7 @@
       <% else %>
         <%= Sale::DISC_TIME_NAME[sale.disc_time_types] %>
       <% end %></span>
-    <p><%= sale.description %>...</p>
+    <p><%= sale.description.html_safe if sale.description %>...</p>
     <a href="/official_sale/<%= sale.id %>">详情&gt;&gt;</a>
   </div>
 
