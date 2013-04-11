@@ -6,8 +6,7 @@ function login_validate(){
     else if($.trim($("#user_password").val()) == ""){
         tishi_alert("密码不能为空!");
         return false;
-    }
-    else{
+    }else{
         return true;
     }
 }
