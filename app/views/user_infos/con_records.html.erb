@@ -23,9 +23,9 @@
               <td>数量</td>
               <td>单价（元）</td>
             </tr>
-            <% (OrderProdRelation.includes(:product).where(:order_id => order.id) || []).each do |relation|  %>
+            <% (OrderProdRelation.joins(:product).includes(:product).where(:order_id => order.id) || []).each do |relation|  %>
               <tr>
-                <td><%= relation.product.try(:name) %></td>
+                <td><%= relation.product.name %></td>
                 <td><%= relation.pro_num %></td>
                 <td><%= relation.price %></td>
               </tr>
@@ -34,10 +34,13 @@
         </td>
         <td><%=  order.price%></td>
         <td>
-           <% paytype_key = OrderPayType.find_by_id(order.types).pay_type %>
-            <%=  OrderPayType::PAY_TYPES_NAME[paytype_key]%>
+          <% pay_types = [] %>
+          <% order.order_pay_types.map(&:pay_type).each do |pay_type| %>
+            <%  pay_types << OrderPayType::PAY_TYPES_NAME[pay_type]   %>
+          <% end %>
+           <%= pay_types.join(",") %>
         </td>
-        <td><%= Store.find(order.store_id).name%> </td>
+        <td><%= order.s_store.name%> </td>
         <td><%= order.billing_status %></td>
       </tr>
     <%end%>

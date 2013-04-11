@@ -5,6 +5,7 @@ class Order < ActiveRecord::Base
   has_many :order_prod_relations
   has_many :order_pay_types
   belongs_to :car_num
+  belongs_to :s_store, :foreign_key => 'store_id'
 
   IS_BILLING = {:ONE => 1,:TWO => 2,:THREE => 3}
   STATUS = {:NORMAL => 0, :SERVICING => 1, :WAIT_PAYMENT => 2, :BEEN_PAYMENT => 3, :FINISHED => 4, :DELETED => 5, :INNORMAL => 6}
