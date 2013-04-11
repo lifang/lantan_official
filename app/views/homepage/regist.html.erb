@@ -27,7 +27,7 @@
          :html => {:onsubmit => "return regist_validate()"} do %>
         <div class="re_list">
           <label>用户名：<span class="red">*</span></label>
-          <%= text_field_tag "username" %>
+          <%= text_field_tag "username", (@customer.username unless @customer.nil?) %>
         </div>
         <div class="re_list">
           <label>密码：<span class="red">*</span></label>
@@ -35,19 +35,19 @@
         </div>
         <div class="re_list">
           <label>姓名：<span class="red">*</span></label>
-          <%= text_field_tag "name" %>
+          <%= text_field_tag "name", (@customer.name unless @customer.nil?) %>
         </div>
         <div class="re_list">
           <label>车牌号：<span class="red">*</span></label>
-         <%= text_field_tag "car_num" %>
+         <%= text_field_tag "car_num", @car_num %>
         </div>
         <div class="re_list">
           <label>手机号：<span class="red">*</span></label>
-          <%= text_field_tag "mobilephone" %>
+          <%= text_field_tag "mobilephone", (@customer.mobilephone unless @customer.nil?) %>
         </div>
         <div class="re_list">
           <label>地址：<span class="red">*</span></label>
-          <%= text_field_tag "address" %>
+          <%= text_field_tag "address", (@customer.address unless @customer.nil?) %>
         </div>
       <div class="re_btn">
         <button>同意协议并注册</button>

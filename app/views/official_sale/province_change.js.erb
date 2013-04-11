@@ -1,5 +1,7 @@
 <% if @common.eql?('footer') %>
 $("#city_c_id").html('<%= escape_javascript(render :partial => '/official_sale/cities') %>');
+$("#stores_list_table").html('');
 <% else %>
 $("#city_city_id").html('<%= escape_javascript(render :partial => '/official_sale/cities') %>');
+$("#stores_list").html('');
 <% end %>

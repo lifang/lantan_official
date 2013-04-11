@@ -21,7 +21,7 @@ $(document).ready(function(){
             preload:1,
             lens:1
         });
-    }    
+    }
 });
 
 //jqzoom产品小图点击替换大图效果

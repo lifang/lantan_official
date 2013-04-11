@@ -34,11 +34,8 @@
         </td>
         <td><%=  order.price%></td>
         <td>
-          <% if  OrderPayType.find_by_id(order.types).pay_type == 1%>
-            <%=  OrderPayType::TYPES[:one]%>
-          <%elsif OrderPayType.find_by_id(order.types).pay_type == 2%>
-            <%=  OrderPayType::TYPES[:two]%>
-          <%end%>
+           <% paytype_key = OrderPayType.find_by_id(order.types).pay_type %>
+            <%=  OrderPayType::PAY_TYPES_NAME[paytype_key]%>
         </td>
         <td><%= Store.find(order.store_id).name%> </td>
         <td><%= order.billing_status %></td>
