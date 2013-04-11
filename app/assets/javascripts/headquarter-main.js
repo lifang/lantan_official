@@ -100,7 +100,6 @@ $(function(){
 
 //支付宝支付
 $(".btn_three").click(function(){
-    
     var sv_card =$('input:radio[name="sv_card"]:checked').val();
     if (sv_card == null)
     {

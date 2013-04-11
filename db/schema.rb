@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130701051430) do
+ActiveRecord::Schema.define(:version => 20130701051431) do
 
   create_table "c_pcard_relations", :force => true do |t|
     t.integer  "customer_id"
@@ -49,7 +49,8 @@ ActiveRecord::Schema.define(:version => 20130701051430) do
     t.integer "capital_id"
   end
 
-  add_index "car_brands", ["capital_id"], :name => "index_car_brands_capital_id"
+  add_index "car_brands", ["capital_id"], :name => "index_car_brands_on_capital_id"
+  add_index "car_brands", ["name"], :name => "index_car_brands_on_name"
 
   create_table "car_models", :force => true do |t|
     t.string   "name"
@@ -206,7 +207,8 @@ ActiveRecord::Schema.define(:version => 20130701051430) do
     t.integer  "store_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "remark"
+    t.string   "remark",     :limit => 1000
+    t.integer  "check_num"
   end
 
   add_index "materials", ["name"], :name => "index_materials_on_name"
@@ -317,7 +319,7 @@ ActiveRecord::Schema.define(:version => 20130701051430) do
     t.string   "name"
     t.float    "base_price"
     t.float    "sale_price"
-    t.text     "description"
+    t.string   "description"
     t.integer  "types"
     t.string   "service_code"
     t.boolean  "status"
@@ -331,6 +333,7 @@ ActiveRecord::Schema.define(:version => 20130701051430) do
     t.string   "standard"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.float    "deduct_percent"
   end
 
   add_index "products", ["is_service"], :name => "index_products_on_is_service"
@@ -384,6 +387,8 @@ ActiveRecord::Schema.define(:version => 20130701051430) do
     t.string   "name"
     t.datetime "created_at"
   end
+
+  add_index "roles", ["created_at"], :name => "index_roles_on_created_at"
 
   create_table "sale_prod_relations", :force => true do |t|
     t.integer "sale_id"
@@ -458,6 +463,7 @@ ActiveRecord::Schema.define(:version => 20130701051430) do
     t.datetime "updated_at"
   end
 
+  add_index "staffs", ["created_at"], :name => "index_staffs_on_created_at"
   add_index "staffs", ["level"], :name => "index_staffs_on_level"
   add_index "staffs", ["name"], :name => "index_staffs_on_name"
   add_index "staffs", ["position"], :name => "index_staffs_on_position"

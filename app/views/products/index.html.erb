@@ -23,7 +23,7 @@
         <h1>产品</h1>
         <ul class="product">
           <% @products.each do |p|%>
-            <li><img src= <%= p.img_url.gsub("img#{p.id}", "img#{p.id}_#{Constant::PIC_SIZE[5]}") if p.img_url %>/>
+            <li><img src= <%=Constant::BACK_SERVER_PATH + p.img_url.gsub("img#{p.id}", "img#{p.id}_#{Constant::PIC_SIZE[5]}") if p.img_url %>/>
               <a href="/stores/<%= @store.id %>/products/<%= p.id %>"><%= p.name %></a>
             </li>
           <% end if @products %>

@@ -1,6 +1,7 @@
 #encoding: utf-8
 module Constant
-  SERVER_PATH = "http://bam.gankao.co/"
+  SERVER_PATH = "http://official.gankao.co/"
+  BACK_SERVER_PATH = "http://headoffice.gankao.co/"
   
   #支付宝
   PAGE_WAY="https://www.alipay.com/cooperate/gateway.do"

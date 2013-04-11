@@ -15,8 +15,8 @@ class CardsController < ApplicationController #储值卡
     #支付宝中我们要用到的也写参数
     options ={
       :service=>"create_direct_pay_by_user",
-      :notify_url=>Constant::SERVER_PATH+"/cards/alipay_compete",  #请求地址
-      :subject=>"会员购买#{sv_card.price}产品", #物品名称
+      :notify_url=>Constant::SERVER_PATH+"cards/alipay_compete",  #请求地址
+      :subject=>"会员购买#{sv_card.name}产品", #物品名称
       :total_fee =>params[:total_fee]  #订单总金额
     }
     out_trade_no="#{session[:customer_id]}_#{
@@ -25,8 +25,7 @@ class CardsController < ApplicationController #储值卡
       :_input_charset=>"utf-8", :out_trade_no=>out_trade_no,:payment_type => 1)
     options.merge!(:sign_type => "MD5",
       :sign =>Digest::MD5.hexdigest(options.sort.map{|k,v|"#{k}=#{v}"}.join("&")+Constant::PARTNER_KEY))
-    redirect_to "#{Constant::PAGE_WAY}?#{options.sort.map{|k, v| "
-    #{CGI::escape(k.to_s)}=#{CGI::escape(v.to_s)}"}.join('&')}"
+    redirect_to "#{Constant::PAGE_WAY}?#{options.sort.map{|k, v| "#{CGI::escape(k.to_s)}=#{CGI::escape(v.to_s)}"}.join('&')}"
   end
 
   #充值异步回调
@@ -36,8 +35,7 @@ class CardsController < ApplicationController #储值卡
     c_sv_relations = CSvcRelation.find(:first,
       :conditions => ["customer_id = ? and sv_card_id = ?",trade_nu[0],trade_nu[2]])#获取订单
     if c_sv_relations.nil?#如果订单不存在
-      alipay_notify_url = "#{Constant::NOTIFY_URL}?partner=#{Constant::PARTNER}
-&notify_id=#{params[:notify_id]}"
+      alipay_notify_url = "#{Constant::NOTIFY_URL}?partner=#{Constant::PARTNER}&notify_id=#{params[:notify_id]}"
       response_txt =Net::HTTP.get(URI.parse(alipay_notify_url))
       my_params = Hash.new
       request.parameters.each {|key,value|my_params[key.to_s]=value}

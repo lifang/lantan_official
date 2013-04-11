@@ -26,15 +26,16 @@ LantanOfficial::Application.routes.draw do
   resources :surveys
   resources :homepage do
     collection do
-    get :login, :logout, :regist
-    get :sales_promotion, :sv_cards, :news_centre, :show_sale, :show_new, :contact_us
-    post :regist_create, :login_create, :provincechange, :citychange
+      get :login, :logout, :regist
+      get :sales_promotion, :sv_cards, :news_centre, :show_sale, :show_new, :contact_us
+      post :regist_create, :login_create, :provincechange, :citychange
     end
   end
   resources :news
   resources :cards do
     collection do
-     get :alipay_exercise, :alipay_compete
+      get :alipay_exercise
+      post :alipay_compete
     end
   end
   resources :official_sale do
@@ -104,7 +105,7 @@ LantanOfficial::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-     root :to => 'homepage#index'
+  root :to => 'homepage#index'
 
   # See how all your routes lay out with "rake routes"
 
