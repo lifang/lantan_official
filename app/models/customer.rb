@@ -11,7 +11,8 @@ class Customer < ActiveRecord::Base
   TYPES = {:GOOD => 0, :NORMAL => 1, :STRESS => 2} #1 优质客户  2 一般客户  3 重点客户
 
   attr_accessor :password
-  validates :password, :allow_nil => true, :length=>{:within=>6..20} #:confirmation=>true
+  validates :username, :uniqueness => {:message => "用户名已经存在"}
+  validates :password, :allow_nil => true, :length=>{:within=>6..20, :message => "密码长度必须在6-20位之间"} #:confirmation=>true
 
 
   def has_password?(submitted_password)
