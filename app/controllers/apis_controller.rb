@@ -6,7 +6,8 @@ class ApisController < ApplicationController
         params[:mobilephone].strip])[0]
     status = 0
     send_message = "余额不足，您的储值卡余额为#{record.left_price}元。" if record
-    if record and  record.left_price >= params[:price].to_f
+    
+    if record and  record.left_price >= params[:price].to_f     
       record.verify_code = proof_code(6)
       record.save
       status = 1
@@ -22,7 +23,7 @@ class ApisController < ApplicationController
 
   def use_svcard
     record = CSvcRelation.find_by_sql(["select csr.* from c_svc_relations csr
-      left join lantan_db.customers c on c.id = csr.customer_id where c.mobilephone = ? and csr.verify_code = ?",
+      left join lantan_db_all.customers c on c.id = csr.customer_id where c.mobilephone = ? and csr.verify_code = ?",
         params[:mobilephone].strip, params[:verify_code].strip])[0]
     status = 0
     message = "支付失败。"
