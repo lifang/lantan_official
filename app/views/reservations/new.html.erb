@@ -1,4 +1,4 @@
-<%= javascript_include_tag "My97DatePicker/WdatePicker", "reservate_validate" %>
+<%= javascript_include_tag "reservate_validate" %>
 <div class="main">
   <div class="box">
     <div class="leftAera">
@@ -78,7 +78,7 @@
                       <td>
                         <div class="td_item">
                           <img  alt="lantan" width="120" height="90"
-                                src="<%= Constant::BACK_SERVER_PATH +service.img_url.gsub("img#{service.id}", "img#{service.id}_#{Constant::PIC_SIZE[6]}") if service.img_url %>" />
+                                src="<%=  service.img_url.gsub("img#{service.id}", "img#{service.id}_#{Constant::PIC_SIZE[6]}") if service.img_url %>" />
                           <p><input type="checkbox" name="select_service[]"  value='<%= service.id %>' /><%= service.name %></p>
                         </div>
                       </td>
@@ -101,7 +101,7 @@
                       <td>
                         <div class="td_item">
                           <img  alt="lantan" width="120" height="90"
-                                src="<%=Constant::BACK_SERVER_PATH + service.img_url.gsub("img#{service.id}", "img#{service.id}_#{Constant::PIC_SIZE[6]}") if service.img_url %>" />
+                                src="<%= service.img_url.gsub("img#{service.id}", "img#{service.id}_#{Constant::PIC_SIZE[6]}") if service.img_url %>" />
                           <p><input type="checkbox" name="select_service[]"  value='<%= service.id %>' /><%= service.name %></p>
                         </div>
                       </td>

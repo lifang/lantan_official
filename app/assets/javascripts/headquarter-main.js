@@ -2,7 +2,7 @@
 //nav
 //储值卡
 
-$(".btn_one").click(function(){
+function get_btn_tow() {
     $(".card_one").animate({
         opacity:0
     },600,function(){
@@ -12,9 +12,9 @@ $(".btn_one").click(function(){
             opacity:1
         },600,function(){});
     });
-});
+}
 
-$(".btn_two").click(function(){
+function get_btn_three() {
     $(".card_two").animate({
         opacity:0
     },600,function(){
@@ -24,8 +24,7 @@ $(".btn_two").click(function(){
             opacity:1
         },600,function(){});
     });
-});
-  
+}
   
 $(function(){
     var xxx,re;
