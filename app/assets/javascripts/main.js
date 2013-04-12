@@ -29,12 +29,12 @@ $(function(){
     $('.pic_show li img').click(function(){
         var imgSrc = $(this).attr('src');
         var i = imgSrc.lastIndexOf('.');
-        var jpg = imgSrc.substring(i);
+        var format = imgSrc.substring(i);
         imgSrc = imgSrc.substring(0,i);
-        var imgSrc_big = imgSrc + '_big' + jpg;
-        var imgSrc_show = imgSrc + '_show' + jpg;
-        $('.bigImg img').attr('src',imgSrc_big);
-        $('.bigImg img').attr('jqimg',imgSrc_show);
+        var imgSrc_big = imgSrc.replace("_50","")+format;
+        var imgSrc_show =imgSrc.replace("_50","_300")+format;
+        $('.bigImg img').attr('src',imgSrc_show);
+        $('.bigImg img').attr('jqimg',imgSrc_big);
     })
 })
 

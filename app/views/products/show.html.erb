@@ -18,15 +18,16 @@
         <% end %>
         <div class="pro_show">
           <div class="bigImg jqzoom">
-            <img src="<%=Constant::BACK_SERVER_PATH + @product.img_url.gsub("img#{@product.id}", "img#{@product.id}_#{Constant::PIC_SIZE[3]}") if @product.img_url %>"
-                 jqimg = "<%= @product.img_url %>" />
+            <%if @img_urls[0]%>
+              <img jqimg="<%= @img_urls[0].img_url.nil? ? "" : Constant::BACK_SERVER_PATH + @img_urls[0].img_url  %>"
+                   src="<%= @img_urls[0].img_url.nil? ? "" : Constant::BACK_SERVER_PATH + @img_urls[0].img_url.gsub("img#{@product.id}","img#{@product.id}_300")  %>" />
+                 <% end %>
           </div>
           <div class="pic_show">
             <ul>
-              <li><img src="<%=Constant::BACK_SERVER_PATH + @product.img_url.gsub("img#{@product.id}", "img#{@product.id}_#{Constant::PIC_SIZE[0]}") if @product.img_url %>" alt="lantan" /></li>
-              <% @image_urls.each do |img| %>
-                <li><img src="<%=Constant::BACK_SERVER_PATH + img.img_url.gsub("img#{@product.id}", "img#{@product.id}_#{Constant::PIC_SIZE[0]}") %>" alt="lantan" /></li>
-              <% end unless @image_urls.blank? %>
+              <%@img_urls.each do |img|%>
+                <li><img src="<%=  img.img_url.nil? ? "" : Constant::BACK_SERVER_PATH + img.img_url.gsub("img#{@product.id}","img#{@product.id}_50") %>"    /></li>
+              <% end unless @img_urls.blank?  %>
             </ul>
           </div>
         </div>
