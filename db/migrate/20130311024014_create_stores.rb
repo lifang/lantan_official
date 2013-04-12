@@ -13,7 +13,6 @@ class CreateStores < ActiveRecord::Migration
       t.datetime :opened_at
       t.float :account  #门店账户余额
 
-
       t.timestamps
     end
 
