@@ -13,6 +13,6 @@ class ProductsController < ApplicationController    #产品与服务
   def show    #单个产品显示
     @store = SStore.find_by_id(params[:store_id].to_i)
     @product = SProduct.find_by_id(params[:id].to_i)
-    @image_urls = SImageUrl.find(:all, :conditions => ["product_id = ?", @product.id])
+    @img_urls = SImageUrl.find(:all, :conditions => ["product_id = ?", @product.id])
   end
 end

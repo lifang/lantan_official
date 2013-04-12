@@ -1,3 +1,3 @@
 <% ( store_lasted_sales || []).each do |sale| %>
-  <a href="/stores/<%= @store.id %>/sales/<%= sale.id %>"><img src="<%=Constant::BACK_SERVER_PATH + sale.img_url %>" alt="lantan" width="230" height="100" /></a>
+  <a href="/stores/<%= @store.id %>/sales/<%= sale.id %>"><img src="<%=sale.img_url %>" alt="lantan" width="230" height="100" /></a>
 <% end %>

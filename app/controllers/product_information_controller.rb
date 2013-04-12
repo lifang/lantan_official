@@ -7,6 +7,6 @@ class ProductInformationController < ApplicationController  #产品信息
 
   def show
     @product = Product.find(params[:id])
-    @image_urls = @product.image_urls
+    @img_urls = @product.image_urls
   end
 end
