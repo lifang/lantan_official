@@ -48,8 +48,10 @@
 </table>
 
 <div class="pageTurn">
+  <% if !@orders.blank? %>
   <%= will_paginate  @orders, :class => "pagination", :previous_label => "&lt;上一页",
     :next_label=> "下一页&gt;"%>
+  <% end %>
 </div>
 
 <%= javascript_include_tag "application","user_info_main" %>
