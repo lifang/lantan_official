@@ -98,7 +98,7 @@ $(function(){
 
 
 //支付宝支付
-$(".btn_three").click(function(){
+ function get_btn_over() {
     var sv_card =$('input:radio[name="sv_card"]:checked').val();
     if (sv_card == null)
     {
@@ -108,7 +108,7 @@ $(".btn_three").click(function(){
         $(".btn_three").attr("href", "/cards/alipay_exercise?sv_card=" +
             $('input:radio[name="sv_card"]:checked').attr("id") + "&total_fee=" + a);
     }
-});
+ }
 
 
 
