@@ -23,11 +23,12 @@
               <td>数量</td>
               <td>单价（元）</td>
             </tr>
-            <% (OrderProdRelation.joins(:product).includes(:product).where(:order_id => order.id) || []).each do |relation|  %>
+            <% (order.s_products || []).each do |s_product|  %>
+            <% opr = order.order_prod_relations.where(:product_id => s_product.id).first %>
               <tr>
-                <td><%= relation.product.name %></td>
-                <td><%= relation.pro_num %></td>
-                <td><%= relation.price %></td>
+                <td><%= s_product.name %></td>
+                <td><%= opr.pro_num %></td>
+                <td><%= opr.price %></td>
               </tr>
             <%end%>
           </table>
