@@ -64,16 +64,18 @@ class UserInfosController < ApplicationController
 
     when 0, 1, 2
       @orders = Order.find(:all,
-        :joins => [:s_store, :order_pay_types],
-        :conditions => [" subdate(now(),interval #{time+1} month) < orders.created_at and orders.status = ?
-and is_billing = ? and customer_id = ?", Order::STATUS[:FINISHED],is_billing, session[:customer_id]],
+        :joins => [:s_store, :order_pay_types, :s_products],
+        :include =>[:order_pay_types, :order_prod_relations],
+        :conditions => [" subdate(now(),interval #{time+1} month) < orders.created_at and orders.status in (?)
+     and is_billing = ? and customer_id = ?", [Order::STATUS[:BEEN_PAYMENT], Order::STATUS[:FINISHED]],is_billing, session[:customer_id]],
         :order => "orders.created_at desc").paginate(
         :page => params[:page],
         :per_page =>Order::USER_INFO_PER_PAGE)
     else
       @orders = Order.find(:all,
-        :joins => [:s_store, :order_pay_types],
-        :conditions => [" orders.status = ? and is_billing = ? and customer_id = ?",Order::STATUS[:FINISHED],is_billing,session[:customer_id]],:order => "orders.created_at desc").paginate(
+        :joins => [:s_store, :order_pay_types, :s_products],
+        :include =>[:order_pay_types, :order_prod_relations],
+        :conditions => [" orders.status in (?) and is_billing = ? and customer_id = ?",[Order::STATUS[:BEEN_PAYMENT], Order::STATUS[:FINISHED]],is_billing,session[:customer_id]],:order => "orders.created_at desc").paginate(
         :page => params[:page],
         :per_page =>Order::USER_INFO_PER_PAGE)
     end

@@ -3,6 +3,7 @@ class Order < ActiveRecord::Base
   set_table_name :"lantan_db_all.orders"
   set_primary_key "id"
   has_many :order_prod_relations
+  has_many :s_products, :through => :order_prod_relations, :foreign_key => 'product_id'
   has_many :order_pay_types
   belongs_to :car_num
   belongs_to :s_store, :foreign_key => 'store_id'
