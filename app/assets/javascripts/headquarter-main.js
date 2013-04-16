@@ -109,9 +109,3 @@ $(function(){
             $('input:radio[name="sv_card"]:checked').attr("id") + "&total_fee=" + a);
     }
  }
-
-
-
-
-  
-  
