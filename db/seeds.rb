@@ -1,3 +1,4 @@
+#encoding: utf-8
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
 #
@@ -28,7 +29,8 @@ store = Store.create(:id => 1, :name => "杭州西湖路门店", :address => "�
 staff = Staff.create(:name => "系统管理员", :type_of_w => 0, :position => 0, :sex => 1, :level => 2, :birthday => Time.now,
   :status => Staff::STATUS[:normal], :store_id => store.id, :username => "admin", :password => "123456")
 staff.encrypt_password
-StaffRoleRelation.create(:role_id => 1, :satff_id => staff.id)
+staff.save
+StaffRoleRelation.create(:role_id => 1, :staff_id => staff.id)
 
 #系统管理员菜单权限
 RoleMenuRelation.create(:role_id => 1, :menu_id => 1)
