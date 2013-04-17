@@ -21,7 +21,7 @@ Role.create(:id => 3,:name => "仓库管理员")
 Role.create(:id => 4,:name => "客服")
 
 #门店
-store = Store.create(:id => 1, :name => "杭州西湖路门店", :address => "杭州西湖路", :phone => "",
+Store.create(:id => 1, :name => "杭州西湖路门店", :address => "杭州西湖路", :phone => "",
   :contact => "", :email => "", :position => "", :introduction => "", :img_url => "",
   :opened_at => Time.now, :account => 0, :created_at => Time.now, :updated_at => Time.now,
   :city_id => 1, :status => 1)
