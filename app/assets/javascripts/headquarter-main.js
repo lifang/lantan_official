@@ -98,14 +98,15 @@ $(function(){
 
 
 //支付宝支付
- function get_btn_over() {
+function get_btn_over() {
     var sv_card =$('input:radio[name="sv_card"]:checked').val();
     if (sv_card == null)
     {
         tishi_alert("请选择你要购买的储值卡！");
     }else{
-        var a =$('input:radio[name="sv_card"]:checked').val()
+        var a =$('input:radio[name="sv_card"]:checked').val();
+        $(".btn_three").attr("target","_blank");
         $(".btn_three").attr("href", "/cards/alipay_exercise?sv_card=" +
             $('input:radio[name="sv_card"]:checked').attr("id") + "&total_fee=" + a);
     }
- }
+}
