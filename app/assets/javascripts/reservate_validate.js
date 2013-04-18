@@ -23,7 +23,7 @@ $(document).ready(function(){
         }
     })
 
-    $( "#datepicker" ).datepicker({ //预约时间插件
+    $("#datepicker").datepicker({ //预约时间插件
          inline: true
     });
 });
