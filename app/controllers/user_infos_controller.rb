@@ -64,7 +64,7 @@ class UserInfosController < ApplicationController
     when 1, 2
       time_sql = "subdate(now(),interval #{time+1} month) < orders.created_at and "
     when 0
-      time_sql = "orders.created_at between concat(date_format(now(),'%Y-%m'),'-01') and now()"
+      time_sql = "orders.created_at between concat(date_format(now(),'%Y-%m'),'-01') and now() and"
     else
       time_sql = ""
     end
