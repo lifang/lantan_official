@@ -48,9 +48,9 @@ class UserInfosController < ApplicationController
         @already_used_count[r.id] = single_car_content unless single_car_content.empty?
       end
       @pcard_prod_relations = PcardProdRelation.find(:all, :conditions => ["package_card_id in (?)", @c_pcard_relations])
-      @pcard_prod_relations.each do |ppr|
+      @pcard_prod_relations.each do |ppr|  
         used_count = ppr.product_num - @already_used_count[ppr.package_card_id][ppr.product_id][1] if !@already_used_count.empty? and @already_used_count[ppr.package_card_id][ppr.product_id]
-        @already_used_count[ppr.package_card_id][ppr.product_id][1] = used_count ? used_count : 0 unless @already_used_count.empty?
+        @already_used_count[ppr.package_card_id][ppr.product_id][1] = used_count ? used_count : 0 unless @already_used_count.empty? and @already_used_count[ppr.package_card_id][ppr.product_id]
       end
     end
   end
@@ -61,22 +61,19 @@ class UserInfosController < ApplicationController
   def search_records(time,is_billing) #查找相应记录
     time = time.to_i
     case time
-
-    when 0, 1, 2
-      @orders = Order.find(:all,
+    when 1, 2
+      time_sql = "subdate(now(),interval #{time+1} month) < orders.created_at and "
+    when 0
+      time_sql = "orders.created_at between concat(date_format(now(),'%Y-%m'),'-01') and now() and"
+    else
+      time_sql = ""
+    end
+    @orders = Order.find(:all,
         :joins => [:s_store, :order_pay_types],
-        :conditions => [" subdate(now(),interval #{time+1} month) < orders.created_at and orders.status = ?
-and is_billing = ? and customer_id = ?", Order::STATUS[:FINISHED],is_billing, session[:customer_id]],
+        :conditions => ["#{time_sql} orders.status in (?) and is_billing = ? and customer_id = ?",[Order::STATUS[:BEEN_PAYMENT], Order::STATUS[:FINISHED]],is_billing,session[:customer_id]],
         :order => "orders.created_at desc").paginate(
         :page => params[:page],
         :per_page =>Order::USER_INFO_PER_PAGE)
-    else
-      @orders = Order.find(:all,
-        :joins => [:s_store, :order_pay_types],
-        :conditions => [" orders.status = ? and is_billing = ? and customer_id = ?",Order::STATUS[:FINISHED],is_billing,session[:customer_id]],:order => "orders.created_at desc").paginate(
-        :page => params[:page],
-        :per_page =>Order::USER_INFO_PER_PAGE)
-    end
     return @orders
   end
 
