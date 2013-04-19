@@ -36,7 +36,7 @@
             <ul>
               <% (@sv_cards[SvCard::CARD_TYPE[:NOTDISCOUNT]]).each do |sv_card| %>
                 <li>
-                  <input id="<%= sv_card.id %>" type="radio" name="sv_card" value="<%= sv_card.price %>"/>
+                  <input id="<%= sv_card.id %>" type="radio" name="sv_card" value="<%= "#{SvCard::CARD_TYPE[:NOTDISCOUNT]}_#{sv_card.price}" %>"/>
                   <%= sv_card.name %>（<%= sv_card.price %>元）
                 </li>
               <% end if @sv_cards[SvCard::CARD_TYPE[:NOTDISCOUNT]] %>              
@@ -50,14 +50,14 @@
             <ul>
               <% (@sv_cards[SvCard::CARD_TYPE[:DISCOUNT]]).each do |sv_card| %>
                 <li>
-                  <input id="<%= sv_card.id %>" type="radio" name="sv_card" value="<%= sv_card.price %>"/>
+                  <input id="<%= sv_card.id %>" type="radio" name="sv_card" value="<%= "#{SvCard::CARD_TYPE[:DISCOUNT]}_#{sv_card.price}" %>"/>
                   <%= sv_card.name %>（<%= sv_card.price %>元）
                 </li>
               <% end if @sv_cards[SvCard::CARD_TYPE[:DISCOUNT]] %>
             </ul>
           </div>
           <div class="clear"></div>
-          <div class="c_btn"><a href="javascript:void(0)" class="btn_three" onclick="javascript:get_btn_over()">完成</a></div>
+          <div class="c_btn"><a href="javascript:void(0)" class="btn_three" onclick="javascript:get_btn_over('<%= cookies[:user_id] %>')">完成</a></div>
         </div>
         <% else %>
         <div class="card card_three" style="display:none;opacity:0;">暂无储值卡/打折卡销售。</div>

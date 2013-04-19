@@ -5,9 +5,7 @@ class CreateSvcardProdRelations < ActiveRecord::Migration
       t.integer :product_id
       t.integer :product_num
       t.integer :sv_card_id
-
     end
-
     add_index :svcard_prod_relations, :product_id
     add_index :svcard_prod_relations, :sv_card_id
   end

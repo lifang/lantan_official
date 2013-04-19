@@ -35,7 +35,7 @@ LantanOfficial::Application.routes.draw do
   resources :cards do
     collection do
       get :alipay_exercise
-      post :alipay_compete
+      post :alipay_compete,:check_card
     end
   end
   resources :official_sale do
