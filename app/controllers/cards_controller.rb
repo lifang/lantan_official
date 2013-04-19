@@ -24,7 +24,6 @@ class CardsController < ApplicationController #储值卡
     options.merge!(:seller_email => Constant::SELLER_EMAIL, :partner => Constant::PARTNER,
       :_input_charset=>"utf-8", :out_trade_no=>out_trade_no,:payment_type => 1)
     options.merge!(:sign_type => "MD5", :sign =>Digest::MD5.hexdigest(options.sort.map{|k,v|"#{k}=#{v}"}.join("&")+Constant::PARTNER_KEY))
-    p "#{Constant::PAGE_WAY}?#{options.sort.map{|k, v| "#{CGI::escape(k.to_s)}=#{CGI::escape(v.to_s)}"}.join('&')}"
     redirect_to "#{Constant::PAGE_WAY}?#{options.sort.map{|k, v| "#{CGI::escape(k.to_s)}=#{CGI::escape(v.to_s)}"}.join('&')}"
   end
 
@@ -47,7 +46,7 @@ class CardsController < ApplicationController #储值卡
           Constant::PARTNER_KEY)
       dir = "#{Rails.root}/public/logs"#
       Dir.mkdir(dir)  unless File.directory?(dir)
-      file = File.open(dir+"/#{Time.now.strftime("%Y%m")}.log"+".log","a+")
+      file = File.open(dir+"/#{Time.now.strftime("%Y%m")}.log","a+")
       file.write "#{Time.now.strftime('%Y%m%d %H:%M:%S')}   #{request.parameters.to_s}\r\n"
       file.close
       if mysign==params[:sign] and response_txt=="true"
@@ -59,9 +58,17 @@ class CardsController < ApplicationController #储值卡
               price =SvcardProdRelation.find(trade_nu[2].to_i)
               CSvcRelation.transaction do
                 if c_sv_relations.nil?#如果没有记录
-                  CSvcRelation.create(:customer_id=>trade_nu[0].to_i,:sv_card_id=>trade_nu[2].to_i,
-                    :created_at=>Time.now,:total_price =>price.base_price+price.more_price,:over_price =>price.base_price+price.more_price)
+                  c_relation = CSvcRelation.create(:customer_id=>trade_nu[0].to_i,:sv_card_id=>trade_nu[2].to_i,
+                    :created_at=>Time.now,:total_price =>price.base_price+price.more_price,:left_price =>price.base_price+price.more_price)
+                  SvcardUseRecord.create(:c_sv_relation_id=>c_relation.id,:types=>SvcardUseRecord::TYPES[:IN],:use_price=>0,
+                    :left_price=>price.base_price+price.more_price,:content=>"#{price.base_price+price.more_price}产品付费")
+                else
+                  c_sv_relations.update_attributes(:total_price =>c_sv_relations.total_price+price.base_price+price.more_price,
+                    :over_price =>c_sv_relations.left_price+price.base_price+price.more_price)
+                  SvcardUseRecord.create(:c_sv_relation_id=>c_sv_relations.id,:types=>SvcardUseRecord::TYPES[:IN],:use_price=>0,
+                    :left_price=>c_sv_relations.left_price+price.base_price+price.more_price,:content=>"#{price.base_price+price.more_price}产品付费")
                 end
+
               end
               render :text=>"success"
             rescue
