@@ -1,11 +1,14 @@
 #encoding: utf-8
 class CardsController < ApplicationController #储值卡
   layout "headquarter"
-  before_filter :sign?, :only => "alipay_exercise"
+  before_filter :sign?, :only => ["check_card","alipay_exercise"]
   @@m = Mutex.new
  
   #储值卡页面
   def index
+    pars = {:customer_id=>1,:sv_card_id=>2,:created_at=>Time.now}
+    pars.merge!(:total_price =>10,:left_price =>12)
+    CSvcRelation.create!(pars)
     sv_cards = SvCard.all
     @sv_cards = sv_cards.group_by{ |c| c.types }
   end
@@ -18,10 +21,9 @@ class CardsController < ApplicationController #储值卡
       :service=>"create_direct_pay_by_user",
       :notify_url=>Constant::SERVER_PATH+"cards/alipay_compete",  #请求地址
       :subject=>"会员购买#{sv_card.name}产品", #物品名称
-      :total_fee =>params[:total_fee],  #订单总金额
-      :fee_type =>params[:fee_type]
+      :total_fee =>params[:total_fee] #订单总金额
     }
-    out_trade_no="#{session[:customer_id]}_#{Time.now.strftime("%Y%m%d%H%M%S")}#{Time.now.to_i}_#{params[:sv_card]}"#订单号
+    out_trade_no="#{session[:customer_id]}_#{Time.now.strftime("%Y%m%d%H%M%S")}#{Time.now.to_i}_#{params[:sv_card]}_#{params[:fee_type]}"#订单号
     options.merge!(:seller_email => Constant::SELLER_EMAIL, :partner => Constant::PARTNER,
       :_input_charset=>"utf-8", :out_trade_no=>out_trade_no,:payment_type => 1)
     options.merge!(:sign_type => "MD5", :sign =>Digest::MD5.hexdigest(options.sort.map{|k,v|"#{k}=#{v}"}.join("&")+Constant::PARTNER_KEY))
@@ -29,8 +31,8 @@ class CardsController < ApplicationController #储值卡
   end
 
   def check_card
-    c_svc = CSvcRelation.find_by_sql("select * from c_svc_relations r inner join sv_cards s on s.id=r.sv_card_id where s.type=#{SvCard::CARD_TYPE[:NOTDISCOUNT]}
-      and s.customer_id=#{params[:user_id]} and s.sv_card_id=#{params[:card_id]}")[0]
+    c_svc = CSvcRelation.find_by_sql("select * from c_svc_relations r inner join sv_cards s on s.id=r.sv_card_id where s.types=#{SvCard::CARD_TYPE[:NOTDISCOUNT]}
+      and r.customer_id=#{params[:user_id]} and r.sv_card_id=#{params[:card_id]}")[0]
     respond_to do |format|
       format.json {
         render :json=>{:card_id=>params[:card_id],:total_fee=>params[:total_fee],:fee_type=>params[:fee_type],:checked=>c_svc.nil?}
@@ -41,7 +43,7 @@ class CardsController < ApplicationController #储值卡
 
   #充值异步回调
   def alipay_compete
-    out_trade_no=params[:out_trade_no] #订单号
+    out_trade_no =params[:out_trade_no] #订单号
     trade_nu =out_trade_no.to_s.split("_")
     c_sv_relations = CSvcRelation.find(:first,
       :conditions => ["customer_id = ? and sv_card_id = ?",trade_nu[0],trade_nu[2]])#获取订单
@@ -53,8 +55,7 @@ class CardsController < ApplicationController #储值卡
     my_params.delete("controller")
     my_params.delete("sign")
     my_params.delete("sign_type")
-    mysign = Digest::MD5.hexdigest(my_params.sort.map{|k,v|"#{k}=#{v}"}.join("&")+
-        Constant::PARTNER_KEY)
+    mysign = Digest::MD5.hexdigest(my_params.sort.map{|k,v|"#{k}=#{v}"}.join("&")+ Constant::PARTNER_KEY)
     dir = "#{Rails.root}/public/logs"
     Dir.mkdir(dir)  unless File.directory?(dir)
     file = File.open(dir+"/#{Time.now.strftime("%Y%m")}.log","a+")
@@ -65,27 +66,29 @@ class CardsController < ApplicationController #储值卡
       elsif params[:trade_status]=="TRADE_FINISHED" or params[:trade_status]=="TRADE_SUCCESS"
         @@m.synchronize {
           #          begin
-          price =SvcardProdRelation.find(trade_nu[2].to_i)
+          price =SvcardProdRelation.find_by_sv_card_id(trade_nu[2].to_i)
+          file.write "#{out_trade_no}\r\n"
           CSvcRelation.transaction do
-            if c_sv_relations.nil?#如果没有记录
-              pars = {:customer_id=>trade_nu[0].to_i,:sv_card_id=>trade_nu[2].to_i,:created_at=>Time.now}
-              if params[:fee_type].to_i == SvCard::CARD_TYPE[:DISCOUNT]
-                pars.merge(:total_price =>price.base_price+price.more_price,:left_price =>price.base_price+price.more_price)
-                c_relation = CSvcRelation.create(pars)
-                SvcardUseRecord.create(:c_sv_relation_id=>c_relation.id,:types=>SvcardUseRecord::TYPES[:IN],:use_price=>0,
+            pars = {:customer_id=>trade_nu[0].to_i,:sv_card_id=>trade_nu[2].to_i,:created_at=>Time.now}
+            if trade_nu[3].to_i == SvCard::CARD_TYPE[:NOTDISCOUNT]
+              file.write "#{trade_nu[3].to_i}\r\n"
+              if c_sv_relations.nil?#如果没有记录
+                c_sv_relations = CSvcRelation.create!( pars.merge!(:total_price =>price.base_price+price.more_price,:left_price =>price.base_price+price.more_price))
+                file.write "#{c_sv_relations.attributes}\r\n"
+                file.write "#{c_sv_relations.id}\r\n"
+                SvcardUseRecord.create(:c_sv_relation_id=>c_sv_relations.id,:types=>SvcardUseRecord::TYPES[:IN],:use_price=>0,
                   :left_price=>price.base_price+price.more_price,:content=>"#{price.base_price+price.more_price}产品付费")
               else
-                c_relation = CSvcRelation.create(pars)
-              end
-            else
-              if params[:fee_type].to_i == SvCard::CARD_TYPE[:DISCOUNT]
-                c_sv_relations.update_attributes(:total_price =>c_sv_relations.total_price+price.base_price+price.more_price,
-                  :left_price =>c_sv_relations.left_price+price.base_price+price.more_price)
+                file.write "#{c_sv_relations.attributes}\r\n"
+                file.write "#{c_sv_relations.id}\r\n"
                 SvcardUseRecord.create(:c_sv_relation_id=>c_sv_relations.id,:types=>SvcardUseRecord::TYPES[:IN],:use_price=>0,
                   :left_price=>c_sv_relations.left_price+price.base_price+price.more_price,:content=>"#{price.base_price+price.more_price}产品付费")
+                c_sv_relations.update_attributes(:total_price =>c_sv_relations.total_price+price.base_price+price.more_price,
+                  :left_price =>c_sv_relations.left_price+price.base_price+price.more_price)  #位置不可挑换，不能更新后在创建记录
               end
+            else
+              CSvcRelation.create(pars.merge(:total_price=>params[:total_fee]))
             end
-
           end
           render :text=>"success"
           #          rescue

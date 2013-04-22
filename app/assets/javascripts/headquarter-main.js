@@ -106,33 +106,38 @@ function get_btn_over(user_id) {
     }else{
         var a =$('input:radio[name="sv_card"]:checked').val().split("_");
         var card_id = $('input:radio[name="sv_card"]:checked').attr("id");
-        $.ajax({
-            async:true,
-            type : 'POST',
-            dataType : 'JSON',
-            url : "/cards/check_card",
-            data : {
-                user_id : user_id,
-                card_id : card_id,
-                fee_type :　a[0],
-                total_fee : a[1]
-            },
-            success : function (data){
-                if (data.checked){
-                    $(".btn_three").attr("target","_blank");
-                    $(".btn_three").attr("href", "/cards/alipay_exercise?sv_card=" + data.card_id +"&total_fee="+
-                        data.total_fee+"&fee_type="+data.fee_type);
-                }else{
-                    if (confirm("您已购买该打折卡，确认是否再次购买？")){
+        if (parseInt($("#f_types"))==parseInt(a[0])){
+            $.ajax({
+                async:true,
+                type : 'POST',
+                dataType : 'JSON',
+                url : "/cards/check_card",
+                data : {
+                    user_id : user_id,
+                    card_id : card_id,
+                    fee_type :　a[0],
+                    total_fee : a[1]
+                },
+                success : function (data){
+                    if (data.checked){
                         $(".btn_three").attr("target","_blank");
-                        $(".btn_three").attr("href", "/cards/alipay_exercise?sv_card=" + data.card_id + "&total_fee="+
+                        $(".btn_three").attr("href", "/cards/alipay_exercise?sv_card=" + data.card_id +"&total_fee="+
                             data.total_fee+"&fee_type="+data.fee_type);
+                        $(".btn_three").trigger("onclick");
+                    }else{
+                        if (confirm("您已购买该打折卡，确认是否再次购买？")){
+                            $(".btn_three").attr("target","_blank");
+                            $(".btn_three").attr("href", "/cards/alipay_exercise?sv_card=" + data.card_id + "&total_fee="+
+                                data.total_fee+"&fee_type="+data.fee_type);
+                            $(".btn_three").trigger("onclick");
+                        }
                     }
+
                 }
-              
-            }
-        });
-        
-       
+            });
+        }else{
+            $(".btn_three").attr("target","_blank");
+            $(".btn_three").attr("href", "/cards/alipay_exercise?sv_card=" +card_id+ "&total_fee=" + a[1]+"&fee_type="+a[0]);
+        }
     }
 }
