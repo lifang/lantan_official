@@ -13,7 +13,7 @@ class Customer < ActiveRecord::Base
   attr_accessor :password
   validates :username, :uniqueness => {:message => "用户名已经存在"}
   validates :password, :allow_nil => true, :length=>{:within=>6..20, :message => "密码长度必须在6-20位之间"} #:confirmation=>true
-
+  validates :mobilephone, :uniqueness => {:message => "手机号码已经存在"}
 
   def has_password?(submitted_password)
 		encrypted_password == encrypt(submitted_password)
