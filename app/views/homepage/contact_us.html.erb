@@ -21,14 +21,14 @@
   </ul>
 </div><%= javascript_include_tag "contact_us_map" %>
 <script type="text/javascript">
-  var position="<%= @store.position  %>";
+  var position="<%= @store.position if @store %>";
   var position_j_w= position.toString().split(',');
   var center_j=position_j_w[0];
   var center_w=position_j_w[1];
   //标注点数组
   var markerArr = [{
-      title:"<%= @store.name %>",
-      content:"<%= @store.address %>",
+      title:"<%= @store.name if @store %>",
+      content:"<%= @store.address if @store %>",
       point: center_j+"|"+center_w  ,//"116.419217|39.941715"
       isOpen:1,
       icon:{
