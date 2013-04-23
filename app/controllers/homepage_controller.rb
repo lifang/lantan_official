@@ -17,8 +17,14 @@ class HomepageController < ApplicationController  #总部控制器
       @customer.encrypt_password
       @car_num = params[:car_num].strip
       if @customer.save
-        car_num = CarNum.create(:num => params[:car_num].strip)
-        CustomerNumRelation.create(:customer_id => @customer.id, :car_num_id => car_num.id)
+        car_num_record = CarNum.find_by_num(params[:car_num].strip)
+        if car_num_record.nil?
+          car_num = CarNum.create(:num => params[:car_num].strip)
+          CustomerNumRelation.create(:customer_id => @customer.id, :car_num_id => car_num.id)
+        else
+          customer_num_relation = car_num_record.customer_num_relation
+          customer_num_relation.update_attribute(:customer_id, @customer.id) if customer_num_relation
+        end
         session[:customer_id] = @customer.id
       else
         flash.now[:notice] = @customer.errors.messages.map{|key,value|value.join(",")}.join("<br/>").html_safe()

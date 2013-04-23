@@ -65,35 +65,29 @@ class CardsController < ApplicationController #储值卡
         render :text=>"success"
       elsif params[:trade_status]=="TRADE_FINISHED" or params[:trade_status]=="TRADE_SUCCESS"
         @@m.synchronize {
-          #          begin
-          price =SvcardProdRelation.find_by_sv_card_id(trade_nu[2].to_i)
-          file.write "#{out_trade_no}\r\n"
-          CSvcRelation.transaction do
-            pars = {:customer_id=>trade_nu[0].to_i,:sv_card_id=>trade_nu[2].to_i,:created_at=>Time.now}
-            if trade_nu[3].to_i == SvCard::CARD_TYPE[:NOTDISCOUNT]
-              file.write "#{trade_nu[3].to_i}\r\n"
-              if c_sv_relations.nil?#如果没有记录
-                c_sv_relations = CSvcRelation.create!( pars.merge!(:total_price =>price.base_price+price.more_price,:left_price =>price.base_price+price.more_price))
-                file.write "#{c_sv_relations.attributes}\r\n"
-                file.write "#{c_sv_relations.id}\r\n"
-                SvcardUseRecord.create(:c_sv_relation_id=>c_sv_relations.id,:types=>SvcardUseRecord::TYPES[:IN],:use_price=>0,
-                  :left_price=>price.base_price+price.more_price,:content=>"#{price.base_price+price.more_price}产品付费")
+          begin
+            price =SvcardProdRelation.find_by_sv_card_id(trade_nu[2].to_i)
+            CSvcRelation.transaction do
+              pars = {:customer_id=>trade_nu[0].to_i,:sv_card_id=>trade_nu[2].to_i,:created_at=>Time.now}
+              if trade_nu[3].to_i == SvCard::CARD_TYPE[:NOTDISCOUNT]
+                if c_sv_relations.nil?#如果没有记录
+                  c_sv_relations = CSvcRelation.create!( pars.merge!(:total_price =>price.base_price+price.more_price,:left_price =>price.base_price+price.more_price))
+                  SvcardUseRecord.create(:c_svc_relation_id =>c_sv_relations.id,:types=>SvcardUseRecord::TYPES[:IN],:use_price=>0,
+                    :left_price=>price.base_price+price.more_price,:content=>"#{price.base_price+price.more_price}产品付费")
+                else
+                  SvcardUseRecord.create(:c_svc_relation_id=>c_sv_relations.id,:types=>SvcardUseRecord::TYPES[:IN],:use_price=>0,
+                    :left_price=>c_sv_relations.left_price+price.base_price+price.more_price,:content=>"#{price.base_price+price.more_price}产品付费")
+                  c_sv_relations.update_attributes(:total_price =>c_sv_relations.total_price+price.base_price+price.more_price,
+                    :left_price =>c_sv_relations.left_price+price.base_price+price.more_price)  #位置不可挑换，不能更新后在创建记录
+                end
               else
-                file.write "#{c_sv_relations.attributes}\r\n"
-                file.write "#{c_sv_relations.id}\r\n"
-                SvcardUseRecord.create(:c_sv_relation_id=>c_sv_relations.id,:types=>SvcardUseRecord::TYPES[:IN],:use_price=>0,
-                  :left_price=>c_sv_relations.left_price+price.base_price+price.more_price,:content=>"#{price.base_price+price.more_price}产品付费")
-                c_sv_relations.update_attributes(:total_price =>c_sv_relations.total_price+price.base_price+price.more_price,
-                  :left_price =>c_sv_relations.left_price+price.base_price+price.more_price)  #位置不可挑换，不能更新后在创建记录
+                CSvcRelation.create(pars.merge(:total_price=>params[:total_fee]))
               end
-            else
-              CSvcRelation.create(pars.merge(:total_price=>params[:total_fee]))
             end
+            render :text=>"success"
+          rescue
+            render :text=>"success"
           end
-          render :text=>"success"
-          #          rescue
-          #            render :text=>"success"
-          #          end
         }
       else
         render :text=>"fail" + "<br>"
