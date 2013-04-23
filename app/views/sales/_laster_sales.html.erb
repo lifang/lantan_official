@@ -1,3 +1,9 @@
 <% ( store_lasted_sales || []).each do |sale| %>
-  <a href="/stores/<%= @store.id %>/sales/<%= sale.id %>"><img src="<%=sale.img_url.nil? ? "" : sale.img_url.gsub("img#{sale.id}", "img#{sale.id}_#{Constant::SALE_PICSIZE[1]}") %>" alt="lantan"/></a>
+  <a href="/stores/<%= @store.id %>/sales/<%= sale.id %>">
+    <% if !sale.img_url.nil? %>
+      <img src="<%= sale.img_url.gsub("img#{sale.id}", "img#{sale.id}_#{Constant::SALE_PICSIZE[1]}") %>" alt="lantan"/>
+    <% else %>
+      <h5><%= sale.name %></h5>
+    <% end %>
+  </a>
 <% end %>
