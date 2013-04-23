@@ -12,8 +12,9 @@
         <%= render("sales_list") %>
       </div>
       <div class="pageTurn">
-        <%= will_paginate  @sales, :class => "pagination", :previous_label => "&lt;上一页",
-          :next_label=> "下一页&gt;"%>
+        <% if !@sales.blank? %>
+        <%= will_paginate  @sales, :previous_label => "上一页",:next_label=> "下一页", :class => "pageTurn" %>
+        <% end %>
       </div>
     </div>
   </div>
