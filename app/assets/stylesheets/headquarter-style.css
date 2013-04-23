@@ -7,7 +7,7 @@ img { border: none;}
 .box { width: 1000px; margin: 0 auto;}
 .clear { clear: both;}
 .red { color: #F00;}
-.btn {
+.btn_one,.btn_two,.btn_three,.btn {
 	width: 80px;
 	height: 30px;
 	display: block;
@@ -44,7 +44,7 @@ img { border: none;}
 .nav_bg { 
     width: 90px; 
 	height: 40px; 
-	background: url(../assets/nav_bg.png) no-repeat; 
+	background: url(../assets/nav_bg.png) no-repeat;
 	position:absolute; 
 	top: 0; 
 	z-index:90;
@@ -95,7 +95,7 @@ img { border: none;}
 .news h1, .inquire h1, .serviceItems h1 { 
     font-size: 20px; 
 	color:#d51518; 
-	background: url(../assets/d.png) no-repeat left center; 
+	background: url(../assets/d.png) no-repeat left center;
 	padding-left: 20px;
 	margin-bottom: 10px;
 }
@@ -126,7 +126,6 @@ img { border: none;}
 	padding: 10px; 
 	float: left;
 }
-
 /*foot*/
 .foot { border-top: 1px #cccccc solid; padding: 15px 0; font-size: 12px;}
 .foot div { width: 150px; height: 70px; margin: 0 auto;}
@@ -144,7 +143,7 @@ img { border: none;}
 	font-size: 16px; 
 	color: #D51518; 
 	border-bottom: 1px #930205 solid;
-	background: url(../assets/d.png) no-repeat left center; 
+	background: url(../assets/d.png) no-repeat left center;
 }
 .leftNews h1 a, .leftInquire h1 a { float: right; margin-right: 10px; font-weight: 100; font-size: 12px; color: #999;}
 .leftNews ul { padding: 10px 0;}
@@ -174,7 +173,7 @@ img { border: none;}
 .r_menu li a.hover { 
     width: 153px; 
 	height: 47px; 
-	background: url(../assets/rMenu_bg.jpg) no-repeat; 
+	background: url(../assets/rMenu_bg.jpg) no-repeat;
 	font-size: 18px; 
 	color: #D51518; 
 	text-align: left; 
@@ -209,7 +208,7 @@ img { border: none;}
 
 
 /*促销活动*/
-.salesPro { height: 150px; padding-bottom: 15px; margin-bottom: 15px; border-bottom: 1px #CCCCCC dashed; overflow: hidden;}
+.salesPro { padding-bottom: 15px; margin-bottom: 15px; border-bottom: 1px #CCCCCC dashed; overflow: hidden;}
 .salesPro img { float: left; margin: 0 10px 0 0;}
 .salesPro h1 { font-size:18px; color: #333;}
 .salesPro span { font-size: 12px; color: #999; font-style: italic;}
@@ -217,7 +216,7 @@ img { border: none;}
 
 
 /*储值卡*/
-.card { padding-bottom: 15px; margin-bottom: 15px;}
+.card,.card_one,.card_two { padding-bottom: 15px; margin-bottom: 15px;}
 .c_one, .c_two, .c_three, .c_four { width: 98px; height: 98px; text-indent: -999px; overflow: hidden; float: left; margin-right: 15px;}
 .c_one {background: url(../assets/card_bg.png) no-repeat;}
 .c_two {background: url(../assets/card_bg.png) no-repeat 0 -99px;}
@@ -237,17 +236,28 @@ img { border: none;}
 .news_list li a { color: #333; width: 500px; display: block; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
 .news_list li a:hover { color: #930205; text-decoration: underline; background: #e6e6e6;}
 
-
-
+/*产品详细*/
+.pro_show { width: 350px; float: left; padding-left: 10px;}
+.bigImg { width: 300px; height: 250px; border: 1px #f3f3f3 solid; padding: 2px;}
+.pic_show { overflow: hidden; width: 306px;}
+.pic_show li {
+    width: 50px;
+    height: 50px;
+    float: left;
+    border: 1px #f3f3f3 solid;
+    margin: 5px 0 0 7px;
+    cursor: pointer;
+}
 
 /*page翻页----*/
 .pageTurn { padding: 10px 0; text-align: center; font-size: 13px; color: #333;}
 .pageTurn a { padding: 5px 12px; margin: 0px 2px; color: #333; background: #dbdbdb;}
 .pageTurn a:hover, .pageTurn a:active { color: #930205;}
 
-.pageTurn a.current { padding: 5px 12px; font-weight: bold; color: #fff; background: #930205;}
-.pageTurn a.disabled {display: none;}
-
+.pageTurn em { padding: 5px 12px; font-weight: bold; color: #fff; background: #930205;}
+.pageTurn span.disabled {display: none;}
+/*联系我们----*/
+#contact_us_map{width:700px;height: 350px;margin-bottom: 20px;border: 1px solid #ddd;}
 
 /*tab_alert*/
 .tab_alert { 
@@ -261,65 +271,14 @@ img { border: none;}
 .tab_alert_box { background: #FFF; overflow: hidden; border-radius: 0.6em;}
 .tabox_h { line-height: 24px; margin: 20px auto; text-align: center; color:#930205;}
 .x, .close {
-	display:block; 
-	text-indent: -999px; 
-	overflow: hidden; 
-	position: absolute; 
-	top: 5px; 
+	display:block;
+	text-indent: -999px;
+	overflow: hidden;
+	position: absolute;
+	top: 5px;
 	right: 5px;
 	cursor: pointer;
 	z-index: 110;
 }
-.x { width: 10px; height: 10px; background: url(../assets/x.png) no-repeat 0 0; top: 14px; right: 14px; }
-.close { width: 13px; height: 13px; background: url(../assets/close.jpg) no-repeat ; }
-
-/*产品介绍--------*/
-.pro_box { padding: 10px; line-height: 24px;}
-.pro_name { margin: 5px 0;}
-.pro_name em { color: #999; font-size: 12px;}
-.pro_box h1 { line-height: 40px; font-size: 20px;}
-.pro_box h2 { line-height: 36px; font-size: 18px;} 
-.pro_show { width: 320px; margin: 10px; float: left;}
-
-.bigImg { width: 300px; height: 250px; border: 1px #f3f3f3 solid; padding: 2px;}
-.pic_show { overflow: hidden; width: 306px;}
-.pic_show li { 
-    width: 50px; 
-	height: 50px; 
-	float: left; 
-	border: 1px #f3f3f3 solid; 
-	margin: 5px 0 0 7px;
-	cursor: pointer;
-	font-size: 0;
-}
-.pro_text { border-top: 1px #930205 dashed; margin-top: 20px; line-height: 24px; padding: 20px;}
-.pro_text p { text-indent: 24px;}
-
-/*tab_popup*/
-.tab_popup { width: 650px; padding: 10px; background: url(../assets/black.png) repeat; border-radius: 0.6em;}
-.popup_box { background: #FFF;}
-.popup_box h1 { 
-    height: 32px; 
-	line-height: 32px; 
-	background: #930205; 
-	color: #FFF; 
-	font-size: 16px; 
-	padding-left: 20px; 
-	position: relative;
-}
-.popup_body { overflow: hidden; padding: 10px; position: relative;}
-.popup_body_area { overflow: hidden;}
-
-/*协议*/
-.agreement_text { width: 600px; height: 400px; margin: 0 auto; overflow-y: auto; font-size: 12px;}
-.agreement_text p { margin-top: 10px;}
-.agreement_btn { width: 160px; margin: 20px auto;}
-.agreement_btn input { 
-    width: 160px; 
-	height: 32px; 
-	line-height: 32px; 
-	background: #930205; 
-	cursor: pointer; 
-	color: #FFF;
-	border: none;
-}
+.x { width: 10px; height: 10px; background: url(/assets/x.png) no-repeat 0 0; top: 14px; right: 14px; }
+.close { width: 13px; height: 13px; background: url(/assets/close.jpg) no-repeat ; }
