@@ -19,7 +19,7 @@ module Constant
   PASSWORD = "123456"
 
   #上传图片的比例
-  SALE_PICSIZE =[300,230,663]
+  SALE_PICSIZE =[300,230,663,50]
   P_PICSIZE = [50,154,246,300,356]
   C_PICSIZE = [148,154]
 end
