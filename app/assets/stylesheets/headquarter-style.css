@@ -246,7 +246,7 @@ img { border: none;}
 .pageTurn a:hover, .pageTurn a:active { color: #930205;}
 
 .pageTurn a.current, .pageTurn em { padding: 5px 12px; font-weight: bold; color: #fff; background: #930205;}
-.pageTurn a.disabled {display: none;}
+.pageTurn a.disabled, .pageTurn span.disabled {display: none;}
 
 
 /*tab_alert*/
