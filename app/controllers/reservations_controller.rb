@@ -3,7 +3,7 @@ class ReservationsController < ApplicationController  #预约
   layout 'frontdoor'
   def new
     @store = SStore.find(params[:store_id].to_i)
-    @services = SProduct.find_all_by_is_service_and_store_id(Product::IS_SERVICE[:YES],params[:store_id].to_i)
+    @services = SProduct.find_all_by_is_service_and_store_id_and_status(Product::IS_SERVICE[:YES],params[:store_id].to_i,Product::STATUS[:NOMAL])
   end
   
   def create

@@ -59,7 +59,7 @@
               </tr>
             </table>
 
-            <table width="100%" border="0" cellspacing="1" cellpadding="0" id="selectservice" style="display:none">
+            <table width="100%" border="0" cellspacing="1" cellpadding="0" id="selectservice" style="display:none;">
               <tr>
                 <td colspan="4" class="table_head">
                   选择服务项目
@@ -77,8 +77,7 @@
                     <% @services.first(3).each do |service|%>
                       <td>
                         <div class="td_item">
-                          <img  alt="lantan" width="120" height="90"
-                                src="<%=  service.img_url.gsub("img#{service.id}", "img#{service.id}_#{Constant::PIC_SIZE[6]}") if service.img_url %>" />
+                          <img alt="lantan" src="<%=  service.img_url.nil? ? "" : service.img_url.gsub("img#{service.id}", "img#{service.id}_#{Constant::PIC_SIZE[6]}") %>" />
                           <p><input type="checkbox" name="select_service[]"  value='<%= service.id %>' /><%= service.name %></p>
                         </div>
                       </td>
@@ -101,7 +100,7 @@
                       <td>
                         <div class="td_item">
                           <img  alt="lantan" width="120" height="90"
-                                src="<%= service.img_url.gsub("img#{service.id}", "img#{service.id}_#{Constant::PIC_SIZE[6]}") if service.img_url %>" />
+                                src="<%= service.img_url.nil? ? "" : service.img_url.gsub("img#{service.id}", "img#{service.id}_#{Constant::PIC_SIZE[6]}") %>" />
                           <p><input type="checkbox" name="select_service[]"  value='<%= service.id %>' /><%= service.name %></p>
                         </div>
                       </td>
