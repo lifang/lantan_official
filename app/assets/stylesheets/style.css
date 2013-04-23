@@ -188,9 +188,9 @@ img { border: none;}
 }
 .arrange td input[type="text"] { height: 24px; line-height: 24px; float: left;}
 .arrange td select { margin-left: 10px;height: 26px; line-height: 26px;float: left;}
-.arrange td .td_item { width: 120px; margin: 0 auto;}
+.arrange td .td_item { width: 150px; margin: 0 auto;}
 .arrange td .td_item p { height: 24px; line-height: 24px; padding: 0 10px;}
-.arrange td .td_item p input { float: left; margin-right: 10px;}
+.arrange td .td_item p input { float: left; margin-right: 10px; line-height: 24px; height: 24px;}
 .arrange td li {height: 24px; line-height: 24px; padding: 0 10px; float: left; margin: 5px 10px;}
 .arrange td li input { float: left; margin-right: 10px;}
 
