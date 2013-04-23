@@ -1,6 +1,6 @@
 <h1><%= @sale.name %> </h1>
 <em><%= @sale.created_at.strftime('%Y-%m-%d') if @sale.created_at %></em>
-<img src="<%=@sale.img_url %>" alt="lantan" width="663" height="228" />
+<img src="<%=@sale.img_url.gsub("img#{@sale.id}","img#{@sale.id}_#{Constant::SALE_PICSIZE[2]}") %>" alt="lantan"/>
 <h2>活动介绍</h2>
 <p><%= @sale.introduction.html_safe if @sale.introduction %></p>
 <h2>

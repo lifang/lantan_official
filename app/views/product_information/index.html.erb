@@ -7,7 +7,7 @@
 <div class="text_box">
   <% (@products || []).each do |product| %>
     <div class="salesPro">
-      <img src="<%= product.img_url %>" alt="lantan" width="300" height="150" />
+      <img src="<%= product.img_url.gsub("img#{product.id}","img#{product.id}_#{Constant::P_PICSIZE[3]}") %>" alt="lantan" />
       <h1><%= product.name %></h1>
       <span><%= product.created_at.strftime('%Y-%m-%d') if product.created_at %></span>
       <p><%= product.description.html_safe if product.description %></p>

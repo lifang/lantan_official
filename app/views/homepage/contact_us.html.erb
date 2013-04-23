@@ -10,10 +10,10 @@
   <div id="contact_us_map"></div>
   <ul>
     <li>公司名称：杭州澜泰科技有限公司</li>
-    <li>公司地址：<%= @store.address %></li>
-    <li>公司电话：<%= @store.phone %></li>
-    <li>联 系 人： <%= @store.contact %></li>
-    <li>电子邮件： <%= @store.email %></li>
+    <li>公司地址：<%= @store.address if @store %></li>
+    <li>公司电话：<%= @store.phone if @store %></li>
+    <li>联 系 人： <%= @store.contact if @store %></li>
+    <li>电子邮件： <%= @store.email if @store %></li>
   </ul>
 </div><%= javascript_include_tag "contact_us_map" %>
 <script type="text/javascript">
