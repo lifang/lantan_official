@@ -204,7 +204,7 @@ img { border: none;}
 .pageTurn a { border: 2px #f0f0f0 solid; padding: 2px 5px; margin: 0px 2px; color: #CB5C5C;}
 .pageTurn a:hover, .pageTurn a:active { border: 2px #930205 solid; color: #ff5a00;}
 
-.pageTurn a.current {border: 2px #930205 solid; padding: 2px 5px; font-weight: bold; color: #fff; background: #930205;}
+.pageTurn a.current, .pageTurn em {border: 2px #930205 solid; padding: 2px 5px; font-weight: bold; color: #fff; background: #930205;}
 .pageTurn a.disabled {display: none;}
 
 /*tab_alert*/
