@@ -60,7 +60,7 @@ img { border: none;}
 .text h1 { font-size: 24px; line-height: 36px;}
 .text dl {}
 .text dt { font-size: 16px; font-weight:bolder; line-height: 32px; margin-top: 10px;}
-.text dd, .text dd a { font-size: 12px; font-style:italic; line-height: 24px;}
+.text dd, .text dd a { font-size: 12px; font-style:italic; line-height: 24px; color: #FFF;}
 
 
 .foot { 
@@ -168,6 +168,7 @@ img { border: none;}
 .salesDetail { padding: 10px;}
 .salesDetail h1 { font-size: 24px; color:#930205; line-height: 36px;}
 .salesDetail span { font-size: 12px; color: #999; font-style: italic;}
+.salesDetail span.red { color: #F00;}
 .salesDetail h2 { font-size: 16px; color: #333; line-height: 32px; margin: 10px 0;}
 .salesDetail img { margin: 10px;}
 .salesDetail p { text-indent: 24px; line-height: 24px;}
@@ -185,7 +186,7 @@ img { border: none;}
 	padding: 0 0 0 20px;
 	color: #930205;
 }
-.arrange td input { height: 24px; line-height: 24px; float: left;}
+.arrange td input[type="text"] { height: 24px; line-height: 24px; float: left;}
 .arrange td select { margin-left: 10px;height: 26px; line-height: 26px;float: left;}
 .arrange td .td_item { width: 120px; margin: 0 auto;}
 .arrange td .td_item p { height: 24px; line-height: 24px; padding: 0 10px;}
