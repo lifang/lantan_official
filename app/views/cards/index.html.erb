@@ -58,7 +58,7 @@
           </div>
           <div class="clear"></div>
           <input type="hidden" value="<%= SvCard::CARD_TYPE[:NOTDISCOUNT] %>" id="f_types" />
-          <div class="c_btn"><a href="javascript:void(0)" class="btn" onclick="javascript:get_btn_over('<%= session[:customer_id] %>')">完成</a></div>
+          <div class="c_btn"><a href="javascript:void(0)" class="btn btn_three" onclick="javascript:get_btn_over('<%= session[:customer_id] %>')">完成</a></div>
         </div>
         <% else %>
         <div class="card card_three" style="display:none;opacity:0;">暂无储值卡/打折卡销售。</div>

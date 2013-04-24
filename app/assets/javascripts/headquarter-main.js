@@ -99,6 +99,10 @@ $(function(){
 
 //支付宝支付
 function get_btn_over(user_id) {
+    if (user_id==""){
+        tishi_alert("请登录");
+        return false;
+    }
     var sv_card =$('input:radio[name="sv_card"]:checked').val();
     if (sv_card == null)
     {
