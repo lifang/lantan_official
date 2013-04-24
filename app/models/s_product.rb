@@ -9,5 +9,5 @@ class SProduct < ActiveRecord::Base
     4 => "汽车电子产品", 5 => "其它产品"} #产品类别
   SERVICE_TYPES = {6 => "清洗服务", 7 => "维修服务", 8 => "钣喷服务", 9 => "美容服务", 10 => "安装服务", 11 => "其它服务"} #服务类别
 
-  STATUS = {:NOMAL => 0, :DELETED => 1} #0 正常  1 删除
+  STATUS = {:NOMAL => 1, :DELETED => 0} #1 正常  0 删除
 end
