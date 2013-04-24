@@ -14,7 +14,7 @@ module ApplicationHelper
   def store_lasted_sales
     SSale.find(:all,
       :conditions => ["store_id = ? and status = ? ", params[:store_id].to_i,
-        SSale::STATUS[:RELEASE]], :order=>"screated_at desc", :limit => SSale::LASTER_SALES)
+        SSale::STATUS[:RELEASE]], :order=>"created_at desc", :limit => SSale::LASTER_SALES)
   end
 
   def sign?
