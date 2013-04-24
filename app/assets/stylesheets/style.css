@@ -89,7 +89,8 @@ img { border: none;}
 .leftAera li { line-height: 28px;}
 
 .leftSales { padding: 10px 0;}
-.leftSales a { font-size: 0; margin-bottom: 10px; display: block;}
+.leftSales a { margin-bottom: 10px; color: #333;}
+.leftSales a:hover { text-decoration:underline; color: #930205;}
 
 .rightAera { width: 740px; float: left; overflow: hidden;}
 

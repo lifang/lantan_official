@@ -77,7 +77,8 @@
                     <% @services.first(3).each do |service|%>
                       <td>
                         <div class="td_item">
-                          <img alt="lantan" src="<%=  service.img_url.nil? ? "" : service.img_url.gsub("img#{service.id}", "img#{service.id}_#{Constant::PIC_SIZE[6]}") %>" />
+                          <img  alt="lantan" width="120" height="90"
+                                src="<%=  service.img_url.gsub("img#{service.id}", "img#{service.id}_#{Constant::P_PICSIZE[1]}") if service.img_url %>" />
                           <p><input type="checkbox" name="select_service[]"  value='<%= service.id %>' /><%= service.name %></p>
                         </div>
                       </td>
@@ -100,7 +101,7 @@
                       <td>
                         <div class="td_item">
                           <img  alt="lantan" width="120" height="90"
-                                src="<%= service.img_url.nil? ? "" : service.img_url.gsub("img#{service.id}", "img#{service.id}_#{Constant::PIC_SIZE[6]}") %>" />
+                                src="<%= service.img_url.gsub("img#{service.id}", "img#{service.id}_#{Constant::P_PICSIZE[1]}") if service.img_url %>" />
                           <p><input type="checkbox" name="select_service[]"  value='<%= service.id %>' /><%= service.name %></p>
                         </div>
                       </td>
