@@ -10,7 +10,14 @@ class ReservationsController < ApplicationController  #预约
     @store = SStore.find(params[:store_id].to_i)
     Reservation.transaction do
       @car_num = CarNum.find_or_create_by_num(params[:car_number].strip)
-      @customer = Customer.find_or_create_by_name_and_mobilephone(params[:customer_name].strip, params[:telephone].strip)
+      @customer = Customer.find_by_id(session[:customer_id])
+      if @customer.nil?
+        @customer = Customer.new(:name => params[:customer_name].strip,:mobilephone => params[:telephone].strip,
+                              :username => params[:customer_name].strip, :password => params[:telephone].strip)
+        @customer.encrypt_password
+        @customer.save
+      end
+      #@customer = Customer.find_or_create_by_name_and_mobilephone(params[:customer_name].strip, params[:telephone].strip)
       @customer_num_relation = CustomerNumRelation.find_or_create_by_customer_id_and_car_num_id(@customer.id, @car_num.id)
       res_time = params[:res_day].strip+" "+params[:res_hour]+":"+params[:res_mins]+":00"
       @reservation = Reservation.create(:car_num_id => @car_num.id,
