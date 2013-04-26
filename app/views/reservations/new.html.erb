@@ -7,7 +7,7 @@
     </div>
     <div class="rightAera">
       <div class="rightTitle">
-        <h1>在线预约</h1>
+        <h1>在线预约1</h1>
         <div class="arrange">
           <span class="red arrange_info">*您登记信息之后，我们客服将于您联系，请您将您的手机畅通，若联系不上，您的预约信息将作废。</span>
           <%=  form_for "reservations", :url => "/stores/#{@store.id}/reservations", :method => "post",
@@ -19,14 +19,14 @@
               <tr>
                 <td align="right">姓名：</td>
                 <td><input name="customer_name" type="text" id="customer_name"
-                           value="<%= current_customer.name if current_customer %>" /></td>
+                           value="<%= current_customer.name if current_customer %>" <%= current_customer ? "readonly" : "" %>/></td>
                 <td align="right">车牌号：</td>
                 <td><input name="car_number" type="text" id="car_number"/></td>
               </tr>
               <tr>
                 <td align="right">电话：</td>
                 <td><input name="telephone" type="text" id="telephone"
-                           value="<%= current_customer.mobilephone if current_customer %>" /></td>
+                           value="<%= current_customer.mobilephone if current_customer %>" <%= current_customer ? "readonly" : "" %>/></td>
                 <td align="right">预约时间：</td>
                 <td>
                   <input name="res_day" type="text" id="datepicker" readonly/>

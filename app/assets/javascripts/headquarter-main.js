@@ -99,11 +99,16 @@ $(function(){
 
 //支付宝支付
 function get_btn_over(user_id) {
+    if (user_id==""){
+        tishi_alert("请登录");
+        return false;
+    }
     var sv_card =$('input:radio[name="sv_card"]:checked').val();
     if (sv_card == null)
     {
         tishi_alert("请选择你要购买的储值卡！");
     }else{
+        show_center("#alipay_confirm");
         var a =$('input:radio[name="sv_card"]:checked').val().split("_");
         var card_id = $('input:radio[name="sv_card"]:checked').attr("id");
         if (parseInt($("#f_types"))==parseInt(a[0])){
@@ -121,15 +126,24 @@ function get_btn_over(user_id) {
                 success : function (data){
                     if (data.checked){
                         $(".btn_three").attr("target","_blank");
+                        $("#again_pay").attr("href", "/cards/alipay_exercise?sv_card=" + data.card_id +"&total_fee="+
+                            data.total_fee+"&fee_type="+data.fee_type);
                         $(".btn_three").attr("href", "/cards/alipay_exercise?sv_card=" + data.card_id +"&total_fee="+
                             data.total_fee+"&fee_type="+data.fee_type);
+                        show_center("#alipay_confirm");
                         $(".btn_three").trigger("onclick");
+                       
                     }else{
                         if (confirm("您已购买该打折卡，确认是否再次购买？")){
                             $(".btn_three").attr("target","_blank");
+                            $("#again_pay").attr("href", "/cards/alipay_exercise?sv_card=" + data.card_id + "&total_fee="+
+                                data.total_fee+"&fee_type="+data.fee_type);
                             $(".btn_three").attr("href", "/cards/alipay_exercise?sv_card=" + data.card_id + "&total_fee="+
                                 data.total_fee+"&fee_type="+data.fee_type);
+                       
+                            show_center("#alipay_confirm");
                             $(".btn_three").trigger("onclick");
+                          
                         }
                     }
 
@@ -137,6 +151,7 @@ function get_btn_over(user_id) {
             });
         }else{
             $(".btn_three").attr("target","_blank");
+             $("#again_pay").attr("href", "/cards/alipay_exercise?sv_card=" +card_id+ "&total_fee=" + a[1]+"&fee_type="+a[0]);
             $(".btn_three").attr("href", "/cards/alipay_exercise?sv_card=" +card_id+ "&total_fee=" + a[1]+"&fee_type="+a[0]);
         }
     }
