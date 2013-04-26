@@ -61,3 +61,17 @@ function tishi_alert(message){
         $(".tab_alert").css('display','none');
     }, 3000);
 }
+
+function show_center(t){
+    var doc_height = $(document).height();
+    var doc_width = $(document).width();
+    var layer_height = $(t).height();
+    var layer_width = $(t).width();
+    $(".mask").css({
+        display:'block',
+        height: doc_height
+    });
+    $(t).css('top',"50px");
+    $(t).css('left',(doc_width-layer_width)/2);
+    $(t).css('display','block');
+}

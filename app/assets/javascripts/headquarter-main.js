@@ -127,13 +127,17 @@ function get_btn_over(user_id) {
                         $(".btn_three").attr("target","_blank");
                         $(".btn_three").attr("href", "/cards/alipay_exercise?sv_card=" + data.card_id +"&total_fee="+
                             data.total_fee+"&fee_type="+data.fee_type);
+                        show_center("#alipay_confirm");
                         $(".btn_three").trigger("onclick");
+                       
                     }else{
                         if (confirm("您已购买该打折卡，确认是否再次购买？")){
                             $(".btn_three").attr("target","_blank");
                             $(".btn_three").attr("href", "/cards/alipay_exercise?sv_card=" + data.card_id + "&total_fee="+
                                 data.total_fee+"&fee_type="+data.fee_type);
+                            show_center("#alipay_confirm");
                             $(".btn_three").trigger("onclick");
+                          
                         }
                     }
 
