@@ -68,7 +68,9 @@
               </tr>
               <% if @services.blank? %>
                 <tr>
-                <h1>当前门店无产品或服务!</h1>
+                  <td>
+                    <h1>当前门店无产品或服务!</h1>
+                  </td>
                 </tr>
               <% else %>
                 <% if  @services.length > 3 %>
@@ -108,8 +110,6 @@
                     <% end %>
                   </tr>
                 <% end %>
-              <% end %>
-              <% if !@services.blank? %>
                 <tr>
                   <td colspan="4">
                     <input type="submit" class="btn" value="提交预约" id="check"/>
