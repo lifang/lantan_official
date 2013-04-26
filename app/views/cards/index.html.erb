@@ -60,22 +60,7 @@
             <input type="hidden" value="<%= SvCard::CARD_TYPE[:NOTDISCOUNT] %>" id="f_types" />
             <div class="c_btn"><a href="javascript:void(0)" class="btn btn_three" onclick="javascript:get_btn_over('<%= session[:customer_id] %>')">完成</a></div>
           </div>
-          <div class="tab_popup" id="alipay_confirm">
-            <div class="popup_box">
-              <h1>支付宝付款<a href="javascript:void(0)" class="close">关闭</a></h1>
-              <div class="popup_body">
-                <div class="popup_body_area">
-                  <div style="text-align:center">完成付款后请根据你的情况点击下面的按钮:</div>
-                  <div class="fukuan_btn">
-                    <%= hidden_field_tag "pay_order_id","0" %>
-                    <span><a href="javascript:void(0)" class="confirm_btn" onclick="javascript:get_btn_over('<%= session[:customer_id] %>')">重新付款</a></span>
-                    <span><a class="confirm_btn" href="/user_infos/svcard_records" type="button" onclick="window.location.reload()">支付完成</a></span>
-                  </div>
-                  <div class="clear"></div>
-                </div>
-              </div>
-            </div>
-          </div>
+         
         <% else %>
           <div class="card card_three" style="display:none;opacity:0;">暂无储值卡/打折卡销售。</div>
         <% end %>

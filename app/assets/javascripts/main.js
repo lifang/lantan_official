@@ -71,7 +71,13 @@ function show_center(t){
         display:'block',
         height: doc_height
     });
-    $(t).css('top',"50px");
+    $(t).css('top',"200px");
     $(t).css('left',(doc_width-layer_width)/2);
     $(t).css('display','block');
+    $(t).css('z-index','999');
+
+    $(t + " .close").click(function(){
+        $(t).css('display','none');
+        $(".mask").css('display','none');
+    })
 }
