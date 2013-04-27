@@ -72,7 +72,7 @@
           <div class="popup_body_area">
             <div style="text-align:center">完成付款后请根据你的情况点击下面的按钮:</div>
             <div class="fukuan_btn">
-              <span><a href="javascript:void(0)" class="btn" id="again_pay" target="_blank">重新付款</a></span>
+              <span><a href="javascript:void(0)" class="btn" id="again_pay" onclick="get_btn_over('<%= session[:customer_id] %>')" target="_blank">重新付款</a></span>
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               <span><a class="btn" href="/user_infos/svcard_records" type="button" onclick="window.location.reload()">支付完成</a></span>
             </div>
