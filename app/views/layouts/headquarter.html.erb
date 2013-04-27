@@ -31,8 +31,8 @@
           <ul>
             <li <% if controller.controller_name == "homepage" and controller.action_name == "index" %>class="hover"<% end %>><a href="/homepage">首页</a></li>
             <li <% if controller.controller_name == "homepage" and 
-                  ["company_introduce", "characteristic_service", "managment_idea", "company_culture", "team_introduce", "store_introduce"].include?(controller.action_name) %>
-              class="menu hover"<% else %>class="menu"<% end %>>
+                ["company_introduce", "characteristic_service", "managment_idea", "company_culture", "team_introduce", "store_introduce"].include?(controller.action_name) %>
+                class="menu hover"<% else %>class="menu"<% end %>>
               <a href="/introduce">关于澜泰</a>
               <div class="second_menu">
                 <p><a href="/introduce">公司介绍</a></p>
@@ -61,6 +61,23 @@
         </div>
         <div class="right">
           <%= yield %>
+        </div>
+      </div>
+    </div>
+    <div class="mask"></div>
+    <div class="tab_popup tab_alert" id="alipay_confirm" style="display:none">
+      <div class="popup_box">
+        <h1>支付宝付款<a href="javascript:void(0)" class="close">关闭</a></h1>
+        <div class="popup_body">
+          <div class="popup_body_area">
+            <div style="text-align:center">完成付款后请根据你的情况点击下面的按钮:</div>
+            <div class="fukuan_btn">
+              <span><a href="javascript:void(0)" class="btn" id="again_pay" onclick="get_btn_over('<%= session[:customer_id] %>')" target="_blank">重新付款</a></span>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <span><a class="btn" href="/user_infos/svcard_records" type="button" onclick="window.location.reload()">支付完成</a></span>
+            </div>
+            <div class="clear"></div>
+          </div>
         </div>
       </div>
     </div>

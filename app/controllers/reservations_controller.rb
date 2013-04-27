@@ -27,5 +27,4 @@ class ReservationsController < ApplicationController  #预约
       end
     end
   end
-  
 end

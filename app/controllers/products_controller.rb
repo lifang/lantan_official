@@ -15,4 +15,5 @@ class ProductsController < ApplicationController    #产品与服务
     @product = SProduct.find_by_id(params[:id].to_i)
     @img_urls = SImageUrl.find(:all, :conditions => ["product_id = ?", @product.id])
   end
+
 end
