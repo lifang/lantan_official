@@ -6,9 +6,6 @@ class CardsController < ApplicationController #储值卡
  
   #储值卡页面
   def index
-    pars = {:customer_id=>1,:sv_card_id=>2,:created_at=>Time.now}
-    pars.merge!(:total_price =>10,:left_price =>12)
-    CSvcRelation.create!(pars)
     sv_cards = SvCard.all
     @sv_cards = sv_cards.group_by{ |c| c.types }
   end
