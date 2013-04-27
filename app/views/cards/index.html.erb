@@ -17,7 +17,7 @@
             将目前国外最顶尖的汽车美容养护产品和配套技术引入中国，并迅速在第一，不断创新，精益求精”的经营理念，为国内中高档轿车拥有者提
             致力于服务中国市场客户，通过多年的努力和坚持，我们的产品和服务</div>
           <div class="clear"></div>
-          <div class="c_btn"><a href="javascript:void(0)" class="btn_one"  onclick="javascript:get_btn_tow()">下一步</a></div>
+          <div class="c_btn"><a href="javascript:void(0)" class="btn"  onclick="javascript:get_btn_tow()">下一步</a></div>
         </div>
         <div class="card card_two" style="display:none;opacity:0;">
           <div class="c_two">协议申明</div>
@@ -27,41 +27,42 @@
             将目前国外最顶尖的汽车美容养护产品和配套技术引入中国，并迅速在第一，不断创新，精益求精”的经营理念，为国内中高档轿车拥有者提
             致力于服务中国市场客户，通过多年的努力和坚持，我们的产品和服务</div>
           <div class="clear"></div>
-          <div class="c_btn"><a href="javascript:void(0)" class="btn_two" onclick="javascript:get_btn_three()">下一步</a></div>
+          <div class="c_btn"><a href="javascript:void(0)" class="btn" onclick="javascript:get_btn_three()">下一步</a></div>
         </div>
         <% unless @sv_cards.empty? %>
-        <div class="card card_three" style="display:none;opacity:0;">
-          <div class="c_three">储值卡面额</div>
-          <div class="c_text">
-            <ul>
-              <% (@sv_cards[SvCard::CARD_TYPE[:NOTDISCOUNT]]).each do |sv_card| %>
-                <li>
-                  <input id="<%= sv_card.id %>" type="radio" name="sv_card" value="<%= "#{SvCard::CARD_TYPE[:NOTDISCOUNT]}_#{sv_card.price}" %>"/>
-                  <%= sv_card.name %>（<%= sv_card.price %>元）
-                </li>
-              <% end if @sv_cards[SvCard::CARD_TYPE[:NOTDISCOUNT]] %>              
-            </ul>
+          <div class="card card_three" style="display:none;opacity:0;">
+            <div class="c_three">储值卡面额</div>
+            <div class="c_text">
+              <ul>
+                <% (@sv_cards[SvCard::CARD_TYPE[:NOTDISCOUNT]]).each do |sv_card| %>
+                  <li>
+                    <input id="<%= sv_card.id %>" type="radio" name="sv_card" value="<%= "#{SvCard::CARD_TYPE[:NOTDISCOUNT]}_#{sv_card.price}" %>"/>
+                    <%= sv_card.name %>（<%= sv_card.price %>元）
+                  </li>
+                <% end if @sv_cards[SvCard::CARD_TYPE[:NOTDISCOUNT]] %>
+              </ul>
+            </div>
+            <div class="clear"></div>
           </div>
-          <div class="clear"></div>
-        </div>
-        <div class="card card_three" style="display:none;opacity:0;">
-          <div class="c_four">打折卡</div>
-          <div class="c_text">
-            <ul>
-              <% (@sv_cards[SvCard::CARD_TYPE[:DISCOUNT]]).each do |sv_card| %>
-                <li>
-                  <input id="<%= sv_card.id %>" type="radio" name="sv_card" value="<%= "#{SvCard::CARD_TYPE[:DISCOUNT]}_#{sv_card.price}" %>"/>
-                  <%= sv_card.name %>（<%= sv_card.price %>元）
-                </li>
-              <% end if @sv_cards[SvCard::CARD_TYPE[:DISCOUNT]] %>
-            </ul>
+          <div class="card card_three" style="display:none;opacity:0;">
+            <div class="c_four">打折卡</div>
+            <div class="c_text">
+              <ul>
+                <% (@sv_cards[SvCard::CARD_TYPE[:DISCOUNT]]).each do |sv_card| %>
+                  <li>
+                    <input id="<%= sv_card.id %>" type="radio" name="sv_card" value="<%= "#{SvCard::CARD_TYPE[:DISCOUNT]}_#{sv_card.price}" %>"/>
+                    <%= sv_card.name %>（<%= sv_card.price %>元）
+                  </li>
+                <% end if @sv_cards[SvCard::CARD_TYPE[:DISCOUNT]] %>
+              </ul>
+            </div>
+            <div class="clear"></div>
+            <input type="hidden" value="<%= SvCard::CARD_TYPE[:NOTDISCOUNT] %>" id="f_types" />
+            <div class="c_btn"><a href="javascript:void(0)" class="btn btn_three" onclick="javascript:get_btn_over('<%= session[:customer_id] %>')">完成</a></div>
           </div>
-          <div class="clear"></div>
-          <input type="hidden" value="<%= SvCard::CARD_TYPE[:NOTDISCOUNT] %>" id="f_types" />
-          <div class="c_btn"><a href="javascript:void(0)" class="btn_three" onclick="javascript:get_btn_over('<%= session[:customer_id] %>')">完成</a></div>
-        </div>
+         
         <% else %>
-        <div class="card card_three" style="display:none;opacity:0;">暂无储值卡/打折卡销售。</div>
+          <div class="card card_three" style="display:none;opacity:0;">暂无储值卡/打折卡销售。</div>
         <% end %>
       </div>
     </div>

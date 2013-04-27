@@ -8,7 +8,7 @@
   <%= render :partial => "sales_list" %>
 </div>
 <div class="pageTurn">
-  <%= will_paginate  @sales, :previous_label => "< Prev",
-    :next_label=> "Next >", :page_links =>"false" %>
+  <%= will_paginate  @sales, :previous_label => "上一页",
+    :next_label=> "下一页", :class => "pageTurn" %>
 </div>
 

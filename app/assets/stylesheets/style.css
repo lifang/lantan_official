@@ -89,7 +89,8 @@ img { border: none;}
 .leftAera li { line-height: 28px;}
 
 .leftSales { padding: 10px 0;}
-.leftSales a { font-size: 0; margin-bottom: 10px; display: block;}
+.leftSales a { margin-bottom: 10px; color: #333;}
+.leftSales a:hover { text-decoration:underline; color: #930205;}
 
 .rightAera { width: 740px; float: left; overflow: hidden;}
 
@@ -188,9 +189,9 @@ img { border: none;}
 }
 .arrange td input[type="text"] { height: 24px; line-height: 24px; float: left;}
 .arrange td select { margin-left: 10px;height: 26px; line-height: 26px;float: left;}
-.arrange td .td_item { width: 120px; margin: 0 auto;}
+.arrange td .td_item { width: 150px; margin: 0 auto;}
 .arrange td .td_item p { height: 24px; line-height: 24px; padding: 0 10px;}
-.arrange td .td_item p input { float: left; margin-right: 10px;}
+.arrange td .td_item p input { float: left; margin-right: 10px; line-height: 24px; height: 24px;}
 .arrange td li {height: 24px; line-height: 24px; padding: 0 10px; float: left; margin: 5px 10px;}
 .arrange td li input { float: left; margin-right: 10px;}
 
@@ -204,8 +205,8 @@ img { border: none;}
 .pageTurn a { border: 2px #f0f0f0 solid; padding: 2px 5px; margin: 0px 2px; color: #CB5C5C;}
 .pageTurn a:hover, .pageTurn a:active { border: 2px #930205 solid; color: #ff5a00;}
 
-.pageTurn a.current {border: 2px #930205 solid; padding: 2px 5px; font-weight: bold; color: #fff; background: #930205;}
-.pageTurn a.disabled {display: none;}
+.pageTurn a.current, .pageTurn em {border: 2px #930205 solid; padding: 2px 5px; font-weight: bold; color: #fff; background: #930205;}
+.pageTurn a.disabled, .pageTurn span.disabled {display: none;}
 
 /*tab_alert*/
 .tab_alert { 
@@ -230,3 +231,4 @@ img { border: none;}
 }
 .x { width: 10px; height: 10px; background: url(/assets/x.png) no-repeat 0 0; top: 14px; right: 14px; }
 .close { width: 13px; height: 13px; background: url(/assets/close.jpg) no-repeat ; }
+

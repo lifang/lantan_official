@@ -12,9 +12,9 @@
           <dl class="serve">
             <dt><%= SProduct::SERVICE_TYPES[key] %></dt>
             <dd><% value.each_with_index do |service, index| %>
-              <a href="/stores/<%= @store.id %>/products/<%= service.id %>"><%= service.name %></a>
-                <% if (index + 1) < value.length %>&nbsp;/&nbsp;<% end %>              
-            <% end %>
+                <a href="/stores/<%= @store.id %>/products/<%= service.id %>"><%= service.name %></a>
+                <% if (index + 1) < value.length %>&nbsp;/&nbsp;<% end %>
+              <% end %>
             </dd>
           </dl>
         <% end if @services %>
@@ -23,7 +23,8 @@
         <h1>产品</h1>
         <ul class="product">
           <% @products.each do |p|%>
-            <li><img src= <%=p.img_url.gsub("img#{p.id}", "img#{p.id}_#{Constant::PIC_SIZE[5]}") if p.img_url %>/>
+            <li>
+              <img alt="lantan" src="<%=p.img_url.gsub("img#{p.id}", "img#{p.id}_#{Constant::P_PICSIZE[2]}") if p.img_url %>"/>
               <a href="/stores/<%= @store.id %>/products/<%= p.id %>"><%= p.name %></a>
             </li>
           <% end if @products %>

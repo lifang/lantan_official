@@ -1,6 +1,6 @@
 <%  (@sales || []).each do |sale| %>
   <div class="salesPro">
-    <img src="<%= sale.img_url %>" alt="lantan" width="350" height="150" />
+    <img src="<%= sale.img_url.gsub("img#{sale.id}","img#{sale.id}_#{Constant::SALE_PICSIZE[0]}") %>" alt="lantan"/>
     <h1><%= sale.name %></h1>
     <span><% if sale.disc_time_types == Sale::DISC_TIME[:TIME] %>
         <%= sale.started_at.strftime('%Y-%m-%d') if sale.started_at %>&nbsp;
