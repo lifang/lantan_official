@@ -14,11 +14,13 @@
 <h2>活动规则</h2>
 <p>
   参与本次活动即可享受<% if @sale.disc_types == Sale::DISC_TYPES[:FEE] %>
-    最高<%= @sale.discount %>元<% else %><%= @sale.discount %>折<% end %>优惠，
+    最高<%= @sale.discount %>元<% else %><%= @sale.discount %>折<% end %>优惠。
+</p>
+<p>
   <% if @products.blank? %>
     本次活动对店内所有项目/产品消费均有效。
   <% else %>
-    本次参加活动的项目/产品：<% @products.each do |p| %><%= p.name %>&nbsp;&nbsp;&nbsp;数目：<%= p.prod_num %><% end %>。
+    本次参加活动的项目/产品：<% @products.each do |p| %><p><%= p.name %>&nbsp;&nbsp;&nbsp;数目：<%= p.prod_num %></p> <% end %>
   <% end %>
 </p>
 <p><% unless @sale.car_num.nil? %>本次活动限制车辆数: <span class="red"><%= @sale.car_num %>&nbsp;</span>辆<% end %></p>
