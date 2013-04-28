@@ -9,6 +9,6 @@ class NewsController < ApplicationController #新闻控制器
   
   #新闻详细
   def show
-      @new = New.find(params[:id].to_i)
+      @new = New.find_by_id(params[:id].to_i)
   end
 end
