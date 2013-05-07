@@ -22,9 +22,10 @@ img { border: none;}
 }
 
 .head { height: 107px; overflow: hidden; background: url(/assets/h_bg.png) repeat-x;}
-.logo { width: 320px; height: 100px; float: left;}
-.nav { width:  680px; height: 32px; float: right; padding-top: 39px; _padding-top: 38px;}
-.nav ul { overflow: hidden; padding-left: 173px;}
+.logo { width: 410px; height: 100px; float: left; position:relative;}
+.logo h1 { position: absolute; bottom: 10px; left:170px; font-size: 20px; color: #930205;}
+.nav {height: 32px; float: right; padding-top: 39px; _padding-top: 38px;}
+.nav ul { overflow: hidden; padding-left: 80px;}
 .nav li { float: left; font-size: 16px; padding-left:40px; height: 32px; line-height: 32px;}
 .nav li a { color: #333; padding: 2px 0;}
 .nav li a:hover, .nav li a.hover { color: #930205; border-bottom: 2px solid #930205;}
@@ -118,7 +119,8 @@ img { border: none;}
     width: 245px; 
 	height: 140px; 
 	float: left; 
-	margin: 1px 1px 0 0;
+	margin: 1px 1px 0 0; 
+	background: #006;	
 	position: relative;
 	font-size: 0;
 }
@@ -230,4 +232,3 @@ img { border: none;}
 }
 .x { width: 10px; height: 10px; background: url(/assets/x.png) no-repeat 0 0; top: 14px; right: 14px; }
 .close { width: 13px; height: 13px; background: url(/assets/close.jpg) no-repeat ; }
-
