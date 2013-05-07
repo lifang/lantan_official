@@ -4,8 +4,8 @@ class HomepageController < ApplicationController  #总部控制器
   def index 
     @news = New.find(:all, :conditions => "status = '#{New::STATUS[:NOMAL]}'",
       :order => "created_at desc", :limit => 6)
-    @services = Product.find(:all, :select => "id, name, types", :conditions => ["is_service = ?",
-        Product::IS_SERVICE[:YES]]).group_by { |s| s.types }
+    @services = Product.find(:all, :select => "id, name, types", :conditions => ["is_service = ? and status = ?",
+        Product::IS_SERVICE[:YES], Product::STATUS[:NOMAL]]).group_by { |s| s.types }
 
   end
 
