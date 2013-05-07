@@ -50,7 +50,7 @@ class UserInfosController < ApplicationController
       @pcard_prod_relations = PcardProdRelation.find(:all, :conditions => ["package_card_id in (?)", @c_pcard_relations])
       @pcard_prod_relations.each do |ppr|  
         used_count = ppr.product_num - @already_used_count[ppr.package_card_id][ppr.product_id][1] if !@already_used_count.empty? and @already_used_count[ppr.package_card_id][ppr.product_id]
-        @already_used_count[ppr.package_card_id][ppr.product_id][1] = used_count ? used_count : 0 unless @already_used_count.empty? and @already_used_count[ppr.package_card_id][ppr.product_id]
+        @already_used_count[ppr.package_card_id][ppr.product_id][1] = used_count ? used_count : 0 unless @already_used_count.empty? or @already_used_count[ppr.package_card_id][ppr.product_id].nil?
       end
     end
   end
