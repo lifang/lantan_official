@@ -9,7 +9,7 @@ class Customer < ActiveRecord::Base
 
   STATUS = {:NOMAL => 0, :DELETED => 1} #0 正常  1 删除
   TYPES = {:GOOD => 0, :NORMAL => 1, :STRESS => 2} #1 优质客户  2 一般客户  3 重点客户
-
+  IS_VIP = {:NORMAL => 0, :VIP => 1} #0 常态客户 1 会员卡客户
   attr_accessor :password
   validates :username, :uniqueness => {:message => "用户名已经存在"}
   validates :password, :allow_nil => true, :length=>{:within=>6..20, :message => "密码长度必须在6-20位之间"} #:confirmation=>true
