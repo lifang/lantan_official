@@ -10,7 +10,6 @@ function initMap(juli,name){
 function createMap(juli,name){
     var map = new BMap.Map(name);//在百度地图容器中创建一个地图
     var point = new BMap.Point(center_j,center_w);//定义一个中心点坐标
-
     map.centerAndZoom(point,juli);//设定地图的中心点和坐标并将地图显示在地图容器中
 
     window.map = map;//将map变量存储在全局
