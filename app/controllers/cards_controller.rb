@@ -6,9 +6,6 @@ class CardsController < ApplicationController #储值卡
  
   #储值卡页面
   def index
-    pars = {:customer_id=>1,:sv_card_id=>2,:created_at=>Time.now}
-    pars.merge!(:total_price =>10,:left_price =>12)
-    CSvcRelation.create!(pars)
     sv_cards = SvCard.all
     @sv_cards = sv_cards.group_by{ |c| c.types }
   end
@@ -74,6 +71,7 @@ class CardsController < ApplicationController #储值卡
                   c_sv_relations = CSvcRelation.create!( pars.merge!(:total_price =>price.base_price+price.more_price,:left_price =>price.base_price+price.more_price))
                   SvcardUseRecord.create(:c_svc_relation_id =>c_sv_relations.id,:types=>SvcardUseRecord::TYPES[:IN],:use_price=>0,
                     :left_price=>price.base_price+price.more_price,:content=>"#{price.base_price+price.more_price}产品付费")
+                  Customer.find(trade_nu[0].to_i).update_attributes(:is_vip=>Customer::IS_VIP[:VIP])
                 else
                   SvcardUseRecord.create(:c_svc_relation_id=>c_sv_relations.id,:types=>SvcardUseRecord::TYPES[:IN],:use_price=>0,
                     :left_price=>c_sv_relations.left_price+price.base_price+price.more_price,:content=>"#{price.base_price+price.more_price}产品付费")
