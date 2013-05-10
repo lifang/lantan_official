@@ -1,3 +1,4 @@
+<%= javascript_include_tag "contact_us_map" %>
 <div class="r_menu">
   <ul>
     <li><a href="/contact_us" class="hover">联系我们</a></li>
@@ -5,7 +6,7 @@
 </div>
 <div class="clear"></div>
 <div class="text_box">
-  <div id="contact_us_map"></div>
+  <div style="width:697px;height:550px;border:#ccc solid 1px;" id="contact_us_map"></div>
   <ul>
     <% if @store.nil? %>
     <li>无门店数据!</li>
@@ -17,7 +18,7 @@
     <li>电子邮件： <%= @store.email ||= ""%></li>
     <% end %>
   </ul>
-</div><%= javascript_include_tag "contact_us_map" %>
+</div>
 <script type="text/javascript">
   var position="<%= @store.position if @store %>";
   var position_j_w= position.toString().split(',');
@@ -27,7 +28,7 @@
   var markerArr = [{
       title:"<%= @store.name if @store %>",
       content:"<%= @store.address if @store %>",
-      point: center_j+"|"+center_w  ,//"116.419217|39.941715"
+      point: center_j+"|"+center_w  ,//门店坐标
       isOpen:1,
       icon:{
         w:21,
