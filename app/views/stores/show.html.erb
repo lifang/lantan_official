@@ -5,7 +5,7 @@
         <ul>
           <li>
             <a href="/stores/<%= params[:id] %>">
-              <img alt="lantan" src="<%= @store.img_url.nil? ? "/assets/ad01.jpg" : @store.img_url %>"/>
+              <img src="<%= @store.img_url.nil? ? "/assets/ad01.jpg" : @store.img_url.gsub("img#{@store.id}", "img#{@store.id}_#{Constant::STORE_PICSIZE[0]}") %>"/>
             </a>
           </li>
         </ul>
