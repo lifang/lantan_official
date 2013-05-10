@@ -2,7 +2,7 @@
 class Customer < ActiveRecord::Base
   set_table_name :"lantan_db_all.customers"
   set_primary_key "id"
-  attr_accessible :username, :name, :mobilephone, :address, :status, :types, :password
+  attr_accessible :username, :name, :mobilephone, :address, :status, :types, :password,:is_vip
   has_many :customer_num_relations
   has_many :c_svc_relations
   has_many :c_pcard_relations
