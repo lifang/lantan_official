@@ -9,10 +9,7 @@ module Constant
   PARTNER_KEY="y8wpddg38lpu0ks66uluaj8506sw7tks"
   PARTNER="2088002153002681"
   SELLER_EMAIL = "ye.sen@outlook.com"
-
-  #上传图片的比例
-  PIC_SIZE = [50,100,148,300,700,246,154]
-
+  
   #发短信url
   MESSAGE_URL = "http://mt.yeion.com"
   USERNAME = "XCRJ"
