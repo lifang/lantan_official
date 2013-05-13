@@ -23,4 +23,5 @@ module Constant
   P_PICSIZE = [50,154,246,300,356]
   C_PICSIZE = [148,154]
   SVCARD_PICSIZE = [148,154,50]
+    STORE_PICSIZE = [1000,50]
 end
