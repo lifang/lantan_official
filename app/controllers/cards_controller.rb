@@ -69,12 +69,13 @@ class CardsController < ApplicationController #储值卡
               if trade_nu[3].to_i == SvCard::CARD_TYPE[:NOTDISCOUNT]
                 if c_sv_relations.nil?#如果没有记录
                   c_sv_relations = CSvcRelation.create!( pars.merge!(:total_price =>price.base_price+price.more_price,:left_price =>price.base_price+price.more_price))
-                  SvcardUseRecord.create(:c_svc_relation_id =>c_sv_relations.id,:types=>SvcardUseRecord::TYPES[:IN],:use_price=>0,
-                    :left_price=>price.base_price+price.more_price,:content=>"#{price.base_price+price.more_price}产品付费")
-                  Customer.find(trade_nu[0].to_i).update_attributes(:is_vip=>Customer::IS_VIP[:VIP])
+                  SvcardUseRecord.create(:c_svc_relation_id =>c_sv_relations.id,:types=>SvcardUseRecord::TYPES[:IN],:use_price=>price.base_price+price.more_price,
+                    :left_price=>price.base_price+price.more_price,:content=>"#{price.base_price+price.more_price}产品充值")
+                  customer = Customer.find(trade_nu[0].to_i)
+                  customer.update_attributes(:is_vip=>Customer::IS_VIP[:VIP])
                 else
-                  SvcardUseRecord.create(:c_svc_relation_id=>c_sv_relations.id,:types=>SvcardUseRecord::TYPES[:IN],:use_price=>0,
-                    :left_price=>c_sv_relations.left_price+price.base_price+price.more_price,:content=>"#{price.base_price+price.more_price}产品付费")
+                  SvcardUseRecord.create(:c_svc_relation_id=>c_sv_relations.id,:types=>SvcardUseRecord::TYPES[:IN],:use_price=>price.base_price+price.more_price,
+                    :left_price=>c_sv_relations.left_price+price.base_price+price.more_price,:content=>"#{price.base_price+price.more_price}产品充值")
                   c_sv_relations.update_attributes(:total_price =>c_sv_relations.total_price+price.base_price+price.more_price,
                     :left_price =>c_sv_relations.left_price+price.base_price+price.more_price)  #位置不可挑换，不能更新后在创建记录
                 end
