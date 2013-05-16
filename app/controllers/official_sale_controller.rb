@@ -23,7 +23,7 @@ class OfficialSaleController < ApplicationController  #总店活动促销页面
   
   #选择框城市发生变化时
   def city_change
-    @stores = SStore.where("city_id = #{params[:id]}")
+    @stores = SStore.where("city_id = #{params[:id]} and status = #{Store::STATUS[:OPENED]}")
     @common = params[:common] if params.keys.include?('common')
   end
   
