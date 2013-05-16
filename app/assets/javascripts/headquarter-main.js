@@ -48,8 +48,8 @@ $(function(){
 //second_menu
 $(function(){
  $(".menu").hover(
-  function(){$(this).find(".second_menu").stop().slideDown("slow"); },
-  function(){$(this).find(".second_menu").stop().slideUp("slow"); }
+  function(){$(this).find(".second_menu").css("display","block")},
+  function(){$(this).find(".second_menu").css("display","none"); }
  )
 });
 
