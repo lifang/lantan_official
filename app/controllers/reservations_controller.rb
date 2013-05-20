@@ -14,7 +14,7 @@ class ReservationsController < ApplicationController  #预约
       @customer = customer.nil? ? Customer.find_by_mobilephone(params[:telephone].strip) : customer
       if @customer.nil?
         @customer = Customer.new(:name => params[:customer_name].strip,:mobilephone => params[:telephone].strip,
-                              :username => params[:customer_name].strip, :password => params[:telephone].strip)
+                              :username => params[:telephone].strip, :password => params[:telephone].strip)
         @customer.encrypt_password
         @customer.save
       end
