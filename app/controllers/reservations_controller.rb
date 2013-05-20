@@ -10,7 +10,8 @@ class ReservationsController < ApplicationController  #预约
     @store = SStore.find(params[:store_id].to_i)
     Reservation.transaction do
       @car_num = CarNum.find_or_create_by_num(params[:car_number].strip)
-      @customer = Customer.find_by_id(session[:customer_id])
+      customer = Customer.find_by_id(session[:customer_id])
+      @customer = customer.nil? ? Customer.find_by_mobilephone(params[:telephone].strip) : customer
       if @customer.nil?
         @customer = Customer.new(:name => params[:customer_name].strip,:mobilephone => params[:telephone].strip,
                               :username => params[:customer_name].strip, :password => params[:telephone].strip)
