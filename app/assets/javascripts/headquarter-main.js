@@ -47,13 +47,10 @@ $(function(){
 })
 //second_menu
 $(function(){
-    $(".menu").hover(
-        function(){
-            $(this).find(".second_menu").slideDown("slow");
-        },
-        function(){
-            $(this).find(".second_menu").slideUp("slow");
-        })
+ $(".menu").hover(
+  function(){$(this).find(".second_menu").css("display","block")},
+  function(){$(this).find(".second_menu").css("display","none"); }
+ )
 });
 
 //首页轮播
