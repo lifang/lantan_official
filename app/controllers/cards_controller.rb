@@ -42,8 +42,6 @@ class CardsController < ApplicationController #储值卡
   def alipay_compete
     out_trade_no =params[:out_trade_no] #订单号
     trade_nu =out_trade_no.to_s.split("_")
-    c_sv_relations = CSvcRelation.find(:first,
-      :conditions => ["customer_id = ? and sv_card_id = ?",trade_nu[0],trade_nu[2]])#获取订单
     alipay_notify_url = "#{Constant::NOTIFY_URL}?partner=#{Constant::PARTNER}&notify_id=#{params[:notify_id]}"
     response_txt =Net::HTTP.get(URI.parse(alipay_notify_url))
     my_params = Hash.new
@@ -63,28 +61,23 @@ class CardsController < ApplicationController #储值卡
       elsif params[:trade_status]=="TRADE_FINISHED" or params[:trade_status]=="TRADE_SUCCESS"
         @@m.synchronize {
           begin
-            price =SvcardProdRelation.find_by_sv_card_id(trade_nu[2].to_i)
+            spr =SvcardProdRelation.find_by_sv_card_id(trade_nu[2].to_i)
+            sv_card = SvCard.find_by_id trade_nu[2].to_i
             CSvcRelation.transaction do
               pars = {:customer_id=>trade_nu[0].to_i,:sv_card_id=>trade_nu[2].to_i,:created_at=>Time.now}
               if trade_nu[3].to_i == SvCard::CARD_TYPE[:NOTDISCOUNT]
-                if c_sv_relations.nil?#如果没有记录
-                  c_sv_relations = CSvcRelation.create!( pars.merge!(:total_price =>price.base_price+price.more_price,:left_price =>price.base_price+price.more_price))
-                  SvcardUseRecord.create(:c_svc_relation_id =>c_sv_relations.id,:types=>SvcardUseRecord::TYPES[:IN],:use_price=>price.base_price+price.more_price,
-                    :left_price=>price.base_price+price.more_price,:content=>"#{price.base_price+price.more_price}产品充值")
-                  customer = Customer.find(trade_nu[0].to_i)
-                  customer.update_attributes(:is_vip=>Customer::IS_VIP[:VIP])
-                else
-                  SvcardUseRecord.create(:c_svc_relation_id=>c_sv_relations.id,:types=>SvcardUseRecord::TYPES[:IN],:use_price=>price.base_price+price.more_price,
-                    :left_price=>c_sv_relations.left_price+price.base_price+price.more_price,:content=>"#{price.base_price+price.more_price}产品充值")
-                  c_sv_relations.update_attributes(:total_price =>c_sv_relations.total_price+price.base_price+price.more_price,
-                    :left_price =>c_sv_relations.left_price+price.base_price+price.more_price)  #位置不可挑换，不能更新后在创建记录
-                end
+                c_sv_relation = CSvcRelation.create!( pars.merge!(:total_price =>spr.base_price+spr.more_price, :left_price =>spr.base_price+spr.more_price, :status => CSvcRelation::STATUS[:valid]))
+                SvcardUseRecord.create(:c_svc_relation_id =>c_sv_relation.id,:types=>SvcardUseRecord::TYPES[:IN],:use_price=>spr.base_price+spr.more_price,
+                    :left_price=>spr.base_price+spr.more_price,:content=>"购买#{sv_card.name}")
               else
-                CSvcRelation.create(pars.merge(:total_price=>params[:total_fee]))
+                CSvcRelation.create(pars.merge(:total_price=>params[:total_fee], :status => CSvcRelation::STATUS[:valid]))
               end
+               customer = Customer.find(trade_nu[0].to_i)
+               customer.update_attributes(:is_vip=>Customer::IS_VIP[:VIP])
             end
             render :text=>"success"
           rescue
+            file.write "#{捕获异常}\r\n"
             render :text=>"success"
           end
         }
