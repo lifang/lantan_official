@@ -66,9 +66,10 @@ class CardsController < ApplicationController #储值卡
             CSvcRelation.transaction do
               pars = {:customer_id=>trade_nu[0].to_i,:sv_card_id=>trade_nu[2].to_i,:created_at=>Time.now}
               if trade_nu[3].to_i == SvCard::CARD_TYPE[:NOTDISCOUNT]
-                c_sv_relation = CSvcRelation.create!( pars.merge!(:total_price =>spr.base_price+spr.more_price, :left_price =>spr.base_price+spr.more_price, :status => CSvcRelation::STATUS[:valid]))
-                SvcardUseRecord.create(:c_svc_relation_id =>c_sv_relation.id,:types=>SvcardUseRecord::TYPES[:IN],:use_price=>spr.base_price+spr.more_price,
-                    :left_price=>spr.base_price+spr.more_price,:content=>"购买#{sv_card.name}")
+                total_price = spr.try(:base_price).to_f+spr.try(:more_price).to_f
+                c_sv_relation = CSvcRelation.create!( pars.merge!(:total_price =>total_price, :left_price =>total_price, :status => CSvcRelation::STATUS[:valid]))
+                SvcardUseRecord.create(:c_svc_relation_id =>c_sv_relation.id,:types=>SvcardUseRecord::TYPES[:IN],:use_price=>total_price,
+                    :left_price=>total_price,:content=>"购买#{sv_card.name}")
               else
                 CSvcRelation.create(pars.merge(:total_price=>params[:total_fee], :status => CSvcRelation::STATUS[:valid]))
               end
@@ -77,7 +78,7 @@ class CardsController < ApplicationController #储值卡
             end
             render :text=>"success"
           rescue
-            file.write "#{捕获异常}\r\n"
+            file.write "save data failed\r\n"
             render :text=>"success"
           end
         }
