@@ -9,7 +9,8 @@
       <div class="rightTitle">
         <h1>在线预约</h1>
         <div class="arrange">
-          <span class="red arrange_info">*您登记信息之后，我们客服将于您联系，请您将您的手机畅通，若联系不上，您的预约信息将作废。</span>
+          <span class="red arrange_info">*您登记信息之后，我们客服将与您联系，请保持您的手机畅通，若联系不上，您的预约信息将作废。</span><br/>
+          <span class="red arrange_info">预约成功之后，您可以登录我们的网站，用户名和密码默认为您的手机号码，如果您以前注册过用户，请您先登录!</span>
           <%=  form_for "reservations", :url => "/stores/#{@store.id}/reservations", :method => "post",
             :html => {:onsubmit => "return my_validate()"} do %>
             <table width="100%" border="0" cellspacing="1" cellpadding="0" id="loginmessage">

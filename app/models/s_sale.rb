@@ -1,6 +1,6 @@
 #encoding: utf-8
 class SSale < ActiveRecord::Base
-  set_table_name :"lantan_db_all.sales"
+  set_table_name :"lantan_db.sales"
   #最新活动条数
   LASTER_SALES = 2
   #左侧活动列表显示条数

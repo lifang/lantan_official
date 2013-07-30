@@ -1,6 +1,6 @@
 #encoding: utf-8
 class Order < ActiveRecord::Base
-  set_table_name :"lantan_db_all.orders"
+  set_table_name :"lantan_db.orders"
   set_primary_key "id"
   has_many :order_prod_relations
   has_many :s_products, :through => :order_prod_relations, :foreign_key => 'product_id'

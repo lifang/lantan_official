@@ -14,8 +14,8 @@ class SalesController < ApplicationController
   def show
     @store = SStore.find_by_id(params[:store_id].to_i)
     @sale = SSale.find_by_id(params[:id].to_i)
-    @products = SProduct.find_by_sql(["select p.name, s.prod_num from lantan_db_all.products p
-        left join lantan_db_all.sale_prod_relations s
+    @products = SProduct.find_by_sql(["select p.name, s.prod_num from lantan_db.products p
+        left join lantan_db.sale_prod_relations s
         on s.product_id = p.id where s.sale_id = ?", @sale.id])
   end
 

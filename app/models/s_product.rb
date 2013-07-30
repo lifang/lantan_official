@@ -1,6 +1,6 @@
 #encoding: utf-8
 class SProduct < ActiveRecord::Base
-  set_table_name :"lantan_db_all.products"
+  set_table_name :"lantan_db.products"
   set_primary_key "id"
   
   IS_SERVICE = {:YES => 1, :NO => 0} #是否为产品或者服务，1服务，0产品
