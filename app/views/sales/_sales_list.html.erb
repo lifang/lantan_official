@@ -1,6 +1,6 @@
 <%  (@sales || []).each do |sale| %>
   <div class="salesList">
-    <a href="/official_sale/<%= sale.id %>">
+    <a href="/stores/<%= @store.id %>/sales/<%= sale.id %>">
       <img src="<%= sale.img_url.nil? ? "" : Constant::BAM_PATH + sale.img_url.gsub("img#{sale.id}", "img#{sale.id}_#{Constant::SALE_PICSIZE[0]}") %>" alt="lantan"/>
     </a>
     <h2><%= sale.name %></h2>

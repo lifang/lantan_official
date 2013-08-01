@@ -5,7 +5,7 @@ class SalesController < ApplicationController
   #门店活动促销首页
   def index
     @store = SStore.find_by_id(params[:store_id].to_i)
-    @sales = SSale.find(:all, :conditions =>["status = ?  and store_id = ?",
+    @sales = SSale.find(:all, :conditions =>["status = ? and store_id = ?",
         SSale::STATUS[:RELEASE], @store.id]).paginate(:page => params[:page],
       :per_page => SSale::SALES_PER_PAGE_NUM,:order => "created_at desc")
   end

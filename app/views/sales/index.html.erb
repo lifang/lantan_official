@@ -11,11 +11,9 @@
         <h1>促销活动</h1>
         <%= render("sales_list") %>
       </div>
-      <div class="pageTurn">
         <% if !@sales.blank? %>
         <%= will_paginate  @sales, :previous_label => "上一页",:next_label=> "下一页", :class => "pageTurn" %>
         <% end %>
-      </div>
     </div>
   </div>
 </div>
