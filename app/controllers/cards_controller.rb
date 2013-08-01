@@ -16,7 +16,7 @@ class CardsController < ApplicationController #储值卡
     #支付宝中我们要用到的也写参数
     options ={
       :service=>"create_direct_pay_by_user",
-      :notify_url=>Constant::SERVER_PATH+"cards/alipay_compete",  #请求地址
+      :notify_url=>Constant::OFFICIAL_PATH+"/cards/alipay_compete",  #请求地址
       :subject=>"会员购买#{sv_card.name}产品", #物品名称
       :total_fee =>params[:total_fee] #订单总金额
     }

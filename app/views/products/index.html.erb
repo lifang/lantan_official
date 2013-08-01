@@ -24,7 +24,7 @@
         <ul class="product">
           <% @products.each do |p|%>
             <li>
-              <img alt="lantan" src="<%=p.img_url.gsub("img#{p.id}", "img#{p.id}_#{Constant::P_PICSIZE[2]}") if p.img_url %>"/>
+              <img alt="lantan" src="<%= (Constant::BAM_PATH + p.img_url.gsub("img#{p.id}", "img#{p.id}_#{Constant::P_PICSIZE[2]}")) if p.img_url %>"/>
               <a href="/stores/<%= @store.id %>/products/<%= p.id %>"><%= p.name %></a>
             </li>
           <% end if @products %>
