@@ -12,8 +12,9 @@ module ApplicationHelper
 
   #门店中的最新活动
   def store_lasted_sales
+    store_id = params[:store_id].nil? ? params[:id].to_i : params[:store_id].to_i
     SSale.find(:all,
-      :conditions => ["store_id = ? and status = ? ", params[:store_id].to_i,
+      :conditions => ["store_id = ? and status = ? ", store_id,
         SSale::STATUS[:RELEASE]], :order=>"created_at desc", :limit => SSale::LASTER_SALES)
   end
 

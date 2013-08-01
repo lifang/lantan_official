@@ -6,7 +6,7 @@ class CardsController < ApplicationController #储值卡
  
   #储值卡页面
   def index
-    sv_cards = SvCard.all
+    sv_cards = SvCard.where(["status = ?", SvCard::STATUS[:NORMAL]])
     @sv_cards = sv_cards.group_by{ |c| c.types }
   end
 

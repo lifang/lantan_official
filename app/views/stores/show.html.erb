@@ -16,17 +16,19 @@
     </div>
     <div class="right">
       <div class="sales">
-        <%= render("/sales/laster_sales") %>
+         <%= render ("/sales/laster_sales") %>
       </div>
       <div class="text">
         <h1>服务</h1>
         <dl>
           <% @services.each do |key, value| %>
             <dt><%= SProduct::SERVICE_TYPES[key] %></dt>
-            <dd><% value.each_with_index do |service, index| %>
+            <dd>
+            <% value[0..9].each_with_index do |service, index| %>
               <%= link_to "#{service.name}","/stores/#{@store.id}/products/#{service.id}" %>
-              <% if (index + 1) < value.length %>/<% end %>
-            <% end %></dd>
+              <% if (index + 1) < 10 %>/<% end %>
+            <% end %>
+            </dd>
           <% end if @services %>
         </dl>
       </div>
@@ -35,9 +37,9 @@
         <dl>
           <% @products.each do |key, value| %>
             <dt><%= SProduct::PRODUCT_TYPES[key] %></dt>
-            <dd><% value.each_with_index do |product, index| %>
+            <dd><% value[0..2].each_with_index do |product, index| %>
               <%= link_to "#{product.name}","/stores/#{@store.id}/products/#{product.id}" %>
-              <% if (index + 1) < value.length %>/<% end %>
+              <% if (index + 1) < 10 %>/<% end %>
             <% end %></dd>
           <% end if @products %>
         </dl>

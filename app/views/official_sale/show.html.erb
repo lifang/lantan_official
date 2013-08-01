@@ -8,7 +8,33 @@
       </div>
       <div class="clear"></div>
       <div class="text_box">
-        <%= render("/sales/show_sales") %>
+        <h1><%= @sale.name %> </h1>
+        <em><%= @sale.created_at.strftime('%Y-%m-%d') if @sale.created_at %></em>
+        <img src="<%=@sale.img_url.nil? ? "" : @sale.img_url.gsub("img#{@sale.id}", "img#{@sale.id}_#{Constant::SALE_PICSIZE[2]}") %>" alt="lantan" />
+        <h2>活动介绍</h2>
+        <p><%= @sale.introduction.html_safe if @sale.introduction %></p>
+        <h2>
+          活动时间：<% if @sale.disc_time_types == Sale::DISC_TIME[:TIME] %>
+            <%= @sale.started_at.strftime('%Y-%m-%d') if @sale.started_at %>&nbsp;
+            至&nbsp;<%= @sale.ended_at.strftime('%Y-%m-%d') if @sale.ended_at %>
+          <% else %>
+            <%= Sale::DISC_TIME_NAME[@sale.disc_time_types] %>
+          <% end %>
+        </h2>
+        <h2>活动规则</h2>
+        <p>
+          参与本次活动即可享受<% if @sale.disc_types == Sale::DISC_TYPES[:FEE] %>
+            最高<%= @sale.discount %>元<% else %><%= @sale.discount %>折<% end %>优惠。
+        </p>
+        <p>
+          <% if @products.blank? %>
+            本次活动对店内所有项目/产品消费均有效。
+          <% else %>
+            本次参加活动的项目/产品：<% @products.each do |p| %><p><%= p.name %>&nbsp;&nbsp;&nbsp;数目：<%= p.prod_num %></p> <% end %>
+        <% end %>
+        </p>
+        <p><% unless @sale.car_num.nil? %>本次活动限制车辆数: <span class="red"><%= @sale.car_num %>&nbsp;</span>辆<% end %></p>
+        <p><% unless @sale.everycar_times.nil? %>每辆车可参与本次活动: <span class="red"><%= @sale.everycar_times %></span>&nbsp;次<% end %></p>
         <%= render("/homepage/table") %>
       </div>
     </div>

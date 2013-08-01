@@ -7,12 +7,10 @@ class StoresController < ApplicationController  #门店控制器
   require 'openssl'
   require 'net/http/post/multipart'
   
-  #首页,展示门店
+  #门店首页
   def show
-    #当前门店
     @store = SStore.find_by_id(params[:id].to_i)
-    #门店服务
-    all_products = SProduct.find(:all, :conditions => ["store_id = ? ", params[:id].to_i])
+    all_products = SProduct.where(["store_id = ? and status = ?", params[:id].to_i, SProduct::STATUS[:NOMAL]])
     p_hash = all_products.group_by { |i| i.is_service } if all_products
     @products = p_hash[SProduct::IS_SERVICE_VALUE[:NO]].group_by { |p| p.types } if p_hash and p_hash[SProduct::IS_SERVICE_VALUE[:NO]]
     @services = p_hash[SProduct::IS_SERVICE_VALUE[:YES]].group_by { |s| s.types } if p_hash and p_hash[SProduct::IS_SERVICE_VALUE[:YES]]
