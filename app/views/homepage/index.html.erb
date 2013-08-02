@@ -89,9 +89,9 @@
             <% @services.each do |key, value| %>
               <div class="service_list">
                 <h2><%= Product::SERVICE_TYPES[key] %></h2>
-                <% value.each_with_index do |service, index| %>
+                <% value[0..9].each_with_index do |service, index| %>
                   <a href="/product_information/<%= service.id %>" target="_blank"><%= service.name %></a>
-                  <% if (index + 1) < value.length %>/<% end %>
+                  <% if ((index + 1) < value.length && (index + 1) < 10) %>/<% end %>
                 <% end %>
               </div>
             <% end %>
